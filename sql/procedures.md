@@ -10,7 +10,7 @@ TODO
 
 TODO
 
-## Examples
+## Example
 
 TODO
 
