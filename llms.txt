@@ -1,0 +1,12 @@
+# A2v10 Platform
+
+> A2v10 is a full-stack platform for building business applications on SQL Server, ASP.NET Core, and Vue.js.
+> Developers describe data (SQL), model (model.json), and UI (XAML) — the platform builds the application.
+
+## SQL
+
+- [Conventions & Naming](sql/overview.md): Naming rules, schemas, standard columns, DDL idempotence
+- [SQL Markers](sql/markers.md): Column alias markers in SELECT — how the platform maps result sets to models
+- [Stored Procedures](sql/procedures.md): Patterns for Index, Load, Metadata, Update, Fetch, Delete
+- [Update Model (TVP + MERGE)](sql/update-model.md): How data is saved via table-valued parameters and MERGE
+- [Tree & Hierarchy](sql/tree.md): Hierarchical catalogs — Parent column, IsFolder, recursive queries
