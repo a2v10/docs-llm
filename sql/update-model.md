@@ -1,151 +1,198 @@
 # Update Model (TVP + MERGE)
 
-> How data is saved in A2v10: table-valued parameters carry form data into the database, MERGE handles insert/update.
+> How A2v10 saves form data: the platform calls `.Metadata` to learn the shape of the data, constructs typed table variables, and passes them to `.Update`.
 
 ## Overview
 
-The entire model is saved via a single stored procedure call. The platform uses a two-phase process:
+When the user submits a form, the client sends the complete model object to the server.
+The platform first calls the `.Metadata` procedure, which returns empty result sets describing
+how to map model properties to SQL table types (TVPs). The platform then constructs those TVPs
+from the model data and passes them as parameters to `.Update`.
 
-1. The client sends the complete model to the server.
-2. The platform calls the `.Metadata` procedure for the model to determine how to transform the data.
-3. The `.Metadata` procedure returns empty result sets whose column aliases encode transformation rules.
-4. The platform converts client data into typed table variables using the metadata schema.
-5. The `.Update` procedure is called with the resulting table-valued parameters.
+The `.Update` procedure uses `MERGE` to insert or update rows, then calls `.Load` at the end
+to return the saved model to the client.
 
-## Metadata Column Alias Format
+When a record has child rows (a detail table), two TVPs are used: one for the parent, one for
+the children. Because the parent may not yet have a database `Id` at save time, the parent TVP
+includes a client-generated `GUID` column, and the child TVP includes `ParentGUID` to reference it.
 
-Each column in the `.Metadata` result sets follows the pattern:
+## Syntax
+
+The `.Metadata` procedure returns one empty result set per TVP, using this marker format:
+
+| Part          | Meaning                                                        |
+|---------------|----------------------------------------------------------------|
+| `paramName`   | Parameter name in `.Update` — `@Sample` becomes `Sample`      |
+| `modelPath`   | Dot-notation path in the client model — `Sample`, `Sample.Items` |
+| `Metadata`    | Fixed keyword — identifies this result set as a metadata descriptor |
 
 ```
-[ParameterName!DataPath!Metadata]
+[paramName!modelPath!Metadata]
 ```
 
-| Part | Description |
-|------|-------------|
-| `ParameterName` | The SQL parameter name in the `.Update` procedure |
-| `DataPath` | Dot-notation path into the model (e.g., `Document.Rows`) |
-| `Metadata` | Literal — marks this as a metadata descriptor |
+When there are no child rows, `paramName` and `modelPath` are identical.
+When child rows are present, they differ: `[Items!Sample.Items!Metadata]`.
 
-## Service Fields
-
-The platform automatically populates the following fields if they exist in the table type:
-
-| Field | Description |
-|-------|-------------|
-| `GUID` | Client-generated GUID for the record |
-| `RowNumber` | 1-based row index within the parent |
-| `CurrentKey` | Current record identifier |
-| `ParentId` | Database ID of the parent record |
-| `ParentGUID` | GUID of the parent record (used when parent is new) |
-| `ParentKey` | Key of the parent |
-| `ParentRowNumber` | Row number of the parent |
-
-`ParentId` / `ParentGUID` are essential for child rows when the parent record is new (no database ID yet).
+> Drop order before recreation: `Metadata` → `Update` → child `TableType` → parent `TableType`.
 
 ## Example
 
-### Table Types
+### Simple catalog
+
+A catalog without child rows. One TVP, one `MERGE`.
 
 ```sql
-create type a2v10sample.[Document.TableType] as table(
-	Id bigint,
-	Kind nvarchar(32),
-	[Date] date,
-	[No] nvarchar(255),
-	[Sum] money,
-	[Agent] bigint,
-	Memo nvarchar(255)
-)
+drop procedure if exists cat.[Sample.Metadata];
+drop procedure if exists cat.[Sample.Update];
+drop type if exists cat.[Sample.TableType];
 go
 
-create type a2v10sample.[DocDetails.TableType] as table(
-	Id bigint null,
-	ParentId bigint null,
-	RowNumber int,
-	[Qty] float,
-	[Price] float,
-	[Sum] money,
-	Product bigint,
-	[Memo] nvarchar(255)
-)
+------------------------------------------------
+create type cat.[Sample.TableType] as table(
+    Id     bigint null,
+    [Name] nvarchar(255),
+    [Memo] nvarchar(255)
+);
 go
-```
 
-### Metadata Procedure
+------------------------------------------------
+create or alter procedure cat.[Sample.Metadata]
+as begin
+    set nocount on;
+    set transaction isolation level read uncommitted;
+    declare @Sample cat.[Sample.TableType];
+    select [Sample!Sample!Metadata] = null, * from @Sample;
+end
+go
 
-```sql
-create or alter procedure a2v10sample.[Document.Metadata]
-as
-begin
-	set nocount on;
+------------------------------------------------
+create or alter procedure cat.[Sample.Update]
+@UserId bigint,
+@Sample cat.[Sample.TableType] readonly
+as begin
+    set nocount on;
+    set transaction isolation level read committed;
 
-	declare @Document a2v10sample.[Document.TableType];
-	declare @Rows a2v10sample.[DocDetails.TableType];
+    declare @rtable table(id bigint);
+    declare @id bigint;
 
-	select [Document!Document!Metadata] = null, * from @Document;
-	select [Rows!Document.Rows!Metadata] = null, * from @Rows;
+    merge cat.Samples as t
+    using @Sample as s on t.Id = s.Id
+    when matched then update set
+        t.[Name] = s.[Name],
+        t.[Memo]  = s.[Memo]
+    when not matched by target then insert
+        ([Name], Memo) values (s.[Name], s.Memo)
+    output inserted.Id into @rtable(id);
+
+    select top(1) @id = id from @rtable;
+    exec cat.[Sample.Load] @UserId = @UserId, @Id = @id;
 end
 go
 ```
 
-### Update Procedure
+### Catalog with child rows
+
+Two TVPs, two MERGEs, wrapped in a transaction.
 
 ```sql
-create or alter procedure a2v10sample.[Document.Update]
-	@UserId bigint,
-	@Document a2v10sample.[Document.TableType] readonly,
-	@Rows a2v10sample.[DocDetails.TableType] readonly,
-	@Kind nvarchar(32)
-as
-begin
-	set nocount on;
+------------------------------------------------
+drop procedure if exists cat.[Sample.Metadata];
+drop procedure if exists cat.[Sample.Update];
+drop type if exists cat.[Sample.Item.TableType];
+drop type if exists cat.[Sample.TableType];
+go
 
-	declare @RetId bigint;
-	declare @output table(op sysname, id bigint);
+------------------------------------------------
+create type cat.[Sample.TableType] as table(
+    [GUID] uniqueidentifier,
+    Id     bigint null,
+    [Name] nvarchar(255),
+    [Memo] nvarchar(255)
+);
+go
 
-	merge a2v10sample.Documents as target
-	using @Document as source
-	on (target.Id = source.Id)
-	when matched then update set
-		target.[Date]  = source.[Date],
-		target.[No]    = source.[No],
-		target.Agent   = source.Agent,
-		target.[Sum]   = source.[Sum],
-		target.Memo    = source.Memo,
-		target.DateModified = getdate()
-	when not matched by target then
-		insert (Kind, [Date], [No], Agent, [Sum], Memo)
-		values (@Kind, [Date], [No], Agent, [Sum], Memo)
-	output $action op, inserted.Id id
-	into @output(op, id);
+------------------------------------------------
+create type cat.[Sample.Item.TableType] as table(
+    ParentGUID uniqueidentifier,
+    Id         bigint null,
+    RowNo      int,
+    [Name]     nvarchar(255),
+    [Memo]     nvarchar(255)
+);
+go
 
-	select top(1) @RetId = id from @output;
+------------------------------------------------
+create or alter procedure cat.[Sample.Metadata]
+as begin
+    set nocount on;
+    set transaction isolation level read uncommitted;
+    declare @Sample cat.[Sample.TableType];
+    declare @Items  cat.[Sample.Item.TableType];
+    select [Sample!Sample!Metadata]      = null, * from @Sample;
+    select [Items!Sample.Items!Metadata] = null, * from @Items;
+end
+go
 
-	merge a2v10sample.DocDetails as target
-	using @Rows as source
-	on (target.Id = source.Id and target.Document = @RetId)
-	when matched then update set
-		target.RowNo   = source.RowNumber,
-		target.Product = source.Product,
-		target.Qty     = source.Qty,
-		target.Price   = source.Price,
-		target.[Sum]   = source.[Sum],
-		target.Memo    = source.Memo
-	when not matched by target then
-		insert (Document, RowNo, Qty, Price, [Sum], Product, Memo)
-		values (@RetId, RowNumber, Qty, Price, [Sum], Product, Memo)
-	when not matched by source and target.Document = @RetId then delete;
+------------------------------------------------
+create or alter procedure cat.[Sample.Update]
+@UserId bigint,
+@Sample cat.[Sample.TableType] readonly,
+@Items  cat.[Sample.Item.TableType] readonly
+as begin
+    set nocount on;
+    set transaction isolation level read committed;
+    set xact_abort on;
 
-	exec a2v10sample.[Document.Load] @UserId, @RetId;
+    declare @rtable table(id bigint, [guid] uniqueidentifier);
+    declare @id bigint;
+
+    begin tran;
+
+    merge cat.Samples as t
+    using @Sample as s on t.Id = s.Id
+    when matched then update set
+        t.[Name] = s.[Name],
+        t.[Memo]  = s.[Memo]
+    when not matched by target then insert
+        ([Name], Memo) values (s.[Name], s.Memo)
+    output inserted.Id, s.[GUID] into @rtable(id, [guid]);
+
+    select top(1) @id = id from @rtable;
+
+    with T as (
+        select i.Id, i.[Name], i.Memo, [Sample] = t.Id, i.RowNo
+        from @Items i
+            inner join @rtable t on t.[guid] = i.ParentGUID
+    )
+    merge cat.SampleItems as t
+    using T as s on t.Id = s.Id and t.[Sample] = @id
+    when matched then update set
+        t.RowNo  = s.RowNo,
+        t.[Name] = s.[Name],
+        t.[Memo]  = s.[Memo]
+    when not matched by target then insert
+        ([Sample], RowNo, [Name], Memo) values (s.[Sample], s.RowNo, s.[Name], s.Memo)
+    when not matched by source and t.[Sample] = @id then delete;
+
+    commit tran;
+
+    exec cat.[Sample.Load] @UserId = @UserId, @Id = @id;
 end
 go
 ```
 
 ## Notes
 
-- The `.Update` procedure must call the corresponding `.Load` procedure at the end to return the updated model to the client.
-- The `.Metadata` procedure only defines the schema — its result sets must be **empty** (select from empty table variables).
-- For debugging, dump a TVP to XML inside the procedure:
+- `.Update` must always end with a call to `.Load` — the platform expects the saved model in the response.
+- `set xact_abort on` is required when using explicit transactions — it ensures automatic rollback on any error.
+- The `when not matched by source ... then delete` clause is what removes child rows deleted on the client.
+- `GUID` / `ParentGUID` are needed because the parent `Id` does not exist yet when inserting a new record with children.
+- The `output` clause on the parent `MERGE` captures both `Id` and `GUID` so the child MERGE can resolve the parent reference.
+
+## Hints
+
+To inspect a TVP's contents during debugging, dump it to XML and raise as an error:
 
 ```sql
 declare @xml nvarchar(max);

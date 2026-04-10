@@ -30,7 +30,12 @@ Use H3 subheadings (###) to separate multiple related snippets.
 ## Notes
 
 - Bullet list of edge cases, gotchas, and non-obvious behavior.
-- Debugging tips if applicable.
+
+## Hints
+
+- Optional section.
+- Practical tips: debugging snippets, shortcuts, copy-paste patterns.
+- Not for edge cases or gotchas — those belong in Notes.
 ```
 
 ## Rules
