@@ -4,7 +4,11 @@
       "WebSearch",
       "WebFetch(domain:docs-llm.a2v10.com)",
       "WebFetch(domain:github.com)",
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(gh api:*)",
+      "Bash([ -f \"$GH_EXE\" ])",
+      "Read(//c/Users/alexk/AppData/Local/GitHubDesktop/bin//**)",
+      "WebFetch(domain:api.github.com)"
     ]
   }
 }
