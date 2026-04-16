@@ -39,3 +39,13 @@
 - [StackPanel](xaml/layouts/stackpanel.md): Single-axis container — Orientation, Gap, Separator for end-alignment
 - [TabPanel](xaml/layouts/tabpanel.md): Tabbed content panel — Tab elements, Border, FullPage, dynamic tabs via ItemsSource
 - [Repeater](xaml/layouts/repeater.md): Transparent repeating container — renders Content for each item in ItemsSource
+
+## Model Configuration
+
+- [model.json Overview](model/overview.md): Top-level structure, inheritance rules, and endpoint configuration
+- [Actions](model/actions.md): Configuring page actions — view loading, stored procedure mapping, merge, and export
+- [Dialogs](model/dialogs.md): Modal dialog configuration within model.json
+- [Popups](model/popups.md): Popup window configuration within model.json
+- [Commands](model/commands.md): Server-side commands — SQL, CLR, API calls, and process management
+- [Reports](model/reports.md): Report and export configuration — Stimulsoft, XML, and JSON formats
+- [File Upload](model/files.md): File upload handling — parse, SQL storage, Azure Blob, and CLR processing
