@@ -72,7 +72,10 @@ Rules:
 - English only
 - Omit sections that have nothing to say — never leave `TODO` placeholders
 
-Every new file needs a one-liner added to `llms.txt` under the appropriate `##` section.
+The root `llms.txt` is a flat, one-level index with only three entries — SQL, XAML, MODEL —
+each pointing to a section index page (`sql.md`, `xaml.md`, `model.md`). Those section pages hold
+the per-file one-liners. Every new file needs its one-liner added to the matching section page
+(`sql.md` / `xaml.md` / `model.md`), not to `llms.txt`.
 
 ## Sample Schema
 
