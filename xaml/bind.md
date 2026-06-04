@@ -143,3 +143,6 @@ Command="{BindCmd Dialog, Action=Edit, Argument={Bind Row}}"
 - `ValidRequired=True` prevents execution if any validators on the page are failing.
 - `Permission` gates the command — the button is disabled (not hidden) if the user lacks the permission.
 - `ReloadAfter=True` reloads the model after the command, so the UI reflects server-side changes.
+- The `Dialog` command opens a modal configured in the [model.json `dialogs` section](https://docs-llm.a2v10.com/model/dialogs.md); lighter lookups use [`popups`](https://docs-llm.a2v10.com/model/popups.md).
+- `Save` and `SaveAndClose` persist the model through the [TVP + MERGE save pattern](https://docs-llm.a2v10.com/sql/update-model.md) (`.Metadata` → `.Update` → `.Load`).
+- Server-side operations invoked from the UI (`Execute`, `DbRemove`, and similar) are declared as [model.json commands](https://docs-llm.a2v10.com/model/commands.md).

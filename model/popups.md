@@ -71,5 +71,5 @@ Passes `@Active = 1` to the stored procedure to pre-filter the list.
 
 - Popups do not support `copy` or `merge` — use a dialog for those patterns.
 - The XAML view for a popup typically uses `<Popup>` as its root element.
-- Popups are opened from the view layer via `BindCmd` with the appropriate command type; they are not navigable by URL.
+- Popups are opened from the view layer via a [`BindCmd` command](https://docs-llm.a2v10.com/xaml/bind.md); they are not navigable by URL.
 - `parameters` are always static; dynamic filtering should be implemented inside the stored procedure using optional parameters passed from the calling view.

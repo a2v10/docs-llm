@@ -4,7 +4,7 @@
 
 ## Overview
 
-Actions are the primary entry points for user interaction with an endpoint. Each action loads a data model from SQL Server and renders a XAML view. When a user navigates to an endpoint URL, the platform resolves the action name from the URL and executes it.
+Actions are the primary entry points for user interaction with an endpoint. Each action loads a data model from SQL Server (via a [stored procedure](https://docs-llm.a2v10.com/sql/procedures.md)) and renders a [XAML `Page` view](https://docs-llm.a2v10.com/xaml/layouts/page.md). When a user navigates to an endpoint URL, the platform resolves the action name from the URL and executes it.
 
 Each action calls a stored procedure to load its model. By default, an action calls `[schema].[model.Load]`. Setting `index: true` changes the suffix to `.Index`, which is used for list/grid views. Setting `copy: true` uses `.Copy`, for actions that duplicate an existing record.
 
@@ -121,3 +121,4 @@ Calls `[a2].[Agent.Load]`, renders `edit.xaml`, and provides an Excel download u
 - `parameters` values are passed as SQL parameters; names must match the stored procedure's parameter names (without the `@` prefix).
 - `indirect: true` causes the platform to perform a preliminary request before the main data load — used when the view needs to resolve some state before fetching data.
 - `checkTypes` is resolved at development time only; it has no effect in production builds.
+- A form rendered by an action is saved back through the [TVP + MERGE pattern](https://docs-llm.a2v10.com/sql/update-model.md) — the `.Update` procedure receives the edited model.

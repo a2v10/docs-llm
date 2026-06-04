@@ -189,6 +189,8 @@ go
 - The `when not matched by source ... then delete` clause is what removes child rows deleted on the client.
 - `GUID` / `ParentGUID` are needed because the parent `Id` does not exist yet when inserting a new record with children.
 - The `output` clause on the parent `MERGE` captures both `Id` and `GUID` so the child MERGE can resolve the parent reference.
+- The `!Metadata` column alias is one of the platform's [SQL markers](https://docs-llm.a2v10.com/sql/markers.md), like `!Array` and `!Id`.
+- The save is triggered from the UI by a [`Save` or `SaveAndClose` command](https://docs-llm.a2v10.com/xaml/bind.md); a form is usually rendered by a [model.json action](https://docs-llm.a2v10.com/model/actions.md).
 
 ## Hints
 

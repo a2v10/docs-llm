@@ -15,6 +15,18 @@ Every documentation file follows this structure:
 
 Plain-English explanation of the concept. No code yet. 2–5 short paragraphs or a numbered list for sequential processes.
 
+## Use When
+
+Optional. A short bullet list of the situations where this feature is the right choice.
+Selection criteria, not description — what problem it solves and when to reach for it.
+
+## Do Not Use When
+
+Optional. A short bullet list of cases where this feature is the wrong tool.
+Every bullet must name the alternative explicitly — phrase it as "use X instead"
+and link to X when a doc for it exists. The counterpart to Use When; a dead end
+("don't use this here") is not enough — always point to the way out.
+
 ## Syntax
 
 Formal pattern or signature. Use a fenced code block for any formal syntax.
@@ -42,8 +54,11 @@ Use H3 subheadings (###) to separate multiple related snippets.
 
 - **H1**: file title only — must match the link label in `llms.txt`
 - **Blockquote** after H1: mandatory one-liner summary of the page
-- **H2 order**: `Overview` → `Syntax` → `Example` → `Notes`
+- **H2 order**: `Overview` → `Use When` → `Do Not Use When` → `Syntax` → `Example` → `Notes` → `Hints`
   - Omit sections that genuinely have nothing to say; do not leave `TODO` placeholders
+  - `Use When` / `Do Not Use When` are optional decision-criteria blocks — include them when a
+    reader could plausibly reach for the wrong feature; they tell the model *when to choose this*,
+    not what it is. Place them right after `Overview`, before `Syntax`.
 - **Code blocks**: always specify language tag — `sql`, `json`, `xml`, `ts`, etc.
 - **Tables**: use for structured mappings (field names, pattern parts, flags)
 - **No frontmatter / YAML** — the platform does not use it

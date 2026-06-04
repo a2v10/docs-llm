@@ -12,6 +12,19 @@ Child arrays are nested inside a parent object and usually have no name. The par
 
 Lazy arrays are not filled while the model is built — they load on first access to the property. This is typical when the main model is itself an array and the child arrays are only needed when displayed (for example, a list of agents, each with its related documents).
 
+## Use When
+
+- The collection is bounded and small — up to ~100 elements (≈200 max before noticeable slowdown).
+- The whole set is needed at once: rendered together, edited as a unit, or saved back via a TVP.
+- Child rows belong to their parent and are always loaded with it (an `!Array` child array).
+- Use `!LazyArray` when the parent is itself a list and a child collection is only needed on demand (e.g. documents shown when an agent row is expanded).
+
+## Do Not Use When
+
+- The set is large or unbounded — use server-side sorting, filtering, and paging instead.
+- You only ever need a page of rows at a time — use paging instead of loading the full array.
+- A child collection is rarely opened and expensive to load eagerly — use `!LazyArray` instead of a plain `!Array`.
+
 ## Syntax
 
 | Marker | Description |

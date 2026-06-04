@@ -49,6 +49,34 @@ model/
 **Still TODO**: `sql/overview.md`, `sql/markers.md`, `sql/procedures.md` — these are stub files
 with `TODO` placeholders throughout. They need real content.
 
+## Roadmap — Next Tasks (prioritized)
+
+Ordered by leverage. Cross-references must be full absolute URLs (see CONVENTIONS.md → Links).
+
+1. **Fill `sql/markers.md` (highest leverage).** It is the central hub of the data layer —
+   `array`, `tree`, `grouping`, `cross`, and `update-model` all build on markers. While it is a
+   stub, every inbound link lands on an empty page. Source: `models/general.html` +
+   `models/simple.html`. After filling it, wire bidirectional links to all shape docs.
+2. **Fill the other two SQL stubs**: `sql/overview.md` (source `models/general.html`,
+   conventions) and `sql/procedures.md` (Index/Load/Metadata/Update/Fetch/Delete patterns).
+   Several Priority-1/2 links already point into `sql/procedures.md`.
+3. **Add `sql/paging.md`** (source `models/paging.html`). `sql/array.md` already refers to paging
+   in two places (Do Not Use When + Notes) with no link — wire them once the file exists.
+4. **Horizontal links — Priority 3** (data ↔ controls; Priority 1+2 already done):
+   - `xaml/controls/datagrid.md` → `sql/array.md`, `sql/tree.md`, `xaml/bind.md`
+     (datagrid currently has *no* cross-links, not even base-classes)
+   - `xaml/controls/selector.md` → `sql/procedures.md` (server-side Fetch), `sql/array.md`
+   - `xaml/controls/combobox.md` → `sql/array.md` (bound list is an array)
+   - `sql/tree.md` → `xaml/layouts/sheet.md`, `xaml/controls/datagrid.md`
+     (sheet links to tree, but not back — one-directional)
+   - `model/reports.md` → `xaml/layouts/sheet.md` (Excel export)
+   - `sql/array.md` → `xaml/controls/datagrid.md` (what renders it)
+5. **Remaining `models/` source pages not yet documented**: `simple`, `general`, `blob`,
+   `rowversion`, `system` — fold the useful parts into the SQL stubs above rather than creating
+   one-to-one files where they overlap.
+6. **Anchor-text hygiene pass** (low priority): replace any bare `See [X]` / generic anchors with
+   descriptive noun phrases. Not a RAG optimization — just readability for the direct-fetch model.
+
 ## Authoring Rules (summary — full rules in CONVENTIONS.md)
 
 Every `.md` file follows this exact structure:
@@ -58,11 +86,13 @@ Every `.md` file follows this exact structure:
 
 > One-sentence blockquote description.
 
-## Overview   ← plain English, no code, 2–5 paragraphs
-## Syntax     ← fenced code block + tables for property lists
-## Example    ← realistic, complete, uses a2v10sample schema
-## Notes      ← bullet list of edge cases / gotchas
-## Hints      ← optional: copy-paste patterns, debugging tips
+## Overview          ← plain English, no code, 2–5 paragraphs
+## Use When          ← optional: when this is the right choice (selection criteria)
+## Do Not Use When   ← optional: when it's the wrong tool + the alternative
+## Syntax            ← fenced code block + tables for property lists
+## Example           ← realistic, complete, uses a2v10sample schema
+## Notes             ← bullet list of edge cases / gotchas
+## Hints             ← optional: copy-paste patterns, debugging tips
 ```
 
 Rules:

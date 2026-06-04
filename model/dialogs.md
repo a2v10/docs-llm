@@ -8,7 +8,7 @@ Dialogs are modal windows that open on top of the current page. They follow the 
 
 Dialogs inherit `source`, `schema`, and `model` from the root of `model.json` and can override any of them. The stored procedure suffix follows the same convention as actions: `.Load` by default, `.Index` when `index: true`, and `.Copy` when `copy: true`.
 
-A dialog's XAML view must use `Dialog` as its root element. Dialogs are invoked by commands in the view layer — they are not directly navigable by URL.
+A dialog's XAML view must use the [`Dialog` root element](https://docs-llm.a2v10.com/xaml/layouts/dialog.md). Dialogs are invoked from the view layer by a [`BindCmd Dialog` command](https://docs-llm.a2v10.com/xaml/bind.md) — they are not directly navigable by URL.
 
 ## Syntax
 

@@ -6,6 +6,8 @@
 
 `Dialog` is the root element of a dialog XAML file. Dialogs are opened programmatically via `{BindCmd Dialog, Action=...}` commands and are not standalone routes. They inherit from `RootContainer → Container → UIElement → UIElementBase`.
 
+The dialog's data source — stored procedure, model, and load mode — is configured in the [model.json `dialogs` section](https://docs-llm.a2v10.com/model/dialogs.md).
+
 A dialog has a title bar, a content area, and a button panel (`Buttons`). The `SaveAndClose` and `Close` / `CloseOk` commands are used to close dialogs. Dialogs support various sizes and placements including side panels and full-screen modes.
 
 ## Syntax

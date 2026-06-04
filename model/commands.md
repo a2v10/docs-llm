@@ -6,7 +6,7 @@
 
 Commands execute server-side logic in response to user actions — saving a record, deleting an item, calling an external API, starting a business process, or running a custom .NET method. Unlike actions, commands do not load a new view; they perform an operation and return a result to the calling view.
 
-Each command has a required `type` that determines its execution mechanism. The most common type is `sql`, which calls a stored procedure. Other types delegate to .NET code, external HTTP endpoints, or the platform's process engine.
+Each command has a required `type` that determines its execution mechanism. The most common type is `sql`, which calls a [stored procedure](https://docs-llm.a2v10.com/sql/procedures.md). Other types delegate to .NET code, external HTTP endpoints, or the platform's process engine.
 
 Commands inherit `source` and `schema` from the root of `model.json`.
 
@@ -117,3 +117,4 @@ Instantiates `SendReportCommand` from the `MyApp` assembly and calls its `Invoke
 - `signal: true` requires SignalR to be configured in the application; it broadcasts a notification to connected clients after the command completes.
 - For `callApi` and `sendMessage`, the `parameters` object controls the request payload and behavior; the exact keys depend on the platform version.
 - `startProcess` and `resumeProcess` integrate with the A2v10 workflow engine — the process definition must exist separately.
+- Commands are triggered from the view layer by a [`BindCmd` command](https://docs-llm.a2v10.com/xaml/bind.md) (for example `Execute`, `DbRemove`).
