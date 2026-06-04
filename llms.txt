@@ -3,6 +3,6 @@
 > A2v10 is a full-stack platform for building business applications on SQL Server, ASP.NET Core, and Vue.js.
 > Developers describe data (SQL), model (model.json), and UI (XAML) — the platform builds the application.
 
-- [SQL](sql.md): Naming, markers, stored procedures, the TVP+MERGE save pattern, tree and grouping models
-- [XAML (UI Markup)](xaml.md): Server-compiled Vue.js views — Page/Dialog roots, binding, controls, layouts
-- [Model Configuration](model.md): model.json — actions, dialogs, popups, commands, reports, file upload
+- [SQL](https://docs-llm.a2v10.com/sql.md): Naming, markers, stored procedures, the TVP+MERGE save pattern, tree and grouping models
+- [XAML (UI Markup)](https://docs-llm.a2v10.com/xaml.md): Server-compiled Vue.js views — Page/Dialog roots, binding, controls, layouts
+- [Model Configuration](https://docs-llm.a2v10.com/model.md): model.json — actions, dialogs, popups, commands, reports, file upload

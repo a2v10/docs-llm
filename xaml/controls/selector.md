@@ -58,7 +58,7 @@ Selector supports creating new records inline via `NewPane` and `CreateNewComman
 |----------|------|-------------|
 | `Value` | Object | **Binding only.** The selected object from the list. |
 
-See [Base Classes](../base-classes.md) for `Label`, `Required`, `Disabled`, and other inherited properties.
+See [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md) for `Label`, `Required`, `Disabled`, and other inherited properties.
 
 ### SelectorStyle Values
 

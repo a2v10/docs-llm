@@ -27,7 +27,7 @@ A `Separator` element inside a `StackPanel` divides the children into two groups
 | `Inline` | Boolean | Render as inline (non-block) element |
 | `Gap` | GapSize | Spacing between children |
 
-See [Base Classes](../base-classes.md) for inherited properties from `Container` and `UIElement`.
+See [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md) for inherited properties from `Container` and `UIElement`.
 
 ## Example
 

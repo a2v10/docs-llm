@@ -8,7 +8,9 @@
       "Bash(gh api:*)",
       "Bash([ -f \"$GH_EXE\" ])",
       "Read(//c/Users/alexk/AppData/Local/GitHubDesktop/bin//**)",
-      "WebFetch(domain:api.github.com)"
+      "WebFetch(domain:api.github.com)",
+      "PowerShell(gh api repos/alex-kukhtin/A2v10.Help/contents/A2v10.Help/html --jq '.[] | select\\(.type==\\\\\"dir\\\\\"\\) | .name')",
+      "Bash(curl -s \"https://raw.githubusercontent.com/alex-kukhtin/A2v10.Help/master/A2v10.Help/html/models/array.html\")"
     ]
   }
 }

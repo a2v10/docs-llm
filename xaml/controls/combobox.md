@@ -48,7 +48,7 @@ The list can be populated three ways:
 |----------|------|-------------|
 | `Value` | Object | **Binding only.** The selected value. |
 
-See [Base Classes](../base-classes.md) for `Label`, `Required`, `Disabled`, and other inherited properties.
+See [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md) for `Label`, `Required`, `Disabled`, and other inherited properties.
 
 ## ComboBoxItem Properties
 

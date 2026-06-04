@@ -32,7 +32,7 @@ All properties are inherited. The most commonly used:
 | `Disabled` | Boolean | Make the checkbox non-interactive. Supports `Bind`. |
 | `Required` | Boolean | Visual required indicator. |
 
-See [Base Classes](../base-classes.md) for all inherited properties.
+See [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md) for all inherited properties.
 
 ## Example
 

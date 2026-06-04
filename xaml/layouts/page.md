@@ -43,7 +43,7 @@ A page typically contains a `Toolbar` (action buttons at the top), a `Taskpad` (
 |----------|------|-------------|
 | `Children` | UIElementCollection | Main page content elements. |
 
-See [Base Classes](../base-classes.md) for inherited properties from `UIElement` and `UIElementBase`.
+See [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md) for inherited properties from `UIElement` and `UIElementBase`.
 
 ## Example
 

@@ -100,7 +100,7 @@ UIElementBase
               └── ContentControl → CommandControl → Button, MenuItem
 ```
 
-See [Base Classes](base-classes.md) for all inherited properties.
+See [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md) for all inherited properties.
 
 ## Notes
 

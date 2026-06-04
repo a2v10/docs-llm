@@ -100,7 +100,7 @@ Cross set:
 
 ## Example
 
-Cross models are most often used to build reports together with [Sheet](../xaml/layouts/sheet.md) tables. To make the example realistic it also outputs totals. Cross arrays are rendered with the `SheetCellGroup` element.
+Cross models are most often used to build reports together with [Sheet](https://docs-llm.a2v10.com/xaml/layouts/sheet.md) tables. To make the example realistic it also outputs totals. Cross arrays are rendered with the `SheetCellGroup` element.
 
 ### Template
 

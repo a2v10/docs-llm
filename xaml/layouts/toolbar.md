@@ -34,7 +34,7 @@ The `Toolbar.Align="Right"` attached property splits toolbar items into a left g
 |----------|------|-------------|
 | `Toolbar.Align` | ToolbarAlign | `Left` (default) or `Right` — places item in the right group |
 
-See [Base Classes](../base-classes.md) for inherited properties from `Container` and `UIElement`.
+See [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md) for inherited properties from `Container` and `UIElement`.
 
 ## Example
 

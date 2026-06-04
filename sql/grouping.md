@@ -133,7 +133,7 @@ The `$level` property is the depth in the tree (starting from 0); `$groupName` i
 
 ### XAML Binding
 
-A grouping model can be displayed with a [Sheet](../xaml/layouts/sheet.md) element:
+A grouping model can be displayed with a [Sheet](https://docs-llm.a2v10.com/xaml/layouts/sheet.md) element:
 
 ```xml
 <Sheet GridLines="Both" Columns="Fit,Auto,Auto">

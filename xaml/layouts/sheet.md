@@ -19,7 +19,7 @@ A sheet is assembled from a small family of elements:
 | `SheetTreeSection` | Like `SheetSection`, but binds recursively for tree / grouping models |
 | `SheetGroupCell` | A cell that renders the expand/collapse control inside a tree section |
 
-`Sheet` is the natural renderer for the data shapes described in [Tree & Hierarchy](../../sql/tree.md), [Grouping Models](../../sql/grouping.md), and [Cross (Pivot) Models](../../sql/cross.md).
+`Sheet` is the natural renderer for the data shapes described in [Tree & Hierarchy](https://docs-llm.a2v10.com/sql/tree.md), [Grouping Models](https://docs-llm.a2v10.com/sql/grouping.md), and [Cross (Pivot) Models](https://docs-llm.a2v10.com/sql/cross.md).
 
 ## Syntax
 
@@ -102,11 +102,11 @@ A sheet is assembled from a small family of elements:
 
 `SheetCellGroup` exposes `ItemsSource` (always a `Bind`) and a `Cells` collection — it can be used anywhere a `SheetCell` is allowed and emits one rendering of its cells per item. `SheetGroupCell` has no properties of its own; it renders the expand/collapse control and is only meaningful inside a `SheetTreeSection` (empty elsewhere).
 
-See [Base Classes](../base-classes.md) for inherited properties.
+See [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md) for inherited properties.
 
 ## Example
 
-A grouping report (see [Grouping Models](../../sql/grouping.md)) rendered as an indented totals table. `SheetTreeSection` walks the nested `Items`, `SheetGroupCell` draws the expand control, and `GroupIndent` indents the label by depth.
+A grouping report (see [Grouping Models](https://docs-llm.a2v10.com/sql/grouping.md)) rendered as an indented totals table. `SheetTreeSection` walks the nested `Items`, `SheetGroupCell` draws the expand control, and `GroupIndent` indents the label by depth.
 
 ```xml
 <Sheet GridLines="Both" Columns="Fit,Auto,Auto">
@@ -133,7 +133,7 @@ A grouping report (see [Grouping Models](../../sql/grouping.md)) rendered as an 
 
 ### Cross Report with Dynamic Columns
 
-`SheetCellGroup` turns a bound array into a variable number of cells, which is how cross (pivot) columns are rendered. The header binds to the key list (`$cross`), the body to each row's cross array. See [Cross (Pivot) Models](../../sql/cross.md).
+`SheetCellGroup` turns a bound array into a variable number of cells, which is how cross (pivot) columns are rendered. The header binds to the key list (`$cross`), the body to each row's cross array. See [Cross (Pivot) Models](https://docs-llm.a2v10.com/sql/cross.md).
 
 ```xml
 <Sheet Margin="1rem" GridLines="Both" Compact="True">

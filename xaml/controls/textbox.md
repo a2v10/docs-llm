@@ -46,7 +46,7 @@ By default, `TextBox` is single-line. Setting `Multiline="True"` switches it to 
 | `Value` | Object | **Binding only.** The field value bound to a model property. |
 | `ValidateValue` | Object | **Binding only.** Alternative binding used for validation. |
 
-See [Base Classes](../base-classes.md) for `Label`, `Description`, `Required`, `Disabled`, `Width`, and other inherited properties.
+See [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md) for `Label`, `Description`, `Required`, `Disabled`, `Width`, and other inherited properties.
 
 ### UpdateTrigger Values
 

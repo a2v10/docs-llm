@@ -29,7 +29,7 @@ Use `Static` when you want to show a model value in the standard form layout (wi
 |----------|------|-------------|
 | `Value` | Object | **Binding only.** The displayed value. |
 
-See [Base Classes](../base-classes.md) for `Label`, `Width`, and other inherited properties.
+See [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md) for `Label`, `Width`, and other inherited properties.
 
 ## Example
 

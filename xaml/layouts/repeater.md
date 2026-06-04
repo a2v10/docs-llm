@@ -37,7 +37,7 @@ Or using the content property shorthand:
 | `Content` | UIElementBase | **Content property.** The element repeated for each item in `ItemsSource`. |
 | `ItemsSource` | Array | **Bind only.** The array to iterate over. |
 
-See [Base Classes](../base-classes.md) for inherited properties from `UIElement` and `UIElementBase`.
+See [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md) for inherited properties from `UIElement` and `UIElementBase`.
 
 ## Example
 

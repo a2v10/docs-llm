@@ -31,7 +31,7 @@ Two view modes are supported: `Day` (default, for selecting a specific date) and
 |----------|------|-------------|
 | `Value` | Object | **Binding only.** The date value. Use `DataType=Date` or `DataType=DateTime` on the Bind. |
 
-See [Base Classes](../base-classes.md) for `Label`, `Required`, `Disabled`, and other inherited properties.
+See [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md) for `Label`, `Required`, `Disabled`, and other inherited properties.
 
 ## Example
 

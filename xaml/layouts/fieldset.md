@@ -26,7 +26,7 @@ Children are laid out using the `Orientation` property — either stacked vertic
 | `Hint` | Popover | Help tooltip shown as `?` icon after the title |
 | `Disabled` | Boolean | Disables all control elements inside the fieldset. Supports `Bind`. |
 
-See [Base Classes](../base-classes.md) for inherited properties from `Container` and `UIElement`.
+See [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md) for inherited properties from `Container` and `UIElement`.
 
 ## Example
 

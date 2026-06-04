@@ -39,7 +39,7 @@ The button's visual appearance is controlled by `Style` and `Size`. An optional 
 | `Command` | BindCmd | Command executed on click |
 | `Content` | Object | Button label text. Supports `Bind`. |
 
-See [Base Classes](../base-classes.md) for properties inherited from `Control`, `UIElement`, and `UIElementBase`.
+See [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md) for properties inherited from `Control`, `UIElement`, and `UIElementBase`.
 
 ### ButtonStyle Values
 
