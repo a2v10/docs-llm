@@ -6,3 +6,4 @@
 - [SQL](https://docs-llm.a2v10.com/sql.md): Naming, markers, stored procedures, the TVP+MERGE save pattern, tree and grouping models
 - [XAML (UI Markup)](https://docs-llm.a2v10.com/xaml.md): Server-compiled Vue.js views — Page/Dialog roots, binding, controls, layouts
 - [Model Configuration](https://docs-llm.a2v10.com/model.md): model.json — actions, dialogs, popups, commands, reports, file upload
+- [Application Configuration](https://docs-llm.a2v10.com/app.md): Application-wide files — menu.json navigation
