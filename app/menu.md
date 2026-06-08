@@ -48,7 +48,7 @@ Menu node properties (the same shape at every nesting level):
 | Property | Type | Description |
 |----------|------|-------------|
 | `title` | string | Display label. `@[Key]` is resolved from resource strings; a plain string is shown as-is |
-| `icon` | string | Icon name from the platform's fixed icon set (mostly used on first-level nodes), e.g. `cart`, `home`, `gear-outline`, `database`. The set is a closed enum — unknown names are rejected by the schema |
+| `icon` | string | Icon name from the platform's fixed icon set (mostly used on first-level nodes), e.g. `cart`, `home`, `gear-outline`, `database`. The set is a closed enum — unknown names are rejected by the schema. See [Icons](#icons) for the full list |
 | `url` | string | Target endpoint URL, e.g. `/document/waybillin`. A node with a `url` is a navigable leaf |
 | `items` | array | Child nodes. A node with `items` is a group; combine with `url` only when grouping |
 | `create` | boolean | Adds a quick "create new" (`+`) action next to the item — for catalogs that support insert |
@@ -137,3 +137,50 @@ A navigation tree with a sales section, a purchase section, a spacer, and a sett
 - Localization: any `title` may use `@[Key]`. Keys that are missing from the resource file fall through to the raw key text, which makes typos easy to spot.
 - `create: true` only makes sense on a leaf whose endpoint exposes an insert/edit action; on a group it has no effect.
 - URLs beginning with `$` (for example `/$workflow/catalog`, `/$meta/config`) target built-in platform endpoints rather than application endpoints.
+
+## Icons
+
+The `icon` property accepts only names from the platform's built-in icon set. The complete, closed list is below (grouped alphabetically); any name outside it is rejected by the schema.
+
+```text
+access  account  account-folder  add  address-book  address-card  alert  apply  approve
+arrow-down  arrow-down-red  arrow-export  arrow-left  arrow-left-right  arrow-left-right-full
+arrow-open  arrow-right  arrow-sort  arrow-up  arrow-up-green  assets  attach
+ban  bank  bank-account  bank-uah  barcode  bell  board  bookmark  brand-excel
+calc  calendar  calendar-today  calendar-week  call  camera  cart  chart-area  chart-bar
+chart-column  chart-pie  chart-pivot  chart-stacked-area  chart-stacked-bar  chart-stacked-line
+check  check-bold  checkbox  checkbox-checked  chevron-double-left  chevron-double-right
+chevron-down  chevron-left  chevron-left-end  chevron-right  chevron-right-end  chevron-up
+circle  circle-small  clear  close  cloud  cloud-outline  code  code-check  comment
+comment-add  comment-discussion  comment-lines  comment-next  comment-outline  comment-previous
+comment-urgent  company  confirm  copy  currency-euro  currency-other  currency-uah
+currency-usd  cut
+dashboard  dashboard-outline  database  delete  delete-box  delete-red  devices  disapprove
+dot  dot-blue  dot-green  dot-red  download
+edit  edit-redo  edit-undo  ellipsis  ellipsis-bottom  ellipsis-vertical  error  error-outline
+exit  export  export-excel  external  eye  eye-disabled  eye-disabled-red
+factory  failure  failure-outline  failure-red  file  file-content  file-download-pdf
+file-error  file-failure  file-image  file-import  file-link  file-preview  file-signature
+file-success  file-user  file-warning  filter  filter-outline  flag  flag-blue  flag-green
+flag-red  flag-yellow  flag2  flame  folder  folder-ban  folder-move-to  folder-outline
+folder-query  folders-outline
+gear  gear-outline  grid
+help  help-blue  help-outline  history  home
+image  import  info  info-blue  info-outline  items
+link  list  list-bullet  lock  lock-outline  log  logout
+menu  message  message-outline  minus  minus-box  minus-circle  mode-dark  mode-light
+package  package-outline  pane-close  pane-left  pane-left-blue  pane-open  pane-right
+pane-right-blue  paste  pencil  pencil-outline  personnel  pin  pin-outline  pinned
+pinned-outline  play  play-outline  plus  plus-box  plus-circle  policy  power  print  process
+qrcode  query  queue
+refresh  reload  rename  report  requery
+save  save-as  save-close  save-close-outline  save-outline  search  security  send
+send-outline  server  share  smile  smile-sad  square  star  star-outline  star-yellow
+step  steps  storyboard  success  success-green  success-outline  switch
+table  tag  tag-blue  tag-green  tag-outline  tag-red  tag-yellow  task-complete  trash
+triangle-left  triangle-right  truck
+unapply  unlock  unlock-outline  unpin  unpin-outline  upgrade  upload  upload2  user
+user-image  user-minus  user-plus  users
+variable
+waiting  waiting-outline  warehouse  warning  warning-outline  warning-yellow  workflow1  wrench
+```
