@@ -4,7 +4,7 @@
 
 ## Overview
 
-`DataGrid` renders a table where each row corresponds to one element of an array in the model. Columns are defined with nested `DataGridColumn` elements. It inherits from `Control → UIElement → UIElementBase`.
+`DataGrid` renders a table where each row corresponds to one element of an [array in the model](https://docs-llm.a2v10.com/client/array.md). Columns are defined with nested `DataGridColumn` elements. It inherits from `Control → UIElement → UIElementBase`.
 
 DataGrid is the primary list control in A2v10. When combined with a `CollectionView`, it gains sorting, filtering, pagination, and grouping. Rows can be marked with colors, expanded for details, double-clicked, or right-clicked for a context menu.
 
@@ -129,10 +129,12 @@ The `Mark` binding should return one of these strings:
 
 ## Notes
 
-- `ItemsSource` must always be a `Bind` — DataGrid only works with model arrays.
+- `ItemsSource` must always be a [`Bind`](https://docs-llm.a2v10.com/xaml/bind.md) — DataGrid only works with model arrays.
 - Inside `DataGridColumn`, bindings are relative to the current row element.
 - `DoubleClick` is the most common way to open an edit dialog from a list — it fires with the selected row as context.
 - `Sort="True"` on the table enables sorting UI; individual columns can opt out with `Sort="False"`.
 - `Editable="True"` on a column renders an inline edit field; the `ControlType` property selects which control type to use.
 - `Mark` binding is evaluated for each row and should return a string (one of the named color classes) or empty string/null for no mark.
 - `Role="Id"` on a column applies `Id`-specific styles (e.g., monospace, no wrap).
+- The bound array is shaped server-side — see [array models](https://docs-llm.a2v10.com/sql/array.md). A hierarchical source is a [tree model](https://docs-llm.a2v10.com/sql/tree.md), which DataGrid renders as an expandable tree.
+- At runtime the bound array exposes selection and helpers through the [Array API](https://docs-llm.a2v10.com/client/array.md) (for example `Documents.Selected`, used by `DoubleClick` above); a hierarchical row is a [Tree Element](https://docs-llm.a2v10.com/client/tree-element.md) with `$expand` / `$selectPath`.
