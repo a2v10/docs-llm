@@ -21,8 +21,8 @@ Lazy arrays are not filled while the model is built — they load on first acces
 
 ## Do Not Use When
 
-- The set is large or unbounded — use server-side sorting, filtering, and paging instead.
-- You only ever need a page of rows at a time — use paging instead of loading the full array.
+- The set is large or unbounded — use server-side sorting, filtering, and [Paging & Filters](https://docs-llm.a2v10.com/sql/paging.md) instead.
+- You only ever need a page of rows at a time — use [Paging & Filters](https://docs-llm.a2v10.com/sql/paging.md) instead of loading the full array.
 - A child collection is rarely opened and expensive to load eagerly — use `!LazyArray` instead of a plain `!Array`.
 
 ## Syntax
@@ -107,12 +107,13 @@ go
 
 ## Notes
 
-- Keep client-side arrays small: the recommended size is no more than 100 elements, and about 200 is the maximum before noticeable performance loss. For large tables use server-side sorting, filtering, and paging.
+- Keep client-side arrays small: the recommended size is no more than 100 elements, and about 200 is the maximum before noticeable performance loss. For large tables use server-side sorting, filtering, and [Paging & Filters](https://docs-llm.a2v10.com/sql/paging.md).
 - A child result set must be processed after the parent — its parent object must already exist in the model.
 - The parent identifier referenced by `!ParentId` must be marked with `!Id` on the parent object.
 - The structure (not the data) of a lazy array must be known when the model is first built — return an empty result set (`where 0 <> 0`) that defines the array shape.
 - A lazy-array loader receives the parent identifier as `@Id` and returns a result set matching the array description; its `!ParentId` field is not required.
-- Lazy-array loaders may take parameters and use paging.
+- Lazy-array loaders may take parameters and use [Paging & Filters](https://docs-llm.a2v10.com/sql/paging.md).
+- A lazy collection whose contents are not loaded yet can report that rows exist via the `HasRows` modifier of [System Datasets](https://docs-llm.a2v10.com/sql/system-datasets.md).
 
 ## Hints
 

@@ -10,7 +10,12 @@
       "Read(//c/Users/alexk/AppData/Local/GitHubDesktop/bin//**)",
       "WebFetch(domain:api.github.com)",
       "PowerShell(gh api repos/alex-kukhtin/A2v10.Help/contents/A2v10.Help/html --jq '.[] | select\\(.type==\\\\\"dir\\\\\"\\) | .name')",
-      "Bash(curl -s \"https://raw.githubusercontent.com/alex-kukhtin/A2v10.Help/master/A2v10.Help/html/models/array.html\")"
+      "Bash(curl -s \"https://raw.githubusercontent.com/alex-kukhtin/A2v10.Help/master/A2v10.Help/html/models/array.html\")",
+      "WebFetch(domain:docs.a2v10.com)",
+      "Bash(xargs wc -l)",
+      "Bash(grep -v '^\\\\s*$')",
+      "Read(//c/A2v10_Net48/**)",
+      "Bash(ls \"C:/\" 2>/dev/null | head -30; echo \"=== A2v10 dirs ===\"; ls -d C:/A2v10* C:/Claude/* 2>/dev/null | head -20)"
     ]
   }
 }

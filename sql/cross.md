@@ -6,7 +6,7 @@
 
 A cross model contains one or more fields that are expanded either into a horizontal array of elements (`CrossArray` type) or into an object keyed by value (`CrossObject` type). Such models are mostly used to build cross (pivot) reports where the number of columns is variable and determined by the returned data. This is similar to the SQL `PIVOT` operator, but — unlike `PIVOT` — you do not need to know in advance which columns will appear in the result set.
 
-Cross models only make sense for arrays. Using them for plain objects (not arrays) is pointless (though not forbidden) — use `MapObject` instead.
+Cross models only make sense for arrays. Using them for plain objects (not arrays) is pointless (though not forbidden) — use [Named Sets (MapObject)](https://docs-llm.a2v10.com/sql/map-object.md) instead.
 
 For cross arrays the differences from ordinary nested arrays are:
 
@@ -184,7 +184,7 @@ const template = {
 
 ## Notes
 
-- Cross arrays are only meaningful for arrays. For an object use `MapObject` instead of a cross model.
+- Cross arrays are only meaningful for arrays. For an object use [Named Sets (MapObject)](https://docs-llm.a2v10.com/sql/map-object.md) instead of a cross model.
 - Every main element must expose `[Id!!Id]` so cross sets can link back to it via `!ParentId`.
 - A cross set must include a text `[Key!!Key]` field — it determines element order and is what `$cross` returns.
 - The `$cross` property lives on the array, not on its elements — reach it as `RepData.$cross.Cross1`.

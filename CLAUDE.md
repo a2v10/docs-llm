@@ -24,10 +24,17 @@ llms.txt              ← LLM entry point, one-liner index of all docs
 CONVENTIONS.md        ← Authoring rules (read this before writing any doc)
 sql/
   overview.md         ← TODO (stub)
-  markers.md          ← TODO (stub)
   procedures.md       ← TODO (stub)
+  markers.md          ← DONE (name composition, dataset types + field modifiers hub)
+  object.md           ← DONE (Object set, !Id/!Name, !RefId + Map, named Map, new instance)
   update-model.md     ← DONE (TVP + MERGE pattern, complete with examples)
+  array.md            ← DONE (Array/LazyArray, !ParentId)
+  paging.md           ← DONE (@Offset/@PageSize/@Order/@Dir, !RowCount, filter forms)
   tree.md             ← DONE (Tree/Hierarchy, static + dynamic, complete)
+  grouping.md         ← DONE (Group type, GroupMarker)
+  cross.md            ← DONE (CrossArray/CrossObject, $cross)
+  map-object.md       ← DONE (MapObject, !Key, key list, dynamic keys)
+  system-datasets.md  ← DONE ($System/$Aliases/$Defaults, modifiers, set order)
 xaml/
   overview.md         ← DONE (Page/Dialog roots, extensions, property syntax)
   bind.md             ← DONE (Bind + BindCmd, all properties and CommandTypes)
@@ -66,23 +73,17 @@ client/               ← DONE (client object model / runtime API; source html/c
   (source has empty stubs: index/module/global/localization — skipped)
 ```
 
-**Still TODO**: `sql/overview.md`, `sql/markers.md`, `sql/procedures.md` — these are stub files
+**Still TODO**: `sql/overview.md`, `sql/procedures.md` — these are stub files
 with `TODO` placeholders throughout. They need real content.
 
 ## Roadmap — Next Tasks (prioritized)
 
 Ordered by leverage. Cross-references must be full absolute URLs (see CONVENTIONS.md → Links).
 
-1. **Fill `sql/markers.md` (highest leverage).** It is the central hub of the data layer —
-   `array`, `tree`, `grouping`, `cross`, and `update-model` all build on markers. While it is a
-   stub, every inbound link lands on an empty page. Source: `models/general.html` +
-   `models/simple.html`. After filling it, wire bidirectional links to all shape docs.
-2. **Fill the other two SQL stubs**: `sql/overview.md` (source `models/general.html`,
+1. **Fill the two remaining SQL stubs**: `sql/overview.md` (source `models/general.html`,
    conventions) and `sql/procedures.md` (Index/Load/Metadata/Update/Fetch/Delete patterns).
-   Several Priority-1/2 links already point into `sql/procedures.md`.
-3. **Add `sql/paging.md`** (source `models/paging.html`). `sql/array.md` already refers to paging
-   in two places (Do Not Use When + Notes) with no link — wire them once the file exists.
-4. **Horizontal links — Priority 3** (data ↔ controls; Priority 1+2 already done):
+   Several existing links already point into `sql/procedures.md`.
+2. **Horizontal links — Priority 3** (data ↔ controls; Priority 1+2 already done):
    - `xaml/controls/datagrid.md` → `sql/array.md`, `sql/tree.md`, `xaml/bind.md`
      (datagrid currently has *no* cross-links, not even base-classes)
    - `xaml/controls/selector.md` → `sql/procedures.md` (server-side Fetch), `sql/array.md`
@@ -91,10 +92,11 @@ Ordered by leverage. Cross-references must be full absolute URLs (see CONVENTION
      (sheet links to tree, but not back — one-directional)
    - `model/reports.md` → `xaml/layouts/sheet.md` (Excel export)
    - `sql/array.md` → `xaml/controls/datagrid.md` (what renders it)
-5. **Remaining `models/` source pages not yet documented**: `simple`, `general`, `blob`,
-   `rowversion`, `system` — fold the useful parts into the SQL stubs above rather than creating
-   one-to-one files where they overlap.
-6. **Anchor-text hygiene pass** (low priority): replace any bare `See [X]` / generic anchors with
+   - `sql/paging.md` → `xaml/controls/datagrid.md` (sorting/paging UI)
+3. **Remaining `models/` source pages not yet documented**: `blob`, `rowversion` — fold the
+   useful parts into the SQL stubs above rather than creating one-to-one files where they
+   overlap.
+4. **Anchor-text hygiene pass** (low priority): replace any bare `See [X]` / generic anchors with
    descriptive noun phrases. Not a RAG optimization — just readability for the direct-fetch model.
 
 ## Authoring Rules (summary — full rules in CONVENTIONS.md)
@@ -145,6 +147,10 @@ When writing new documentation, draw from the original A2v10 HTML help:
 - **xaml/** — XAML controls (already documented)
 
 Fetch files with WebFetch using the raw GitHub URL + path.
+
+A local checkout of the same HTML (usually more current than GitHub) is at
+`C:\A2v10_Net48\A2v10.Uk.Help\A2v10.Help\html\` — read it directly instead of fetching.
+The source is Ukrainian; docs here are written in English from scratch, not translated.
 
 ## Key Platform Concepts
 
