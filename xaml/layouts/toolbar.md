@@ -88,5 +88,6 @@ See [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md) for inherite
 - `Toolbar` is typically used as a value for `Page.Toolbar` or `Dialog.Taskpad` — it can also appear inline inside other containers.
 - `Separator` creates a visual divider between button groups.
 - `Toolbar.Align="Right"` on any element shifts it (and subsequent right-aligned elements) to the right side.
+- [ToolbarAligner](https://docs-llm.a2v10.com/xaml/controls/toolbaraligner.md) is an invisible spacer that does the same job for a whole group of trailing elements and makes the split point explicit in the markup.
 - Buttons in toolbars often use `Disabled="{Bind !Items.HasSelected}"` to disable actions when nothing is selected.
 - For button-only toolbars, prefer `Style="Toolbar"` on individual `Button` elements over `Style="Primary"` for visual consistency.

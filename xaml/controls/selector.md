@@ -13,6 +13,8 @@ When an item is selected, the whole object is stored in the bound `Value`. A `Se
 
 Selector supports creating new records inline via `NewPane` and `CreateNewCommand`.
 
+When the lookup endpoint follows the standard layout — a `browse` dialog plus a `fetch` command — [SelectorSimple](https://docs-llm.a2v10.com/xaml/controls/selectorsimple.md) does the same job with a single `Url` property.
+
 ## Syntax
 
 ```xml

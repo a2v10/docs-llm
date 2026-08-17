@@ -14,9 +14,11 @@
 - [DataGridColumn](https://docs-llm.a2v10.com/xaml/controls/datagrid.md): Column definition — Content, Header, Width, Align, Editable, Command, Role
 - [ComboBox](https://docs-llm.a2v10.com/xaml/controls/combobox.md): Dropdown list — static items, bound list, DisplayProperty, ComboBoxItem
 - [Selector](https://docs-llm.a2v10.com/xaml/controls/selector.md): Search/lookup control — Delegate, SetDelegate, ItemsPanel, NewPane, server-side search
+- [SelectorSimple](https://docs-llm.a2v10.com/xaml/controls/selectorsimple.md): Shorthand selector configured by a single Url — fetch, browse dialog and DisplayProperty by convention
 - [CheckBox](https://docs-llm.a2v10.com/xaml/controls/checkbox.md): Boolean checkbox bound to model value
 - [DatePicker](https://docs-llm.a2v10.com/xaml/controls/datepicker.md): Date selector with calendar popup — View (Day/Month), Placement
 - [Static](https://docs-llm.a2v10.com/xaml/controls/static.md): Read-only display field styled like a disabled TextBox
+- [ToolbarAligner](https://docs-llm.a2v10.com/xaml/controls/toolbaraligner.md): Invisible spacer that pushes following elements to the opposite edge — flex-grow for toolbars
 
 ## Layouts
 
