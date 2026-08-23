@@ -13,6 +13,7 @@ UIElementBase   — visibility, spacing, tooltip, render mode
   └── UIElement — font styling, CSS classes
         ├── Container — children collection, items source
         │     └── RootContainer — Page, Dialog roots
+        ├── Inline    — text elements: block, float, color
         └── Control   — label, disabled, width, popover
               └── ValuedControl  — Value, ValidateValue
                     └── ContentControl — content display
@@ -62,6 +63,18 @@ Derived containers: `Grid`, `StackPanel`, `Toolbar`, `FieldSet`, `Flex`, `Group`
 
 `RootContainer` adds nothing to the API surface but is the direct parent of `Page` and `Dialog`.
 
+## Inline
+
+Extends `UIElement`. Base for all text elements — those that flow inside a line of text rather than occupying a layout slot.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `Block` | Boolean | Render the element as a block rather than inline. |
+| `Float` | FloatMode | Float the element: `None` (default), `Left`, `Right`. |
+| `Color` | TextColor | Text colour. Values in [Text Elements](https://docs-llm.a2v10.com/xaml/text.md). |
+
+Derived: `Span`, `Hyperlink`, `Popover`, `Badge`, `TagLabel`, `SpanIcon`, `SpanSum`, `StaticImage`, `Html`, `Break`, `Line` — all documented in [Text Elements](https://docs-llm.a2v10.com/xaml/text.md).
+
 ## Control
 
 Extends `UIElement`. Base for all interactive controls.
@@ -76,8 +89,8 @@ Extends `UIElement`. Base for all interactive controls.
 | `TabIndex` | Int32 | Tab navigation order. `-1` excludes from tab chain. |
 | `Block` | Boolean | Render as block element (not inline). |
 | `TestId` | String | Identifier for test automation tools. |
-| `Popover` | Popover | Floating help tooltip shown as `?` icon on the right side. |
-| `Hint` | Popover | Floating tooltip shown as icon after the label. |
+| `Popover` | [Popover](https://docs-llm.a2v10.com/xaml/text.md) | Floating help tooltip shown as `?` icon on the right side. |
+| `Hint` | [Popover](https://docs-llm.a2v10.com/xaml/text.md) | Floating tooltip shown as icon after the label. |
 | `Validator` | Validator | Configures validator display (position, width). |
 | `AddOns` | UIElementCollection | Extra controls appended after the field, typically hyperlinks. |
 | `Link` | UIElement | Supplementary link displayed in the upper-right corner. |

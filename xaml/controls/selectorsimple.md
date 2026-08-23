@@ -42,7 +42,7 @@ From the given `Url`, `SelectorSimple` builds the remaining properties of the ba
 | Base selector setting | Derived value |
 |-----------------------|---------------|
 | Fetch command | `Url + '/fetch'` |
-| Browse dialog | `Url + '/browse'`, with a search icon |
+| Browse dialog | `Url + '/browse'`, with a search icon — a [Hyperlink](https://docs-llm.a2v10.com/xaml/text.md) in the control's add-ons |
 | `DisplayProperty` | `Name` |
 | Dialog argument | the current `Value` |
 

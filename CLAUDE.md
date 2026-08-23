@@ -38,11 +38,16 @@ sql/
 xaml/
   overview.md         ← DONE (Page/Dialog roots, extensions, property syntax)
   bind.md             ← DONE (Bind + BindCmd, all properties and CommandTypes)
-  base-classes.md     ← DONE
+  base-classes.md     ← DONE (UIElementBase/UIElement/Inline/Container/Control/…)
+  text.md             ← DONE (all 13 inlines in one file + TextColor values)
   controls/           ← DONE (button, checkbox, combobox, datagrid, datepicker,
-                              selector, static, textbox)
+                              graphics, selector, selectorsimple, static, textbox,
+                              toolbaraligner)
   layouts/            ← DONE (dialog, fieldset, grid, page, repeater,
-                              stackpanel, tabpanel, toolbar)
+                              sheet, stackpanel, tabpanel, toolbar)
+app/                  ← application-wide config (source html/app/)
+  menu.md             ← DONE (menu.json navigation tree + icon set)
+  layout.md           ← DONE (_layout folder, _scripts.html/_styles.html, Core only)
 model/
   overview.md         ← DONE (top-level model.json structure + inheritance)
   actions.md          ← DONE (index/copy/view/template/merge/export)
@@ -59,7 +64,7 @@ template/             ← DONE (client-side JS model behavior; source html/templ
   validators.md       ← DONE (data-bound validation, std/func/obj/async)
   events.md           ← DONE (model/object/array lifecycle handlers)
   commands.md         ← DONE (view commands via BindCmd, confirm/guards)
-  delegates.md        ← DONE (control callbacks, e.g. selector fetch)
+  delegates.md        ← DONE (control callbacks — selector fetch, Graphics draw)
 client/               ← DONE (client object model / runtime API; source html/client/)
   overview.md         ← DONE (the five object shapes + index)
   element.md          ← DONE (IElement base members)
@@ -124,10 +129,10 @@ Rules:
 - English only
 - Omit sections that have nothing to say — never leave `TODO` placeholders
 
-The root `llms.txt` is a flat, one-level index with only three entries — SQL, XAML, MODEL —
-each pointing to a section index page (`sql.md`, `xaml.md`, `model.md`). Those section pages hold
-the per-file one-liners. Every new file needs its one-liner added to the matching section page
-(`sql.md` / `xaml.md` / `model.md`), not to `llms.txt`.
+The root `llms.txt` is a flat, one-level index with six entries — SQL, XAML, MODEL, TEMPLATE,
+CLIENT, APP — each pointing to a section index page (`sql.md`, `xaml.md`, `model.md`,
+`template.md`, `client.md`, `app.md`). Those section pages hold the per-file one-liners. Every
+new file needs its one-liner added to the matching section page, not to `llms.txt`.
 
 ## Sample Schema
 
@@ -151,6 +156,12 @@ Fetch files with WebFetch using the raw GitHub URL + path.
 A local checkout of the same HTML (usually more current than GitHub) is at
 `C:\A2v10_Net48\A2v10.Uk.Help\A2v10.Help\html\` — read it directly instead of fetching.
 The source is Ukrainian; docs here are written in English from scratch, not translated.
+
+**The help HTML is the only source of content.** The platform implementation
+(`C:\A2v10_Net6`, `C:\A2v10_Net48`) may be consulted solely to settle a contradiction — never
+to enrich a page. Nothing found in the code goes into a `.md` file: no properties, no enum
+values, no type names, no notes. A finding is logged in `DISCREPANCIES.md` and decided by the
+project owner. Missing from the help means missing from the docs; say so instead of digging.
 
 ## Key Platform Concepts
 

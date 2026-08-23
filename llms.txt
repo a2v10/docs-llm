@@ -4,8 +4,8 @@
 > Developers describe data (SQL), model (model.json), and UI (XAML) — the platform builds the application.
 
 - [SQL](https://docs-llm.a2v10.com/sql.md): Naming, markers, stored procedures, the TVP+MERGE save pattern, tree and grouping models
-- [XAML (UI Markup)](https://docs-llm.a2v10.com/xaml.md): Server-compiled Vue.js views — Page/Dialog roots, binding, controls, layouts
+- [XAML (UI Markup)](https://docs-llm.a2v10.com/xaml.md): Server-compiled Vue.js views — Page/Dialog roots, binding, controls, layouts, text elements
 - [Model Configuration](https://docs-llm.a2v10.com/model.md): model.json — actions, dialogs, popups, commands, reports, file upload
 - [Client Template](https://docs-llm.a2v10.com/template.md): Client-side JavaScript that defines model behavior — defaults, computed properties, validators, events, commands, delegates
 - [Client API](https://docs-llm.a2v10.com/client.md): The client object model — `$`-prefixed members on objects, arrays, and trees, the controller, and std:utils
-- [Application Configuration](https://docs-llm.a2v10.com/app.md): Application-wide files — menu.json navigation
+- [Application Configuration](https://docs-llm.a2v10.com/app.md): Application-wide files — menu.json navigation, special folders

@@ -1,10 +1,11 @@
 # XAML (UI Markup)
 
-> UI layer reference for A2v10 — XML views compiled server-side to Vue.js. Page/Dialog roots, data and command binding, controls, and layout containers.
+> UI layer reference for A2v10 — XML views compiled server-side to Vue.js. Page/Dialog roots, data and command binding, controls, layout containers, and text elements.
 
 - [XAML Overview](https://docs-llm.a2v10.com/xaml/overview.md): How XAML views work — Page/Dialog roots, markup extensions, property syntax, element hierarchy
 - [Bind & BindCmd](https://docs-llm.a2v10.com/xaml/bind.md): Data binding and command binding — Bind properties, DataType values, all CommandType values
-- [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md): Inherited properties on all elements — UIElementBase, UIElement, Control, ValuedControl, Container
+- [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md): Inherited properties on all elements — UIElementBase, UIElement, Inline, Control, ValuedControl, Container
+- [Text Elements](https://docs-llm.a2v10.com/xaml/text.md): Inlines that compose text — Text, Paragraph, Span, Hyperlink, Popover, Badge, TagLabel, SpanIcon, SpanSum, StaticImage, Html, Break, Line, and the TextColor values
 
 ## Controls
 
@@ -19,6 +20,7 @@
 - [DatePicker](https://docs-llm.a2v10.com/xaml/controls/datepicker.md): Date selector with calendar popup — View (Day/Month), Placement
 - [Static](https://docs-llm.a2v10.com/xaml/controls/static.md): Read-only display field styled like a disabled TextBox
 - [ToolbarAligner](https://docs-llm.a2v10.com/xaml/controls/toolbaraligner.md): Invisible spacer that pushes following elements to the opposite edge — flex-grow for toolbars
+- [Graphics](https://docs-llm.a2v10.com/xaml/controls/graphics.md): Drawing surface filled by a d3.js delegate — Delegate, Argument, Watch modes, attaching d3
 
 ## Layouts
 

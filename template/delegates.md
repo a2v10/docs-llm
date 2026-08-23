@@ -21,6 +21,8 @@ delegates: {
 
 ## Example
 
+### Selector fetch
+
 A selector in the view names the delegate that fetches its options:
 
 ```xml
@@ -47,9 +49,32 @@ function fetchAgent(agent, text) {
 module.exports = template;
 ```
 
+### Graphics drawing
+
+The same section serves a control with a completely different signature. A [Graphics](https://docs-llm.a2v10.com/xaml/controls/graphics.md) element calls its delegate to draw itself, passing the DOM node instead of a search string, and returns nothing:
+
+```xml
+<Graphics Delegate="DrawChart" Argument="{Bind Chart.Items}" Height="20rem" />
+```
+
+```js
+const template = {
+  delegates: {
+    DrawChart: drawChart
+  }
+};
+
+function drawChart(chart, arg, node) {
+  chart.append('svg')
+    .attr('width', node.clientWidth)
+    .attr('height', node.clientHeight);
+  // ... draw with d3.js
+}
+```
+
 ## Notes
 
 - A delegate is referenced by name from a control's `Delegate` property; the control decides when to call it.
 - `this` inside a delegate is the root object (`TRoot`); the first argument is also the root.
-- The remaining arguments and the return value are defined by the control that invokes the delegate — a selector fetch delegate receives the element and the entered text and returns the matching options.
+- The remaining arguments and the return value are defined by the control that invokes the delegate — a selector fetch delegate receives the element and the entered text and returns the matching options, while a [Graphics](https://docs-llm.a2v10.com/xaml/controls/graphics.md) delegate receives the d3 selection, the argument, and the DOM node, and returns nothing.
 - Use the controller (`this.$ctrl`) to reach platform methods such as `$invoke` for server calls.
