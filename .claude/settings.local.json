@@ -23,7 +23,8 @@
       "Bash(pkill -f \"grep -rl\")",
       "PowerShell(git -C C:\\\\A2v10_Net48\\\\A2v10.Uk.Help diff -- A2v10.Help/html/xaml/controls/uploadfile.html)",
       "PowerShell(git -C C:\\\\A2v10_Net48\\\\A2v10.Uk.Help diff -- A2v10.Help/html/models/rowversion.html)",
-      "PowerShell(git -C C:\\\\A2v10_Net48\\\\A2v10.Uk.Help status --short)"
+      "PowerShell(git -C C:\\\\A2v10_Net48\\\\A2v10.Uk.Help status --short)",
+      "PowerShell(Remove-Item C:\\\\Claude\\\\docs-llm\\\\sql\\\\overview.md -Confirm:$false)"
     ]
   }
 }

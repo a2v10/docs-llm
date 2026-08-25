@@ -23,8 +23,7 @@ All files are served as static content.
 llms.txt              ← LLM entry point, one-liner index of all docs
 CONVENTIONS.md        ← Authoring rules (read this before writing any doc)
 sql/
-  overview.md         ← TODO (stub)
-  procedures.md       ← TODO (stub)
+  procedures.md       ← DONE (name composition, suffix table, standard parameters)
   markers.md          ← DONE (name composition, dataset types + field modifiers hub)
   object.md           ← DONE (Object set, !Id/!Name, !RefId + Map, named Map, new instance)
   update-model.md     ← DONE (TVP + MERGE pattern, complete with examples)
@@ -81,20 +80,23 @@ client/               ← DONE (client object model / runtime API; source html/c
   (source has empty stubs: index/module/global/localization — skipped)
 ```
 
-**Still TODO**: `sql/overview.md`, `sql/procedures.md` — these are stub files
-with `TODO` placeholders throughout. They need real content.
+No stub files remain. `sql/overview.md` was deleted rather than written: its promised scope
+(schemas, standard columns, DDL idempotence) has no source in the help, and the one part that
+does — name composition and dataset types, from `models/general.html` — is already
+`sql/markers.md`.
 
 ## Roadmap — Next Tasks (prioritized)
 
 Ordered by leverage. Cross-references must be full absolute URLs (see CONVENTIONS.md → Links).
 
-1. **Fill the two remaining SQL stubs**: `sql/overview.md` (source `models/general.html`,
-   conventions) and `sql/procedures.md` (Index/Load/Metadata/Update/Fetch/Delete patterns).
-   Several existing links already point into `sql/procedures.md`.
+1. ~~Fill the two remaining SQL stubs~~ — done: `sql/procedures.md` written,
+   `sql/overview.md` deleted. Note that `.Fetch` and `.Delete` are **not** platform procedure
+   suffixes — the help knows only `.Index`, `.Load`, `.Metadata`, `.Update`, `.Expand`.
 2. **Horizontal links — Priority 3** (data ↔ controls; Priority 1+2 already done):
    - `xaml/controls/datagrid.md` → `sql/array.md`, `sql/tree.md`, `xaml/bind.md`
      (datagrid currently has *no* cross-links, not even base-classes)
-   - `xaml/controls/selector.md` → `sql/procedures.md` (server-side Fetch), `sql/array.md`
+   - `xaml/controls/selector.md` → `model/commands.md` (the server-side `fetch` command),
+     `sql/array.md`
    - `xaml/controls/combobox.md` → `sql/array.md` (bound list is an array)
    - `sql/tree.md` → `xaml/layouts/sheet.md`, `xaml/controls/datagrid.md`
      (sheet links to tree, but not back — one-directional)
@@ -142,7 +144,9 @@ All examples use the **a2v10sample** database. Common schemas and patterns:
 - Schema `a2` or `cat` for application tables
 - Model names follow PascalCase: `Agent`, `Document`, `AgentCategory`
 - Stored procedure names: `[schema].[ModelName.Verb]` e.g. `[a2].[Agent.Index]`
-- Standard verbs: `Index`, `Load`, `Metadata`, `Update`, `Delete`, `Copy`, `Expand`, `Report`
+- Platform suffixes (the only ones the help confirms): `Index`, `Load`, `Metadata`, `Update`,
+  `Expand`. Anything else (`Delete`, `Copy`, `Report`, …) is an ordinary procedure invoked by a
+  command or an action from `model.json`, not a suffix the platform resolves by convention
 - Tables use `Id bigint` PK, `[Name] nvarchar(255)`, optional `Memo nvarchar(255)`
 
 ## Source Material for New Docs

@@ -2,9 +2,8 @@
 
 > Data layer reference for A2v10 — naming conventions, SELECT markers, stored procedure patterns, and the dataset shapes the platform understands.
 
-- [Conventions & Naming](https://docs-llm.a2v10.com/sql/overview.md): Naming rules, schemas, standard columns, DDL idempotence
 - [SQL Markers](https://docs-llm.a2v10.com/sql/markers.md): Column alias markers in SELECT — how the platform maps result sets to models
-- [Stored Procedures](https://docs-llm.a2v10.com/sql/procedures.md): Patterns for Index, Load, Metadata, Update, Fetch, Delete
+- [Stored Procedures](https://docs-llm.a2v10.com/sql/procedures.md): Procedure naming and the standard suffixes — Index, Load, Metadata, Update, Expand
 - [Update Model (TVP + MERGE)](https://docs-llm.a2v10.com/sql/update-model.md): How data is saved via table-valued parameters and MERGE
 - [Objects & References](https://docs-llm.a2v10.com/sql/object.md): Single-object models — !Id / !Name, references via !RefId, Map sets, new instances
 - [Arrays](https://docs-llm.a2v10.com/sql/array.md): Array models — !Array / !LazyArray markers, child arrays via !ParentId, on-demand loading

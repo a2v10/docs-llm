@@ -107,11 +107,21 @@ automatically from `canExec`; never set `Disabled` yourself». Реальные 
 каталог работает как активная дезинформация. Это дефект, внесённый при заполнении `markers.md`
 2026-07-20.
 
-### A7. Ссылки в заглушки
+### A7. Ссылки в заглушки — ЗАКРЫТО 2026-08-25
 
-`sql/procedures.md` и `sql/overview.md` остаются `TODO`, но на `sql/procedures.md` ссылаются
-как минимум `model/actions.md`, `model/commands.md`, `model/dialogs.md`,
-`xaml/controls/selector.md`. Каждая ссылка приводит на пустую страницу.
+`sql/procedures.md` написан: имя процедуры, таблица суффиксов, стандартные параметры,
+разводка на детальные страницы. Ссылки из `model/actions.md` и `model/commands.md`
+теперь ведут на содержательную страницу (в `model/dialogs.md` и `xaml/controls/selector.md`,
+вопреки исходной формулировке пункта, ссылок на заглушку уже не было).
+
+`sql/overview.md` удалён вместе со строкой в `sql.md`. Обещанного им содержания
+(схемы, стандартные колонки, идемпотентный DDL) в справке нет вообще, а та часть, что есть
+(`models/general.html` — состав имени и типы наборов), уже написана в `sql/markers.md`.
+
+Побочно, из разбора источников: `.Fetch` и `.Delete` **не являются** суффиксами платформы —
+справка знает только `.Index`, `.Load`, `.Metadata`, `.Update`, `.Expand`. Блокквот старой
+заглушки обещал Fetch/Delete, список «Standard verbs» в `CLAUDE.md` добавлял ещё
+`Copy`/`Report`. Оба места исправлены.
 
 ### A8. `UploadFile` в списке наследников `ValuedControl` — ЗАКРЫТО 2026-08-25
 
