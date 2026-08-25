@@ -21,6 +21,9 @@
 - [Static](https://docs-llm.a2v10.com/xaml/controls/static.md): Read-only display field styled like a disabled TextBox
 - [ToolbarAligner](https://docs-llm.a2v10.com/xaml/controls/toolbaraligner.md): Invisible spacer that pushes following elements to the opposite edge — flex-grow for toolbars
 - [Graphics](https://docs-llm.a2v10.com/xaml/controls/graphics.md): Drawing surface filled by a d3.js delegate — Delegate, Argument, Watch modes, attaching d3
+- [Image](https://docs-llm.a2v10.com/xaml/controls/image.md): Data-bound image with upload — Base, Source, ReadOnly, Limit, Placeholder, blob procedures
+- [FileImage](https://docs-llm.a2v10.com/xaml/controls/fileimage.md): Data-bound image served by a files operation — Url, Value, Width, Height
+- [UploadFile](https://docs-llm.a2v10.com/xaml/controls/uploadfile.md): File selection field with drag-and-drop — Url, Argument, Accept, Limit, Delegate, ErrorDelegate
 
 ## Layouts
 

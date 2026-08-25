@@ -58,6 +58,7 @@ Besides these, a procedure may return system datasets. They create no model prop
 | `Items` | `[Items!TItem!Items]` | Child-collection property of a `Tree` or `Group` element |
 | `GroupMarker` | `[!!GroupMarker]` | Grouping-level marker in a `Group` set |
 | `RowCount` | `[!!RowCount]` | Total number of matching records, ignoring paging. See [Paging & Filters](https://docs-llm.a2v10.com/sql/paging.md) |
+| `Token` | `[Token!!Token]` | Access key of a binary object — replaced by an access token. See [Binary Objects (blob)](https://docs-llm.a2v10.com/sql/blob.md) |
 
 ## Example
 

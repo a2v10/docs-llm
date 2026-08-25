@@ -14,3 +14,6 @@
 - [Cross (Pivot) Models](https://docs-llm.a2v10.com/sql/cross.md): Variable columns from data — !CrossArray / !CrossObject, Key/ParentId markers, $cross
 - [Named Sets (MapObject)](https://docs-llm.a2v10.com/sql/map-object.md): Binding by !Key — each key value becomes a named property of the parent object
 - [System Datasets](https://docs-llm.a2v10.com/sql/system-datasets.md): $System, $Aliases and $Defaults — sets that control processing rather than shape
+- [Binary Objects (blob)](https://docs-llm.a2v10.com/sql/blob.md): Images and attachments — !Token access marker, the .Load / .Update byte-stream procedures
+- [Change Tracking (rowversion)](https://docs-llm.a2v10.com/sql/rowversion.md): Refusing a save when the record changed meanwhile — the rv column, varbinary(8) in the TVP
+- [Error Messages](https://docs-llm.a2v10.com/sql/errors.md): Reporting failures with throw — the UI: prefix and who each message is addressed to

@@ -35,14 +35,17 @@ sql/
   cross.md            ← DONE (CrossArray/CrossObject, $cross)
   map-object.md       ← DONE (MapObject, !Key, key list, dynamic keys)
   system-datasets.md  ← DONE ($System/$Aliases/$Defaults, modifiers, set order)
+  blob.md             ← DONE (binary objects, !Token, .Load/.Update byte procedures)
+  rowversion.md       ← DONE (rv column, varbinary(8) in TVP, version check in .Update)
+  errors.md           ← DONE (throw, UI: prefix — user alert vs developer alert)
 xaml/
   overview.md         ← DONE (Page/Dialog roots, extensions, property syntax)
   bind.md             ← DONE (Bind + BindCmd, all properties and CommandTypes)
   base-classes.md     ← DONE (UIElementBase/UIElement/Inline/Container/Control/…)
   text.md             ← DONE (all 13 inlines in one file + TextColor values)
   controls/           ← DONE (button, checkbox, combobox, datagrid, datepicker,
-                              graphics, selector, selectorsimple, static, textbox,
-                              toolbaraligner)
+                              fileimage, graphics, image, selector, selectorsimple,
+                              static, textbox, toolbaraligner, uploadfile)
   layouts/            ← DONE (dialog, fieldset, grid, page, repeater,
                               sheet, stackpanel, tabpanel, toolbar)
 app/                  ← application-wide config (source html/app/)
@@ -98,9 +101,8 @@ Ordered by leverage. Cross-references must be full absolute URLs (see CONVENTION
    - `model/reports.md` → `xaml/layouts/sheet.md` (Excel export)
    - `sql/array.md` → `xaml/controls/datagrid.md` (what renders it)
    - `sql/paging.md` → `xaml/controls/datagrid.md` (sorting/paging UI)
-3. **Remaining `models/` source pages not yet documented**: `blob`, `rowversion` — fold the
-   useful parts into the SQL stubs above rather than creating one-to-one files where they
-   overlap.
+3. ~~Remaining `models/` source pages~~ — done: `blob` → `sql/blob.md`,
+   `rowversion` → `sql/rowversion.md`. Every `models/` page of the help now has a doc.
 4. **Anchor-text hygiene pass** (low priority): replace any bare `See [X]` / generic anchors with
    descriptive noun phrases. Not a RAG optimization — just readability for the direct-fetch model.
 

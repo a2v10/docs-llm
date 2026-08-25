@@ -104,7 +104,7 @@ Extends `Control`. Base for all controls that hold a value.
 | `Value` | Object | **Binding only.** The control's data value, bound to model property. |
 | `ValidateValue` | Object | **Binding only.** Alternative binding for validation when the validated field differs from the displayed value. |
 
-Derived: `TextBox`, `DatePicker`, `TimePicker`, `ComboBox`, `Selector`, `CheckBox`, `Radio`, `Static`, `MultiSelect`, `PeriodPicker`, `Pager`, `UploadFile`, and more.
+Derived: `TextBox`, `DatePicker`, `TimePicker`, `ComboBox`, `Selector`, `CheckBox`, `Radio`, `Static`, `MultiSelect`, `PeriodPicker`, `Pager`, and more.
 
 ## ContentControl
 

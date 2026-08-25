@@ -113,6 +113,18 @@ automatically from `canExec`; never set `Disabled` yourself». Реальные 
 как минимум `model/actions.md`, `model/commands.md`, `model/dialogs.md`,
 `xaml/controls/selector.md`. Каждая ссылка приводит на пустую страницу.
 
+### A8. `UploadFile` в списке наследников `ValuedControl` — ЗАКРЫТО 2026-08-25
+
+`xaml/base-classes.md:107` перечислял `UploadFile` среди наследников `ValuedControl`.
+Справка (`xaml/controls/uploadfile.html`) пишет «Наслідує: UIElementBase», свойства `Value`
+у элемента нет — параметры идут через `Argument`.
+
+Александр привёл объявление: `public class UploadFile : UIElementBase`. Справка права,
+`UploadFile` убран из списка. Новые страницы `uploadfile.md`, `image.md`, `fileimage.md`
+изначально написаны верно.
+
+Осадок: остальной список наследников в `base-classes.md` тем же способом не проверялся.
+
 ## B. docs-llm против укр. справки
 
 Справка отстаёт от реализации — **ни один пункт раздела не закрыт**, каждый требует сверки с
@@ -232,7 +244,26 @@ access rights», не говоря, какие это биты и где зад�
 (`Big` описан как «те саме, що і `Small="True"`» и наоборот). Александр поправил справку;
 `xaml/text.md` приведён к ней: `Big` = `Big="True"`, `Small` = `Small="True"`.
 
-### D5. Непокрытые страницы справки
+### D5. Непокрытые страницы справки — ЗАКРЫТО 2026-08-25
 
-`models/blob.html` (бинарные объекты) и `models/rowversion.html` (отслеживание изменений).
-`models/update.html` ссылается на rowversion как «дивись також» — у нас ссылаться некуда.
+`models/blob.html` → `sql/blob.md`, вместе с ним `xaml/controls/image.md`, `fileimage.md`,
+`uploadfile.md` (справка ссылалась на них из blob).
+`models/rowversion.html` → `sql/rowversion.md`, ссылка из `sql/update-model.md` проставлена.
+
+Раздел `models/` справки покрыт полностью.
+
+### D7. `rowversion` — два умолчания справки
+
+1. ~~Не показано, как `rv` попадает в модель при чтении.~~ Решено Александром 2026-08-25:
+   в наборе данных это **обычное поле без маркера**, соглашение везде работает по имени
+   (`select [Document!TDocument!Object] = null, [Id!!Id] = d.Id, d.rv, ...`).
+   Дописано и в `sql/rowversion.md`, и в саму справку (`models/rowversion.html`:
+   абзац про поле без маркера + пример чтения модели).
+2. ~~Префикс `UI:` в тексте ошибки нигде не объяснён.~~ Объяснено Александром 2026-08-25:
+   с префиксом платформа показывает красивый алерт приложения (то же окно, что `ctrl.$alert`) —
+   это UI/UX-допустимый путь; без префикса текст прилетает обычным js-алертом, то есть
+   сообщение адресовано разработчику.
+   Заведена отдельная страница в обоих местах: `models/errors.html` в укр. справке
+   (+ пункт в `content.txt`, `models/index.html`, `A2v10.Help.csproj`, ссылки из
+   `update.html` и `rowversion.html`) и `sql/errors.md` у нас. В `update-model.md`
+   и `rowversion.md` остались короткие отсылки, дублирования нет.

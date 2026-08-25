@@ -20,7 +20,10 @@
       "Read(//c//**)",
       "Read(//c/A2v10_Net6/**)",
       "Bash(kill %1)",
-      "Bash(pkill -f \"grep -rl\")"
+      "Bash(pkill -f \"grep -rl\")",
+      "PowerShell(git -C C:\\\\A2v10_Net48\\\\A2v10.Uk.Help diff -- A2v10.Help/html/xaml/controls/uploadfile.html)",
+      "PowerShell(git -C C:\\\\A2v10_Net48\\\\A2v10.Uk.Help diff -- A2v10.Help/html/models/rowversion.html)",
+      "PowerShell(git -C C:\\\\A2v10_Net48\\\\A2v10.Uk.Help status --short)"
     ]
   }
 }

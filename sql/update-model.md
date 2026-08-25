@@ -191,10 +191,12 @@ go
 - The `output` clause on the parent `MERGE` captures both `Id` and `GUID` so the child MERGE can resolve the parent reference.
 - The `!Metadata` column alias is one of the platform's [SQL markers](https://docs-llm.a2v10.com/sql/markers.md), like `!Array` and `!Id`.
 - The save is triggered from the UI by a [`Save` or `SaveAndClose` command](https://docs-llm.a2v10.com/xaml/bind.md); a form is usually rendered by a [model.json action](https://docs-llm.a2v10.com/model/actions.md).
+- To refuse the save when somebody else has modified the record in the meantime, add an `rv` column to the table and to the table type — see [Change Tracking (rowversion)](https://docs-llm.a2v10.com/sql/rowversion.md).
+- A validation failure is reported with `throw`. Whether the text reaches the user as a proper application alert or as a raw browser alert depends on the `UI:` prefix — see [Error Messages](https://docs-llm.a2v10.com/sql/errors.md).
 
 ## Hints
 
-To inspect a TVP's contents during debugging, dump it to XML and raise as an error:
+To inspect a TVP's contents during debugging, dump it to XML and raise as an error. There is no [`UI:` prefix](https://docs-llm.a2v10.com/sql/errors.md) here on purpose — the dump is for the developer, so the raw browser alert is exactly what is wanted:
 
 ```sql
 declare @xml nvarchar(max);
