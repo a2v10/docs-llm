@@ -33,7 +33,7 @@ Commands inherit `source` and `schema` from the root of `model.json`.
 | Value | Description |
 |-------|-------------|
 | `sql` | Calls a stored procedure (requires `procedure`) |
-| `clr` | Calls a .NET object implementing `IInvokeTarget` (requires `clrType`) |
+| `clr` | Calls a .NET object implementing `IClrInvokeTarget` (requires `clrType`) |
 | `callApi` | Makes an outbound HTTP request to an external API |
 | `javascript` | Executes a server-side JavaScript module |
 | `startProcess` | Starts a workflow/business process |
@@ -48,7 +48,7 @@ Commands inherit `source` and `schema` from the root of `model.json`.
 | `source` | string | Overrides the root `source` |
 | `schema` | string | Overrides the root `schema` |
 | `procedure` | string | Stored procedure name — required for `sql` type |
-| `clrType` | string | Assembly-qualified .NET type descriptor — required for `clr` type |
+| `clrType` | string | Type descriptor in the platform's own format — required for `clr` type: `clr-type:<full type name>;assembly=<assembly name>` |
 | `file` | string | File path — used with `file` type |
 | `parameters` | object | Static key-value pairs passed to the operation |
 | `signal` | boolean | If `true`, sends a SignalR notification on completion (.NET Core only) |
@@ -89,12 +89,23 @@ Calls `[a2].[Agent.Delete]` with the parameters supplied by the calling view.
 "commands": {
   "sendReport": {
     "type":    "clr",
-    "clrType": "MyApp.Commands.SendReportCommand, MyApp"
+    "clrType": "clr-type:MyApp.Commands.SendReportCommand;assembly=MyApp"
   }
 }
 ```
 
 Instantiates `SendReportCommand` from the `MyApp` assembly and calls its `InvokeAsync` method.
+
+The type has to match the signature the platform looks for: it must be `public`, implement `IClrInvokeTarget` with `Task<Object> InvokeAsync(ExpandoObject args)`, and have a constructor taking a single `IServiceProvider` parameter.
+
+```csharp
+public class SendReportCommand : IClrInvokeTarget
+{
+    public SendReportCommand(IServiceProvider serviceProvider) { /* … */ }
+
+    public Task<Object> InvokeAsync(ExpandoObject args) { /* … */ }
+}
+```
 
 ### callApi command
 
@@ -113,6 +124,7 @@ Instantiates `SendReportCommand` from the `MyApp` assembly and calls its `Invoke
 ## Notes
 
 - `procedure` for a `sql` command must be specified without schema — the schema is applied from `schema` (or the root default).
+- `clrType` is the platform's own descriptor, not a .NET assembly-qualified name: `"Ns.Type, Assembly"` is not accepted. Write `clr-type:Ns.Type;assembly=Assembly`.
 - `debugOnly: true` commands are stripped in production and will return an error if called outside a debug build.
 - `signal: true` requires SignalR to be configured in the application; it broadcasts a notification to connected clients after the command completes.
 - For `callApi` and `sendMessage`, the `parameters` object controls the request payload and behavior; the exact keys depend on the platform version.

@@ -102,8 +102,10 @@ https://docs-llm.a2v10.com/sql/paging.md, включая объяснение *�
   unapply | flag64 | flag128 | flag256`, биты `view=1, edit=2, delete=4, apply=8`), но
   отсутствуют и в docs-llm, и в украинской справке. Источник этих значений неизвестен —
   проверить по реализации, прежде чем на них опираться.
-- **Формат `clrType`**: скилл `clr-type:My.Type;assembly=MyAssembly`, docs-llm
-  `"MyApp.X, MyApp"`. Кто прав — не выяснено.
+- ~~**Формат `clrType`**~~ — закрыто 2026-09-12: прав скилл. Справка описала формат
+  `clr-type:<тип>;assembly=<сборка>` и отдельно оговорила, что `"Ns.Type, Assembly"` не
+  принимается; интерфейс — `IClrInvokeTarget`. `model/commands.md` исправлен, `model/files.md`
+  ждёт подтверждения (см. A9 в `DISCREPANCIES.md`).
 - **`!Json`, `!Expanded`** есть только в скилле; в справке не встречаются.
 
 Полный реестр расхождений (с раскладкой по уровню доказательности) — `DISCREPANCIES.md` в корне

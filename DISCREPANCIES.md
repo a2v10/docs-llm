@@ -135,6 +135,23 @@ automatically from `canExec`; never set `Disabled` yourself». Реальные 
 
 Осадок: остальной список наследников в `base-classes.md` тем же способом не проверялся.
 
+### A9. `clrType` и `IInvokeTarget` в `files` против `commands`
+
+Заведено 2026-09-12, после правки C2.
+
+`model/commands.md` теперь пишет формат `clr-type:Ns.Type;assembly=Assembly` и интерфейс
+`IClrInvokeTarget` — по обновлённой `app/commands.html`.
+
+`model/files.md:55,121` по-прежнему пишет «Assembly-qualified .NET type» и
+`"MyApp.Import.XmlImportHandler, MyApp"`, а `files.md:41` — интерфейс `IInvokeTarget`. Это то же
+свойство `clrType` и, судя по всему, тот же механизм, но страница `app/files.html` не
+обновлялась: там осталась старая формулировка «Рядок, що описує збірку і .NET тип» и
+`IInvokeTarget`.
+
+Правку в `files.md` не вносил: источник её не подтверждает, а распространять вывод с одной
+страницы справки на другую — это домысел. Нужно слово Александра: у `files` тот же формат и тот
+же интерфейс, или действительно другой.
+
 ## B. docs-llm против укр. справки
 
 Справка отстаёт от реализации — **ни один пункт раздела не закрыт**, каждый требует сверки с
@@ -187,15 +204,27 @@ in production builds». В A2v10 нет шага сборки вообще. `app
 
 Ни одна сторона не эталон. Похоже на разрыв NET48 ↔ Core.
 
-### C1. Типы отчётов
+### C1. Типы отчётов — ЗАКРЫТО 2026-09-12
 
-Наша дока (вслед за справкой): `stimulsoft | xml | json`. Скилл: `xml | json | pdf | xlsx`.
-Пересекается с R3.
+Было: наша дока (вслед за справкой) `stimulsoft | xml | json`, скилл `xml | json | pdf | xlsx`.
 
-### C2. Формат `clrType`
+Справка (`app/reports.html`) теперь перечисляет все пять: `pdf | xlsx | stimulsoft | xml | json`,
+где `pdf` — шаблон Xaml, `xlsx` — **объявлен, но не реализован** («використовувати не можна»),
+`stimulsoft` — по-прежнему значение по умолчанию. `model/reports.md` приведён в соответствие.
 
-Наша дока: `"MyApp.Commands.SendReportCommand, MyApp"` (сборочно-квалифицированное имя).
-Скилл: `clr-type:My.Type;assembly=MyAssembly`.
+Спор о списке снят. Вопрос «Stimulsoft устарел и выпиливается» остаётся открытым — это R3,
+справка его пока не подтверждает.
+
+### C2. Формат `clrType` — ЗАКРЫТО 2026-09-12
+
+Было: наша дока `"MyApp.Commands.SendReportCommand, MyApp"` (сборочно-квалифицированное имя),
+скилл `clr-type:My.Type;assembly=MyAssembly`.
+
+Прав скилл. Справка (`app/commands.html`) описала формат явно:
+`clr-type:<полное имя типа>;assembly=<имя сборки>`, и добавила, что это собственный формат
+платформы, а `"Ns.Type, Assembly"` не принимается. Там же уточнены требования к типу: `public`,
+интерфейс `IClrInvokeTarget` (`Task<Object> InvokeAsync(ExpandoObject args)`), конструктор с
+единственным параметром `IServiceProvider`. `model/commands.md` исправлен.
 
 ### C3. Раздел `files` — оба списка неполны
 

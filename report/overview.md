@@ -136,7 +136,7 @@ The current scope is passed into the function as an argument — `{Bind rowTotal
 ## Notes
 
 - The default report type is `stimulsoft`. A Xaml template declared without `"type": "pdf"` is simply never reached.
-- `type: xlsx` uses the same Xaml template but produces an Excel workbook instead of a PDF.
+- `type: xlsx` is meant to produce an Excel workbook from the same Xaml template, but it is not implemented yet and must not be used.
 - The engine does not fetch anything by itself. Everything the template prints must already be in the model returned by the stored procedure.
 - Flow and workbook templates differ in one respect only: in a workbook cell the value type is guessed, in markup it is stated explicitly.
 - The same template file serves a download, a print dialog and the on-form viewer — see [Viewing and Printing](https://docs-llm.a2v10.com/report/view.md).

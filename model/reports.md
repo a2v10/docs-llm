@@ -38,7 +38,7 @@ The `name` property sets the downloaded filename and supports `{{Property.Path}}
 | `schema` | string | Overrides the root `schema` |
 | `model` | string | Overrides the root `model`. The name of the data procedure is built from it: `[schema].[Model.Report]` |
 | `parameters` | object | Static key-value pairs passed to the stored procedure |
-| `type` | string | Report format: `pdf`, `xlsx`, `stimulsoft` (default), `xml`, or `json` |
+| `type` | string | Report format: `pdf`, `stimulsoft` (default), `xml`, or `json`; `xlsx` is declared but not implemented |
 | `report` | string | Template filename without extension, relative to the folder of `model.json`; required for `pdf`, `xlsx` and `stimulsoft` |
 | `name` | string | Downloaded filename; supports `{{Property}}` macros |
 | `encoding` | string | Output encoding for `xml` reports: `utf-8`, `utf-16`, `windows-1251` |
@@ -51,7 +51,7 @@ The `name` property sets the downloaded filename and supports `{{Property.Path}}
 | Type | What it produces |
 |------|------------------|
 | `pdf` | A printed form the platform builds itself from a [Xaml template](https://docs-llm.a2v10.com/report/overview.md) |
-| `xlsx` | The same template, produced as an Excel workbook instead of a PDF |
+| `xlsx` | The same template, produced as an Excel workbook instead of a PDF. Not implemented yet — do not use |
 | `stimulsoft` | Default. An external Stimulsoft report |
 | `xml` | An XML data file |
 | `json` | A JSON data file |
