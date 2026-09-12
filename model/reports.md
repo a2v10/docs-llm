@@ -6,7 +6,7 @@
 
 A report is either a printed form the platform builds itself from a [Xaml template](https://docs-llm.a2v10.com/report/overview.md), an external Stimulsoft report, or a data file exported as XML or JSON. All of them are declared the same way and, except for the on-form viewer, all of them arrive as a file the user downloads.
 
-Each report calls a stored procedure to load its data, then passes the result to the report engine. The procedure name defaults to `[model].Report` but can be overridden with the `procedure` property.
+Each report calls a stored procedure to load its data, then passes the result to the report engine. The name of that procedure is always built from the model — `[schema].[Model.Report]` — and cannot be set explicitly. Reports that need different data are given different `model` values.
 
 Reports inherit `source`, `schema`, and `model` from the root of `model.json`.
 
@@ -20,7 +20,6 @@ The `name` property sets the downloaded filename and supports `{{Property.Path}}
     "source":     "",
     "schema":     "",
     "model":      "",
-    "procedure":  "",
     "parameters": {},
     "type":       "pdf | xlsx | stimulsoft | xml | json",
     "report":     "",
@@ -37,8 +36,7 @@ The `name` property sets the downloaded filename and supports `{{Property.Path}}
 |----------|------|-------------|
 | `source` | string | Overrides the root `source` |
 | `schema` | string | Overrides the root `schema` |
-| `model` | string | Overrides the root `model` |
-| `procedure` | string | Stored procedure name; defaults to `[model].Report` |
+| `model` | string | Overrides the root `model`. The name of the data procedure is built from it: `[schema].[Model.Report]` |
 | `parameters` | object | Static key-value pairs passed to the stored procedure |
 | `type` | string | Report format: `pdf`, `xlsx`, `stimulsoft` (default), `xml`, or `json` |
 | `report` | string | Template filename without extension, relative to the folder of `model.json`; required for `pdf`, `xlsx` and `stimulsoft` |
@@ -101,15 +99,15 @@ Calls `[a2].[Agent.Report]`, loads `agent_card.mrt`, and offers the rendered rep
 ```json
 "reports": {
   "exportXml": {
-    "type":      "xml",
-    "procedure": "Agent.ExportXml",
-    "name":      "{{Agent.Code}}.xml",
-    "encoding":  "utf-8"
+    "type":     "xml",
+    "model":    "AgentExport",
+    "name":     "{{Agent.Code}}.xml",
+    "encoding": "utf-8"
   }
 }
 ```
 
-The downloaded filename uses the `Code` field from the loaded model — for example, `A-00123.xml`.
+Calls `[a2].[AgentExport.Report]` — the export needs a different dataset than the printed card, and a different `model` is the only way to ask for it. The downloaded filename uses the `Code` field from the loaded model — for example, `A-00123.xml`.
 
 ### JSON export
 
@@ -124,6 +122,7 @@ The downloaded filename uses the `Code` field from the loaded model — for exam
 
 ## Notes
 
+- A report cannot name its own procedure: the name is always `model` plus the `.Report` suffix. When two reports need different data, give them different `model` values.
 - `type` defaults to `stimulsoft` when omitted. A Xaml template declared without `"type": "pdf"` is simply never reached.
 - For `stimulsoft` reports, `report` is required and must be the filename without path (the platform looks for the file relative to the endpoint directory).
 - Instead of a filename, `report` may hold a `{{Property.Path}}` expression — the template text is then taken from a field of the report model, that is from the database rather than from disk.

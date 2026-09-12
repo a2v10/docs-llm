@@ -60,6 +60,24 @@
 | `Grid.RowSpan` | Int32 | Number of rows to span (default: 1) |
 | `Grid.VAlign` | AlignItem | Per-cell vertical alignment override |
 
+### GridGroup
+
+A group of elements inside a `Grid`, meant for showing and hiding several cells at once with `If`, `Show` or `Hide`. It inherits from `Container → UIElement → UIElementBase` and has no properties of its own.
+
+`GridGroup` is transparent with respect to attached properties: `Grid.Row` and `Grid.Col` on its children refer to the parent `Grid`, not to the group. That is what separates it from [Group](https://docs-llm.a2v10.com/xaml/layouts/group.md), which would swallow them.
+
+```xml
+<Grid Columns="1*,1*">
+  <TextBox Label="Name" Value="{Bind Agent.Name}" />
+  <GridGroup Show="{Bind Agent.IsCompany}">
+    <TextBox Label="Tax ID" Value="{Bind Agent.TaxId}" Grid.Row="2" Grid.Col="1" />
+    <TextBox Label="Bank account" Value="{Bind Agent.Account}" Grid.Row="2" Grid.Col="2" />
+  </GridGroup>
+</Grid>
+```
+
+Since the element draws nothing, only the visibility properties are worth setting on it — margins or a background have nowhere to apply.
+
 ## Example
 
 ```xml

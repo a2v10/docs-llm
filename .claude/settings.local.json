@@ -33,7 +33,13 @@
       "PowerShell(git -C C:\\\\A2v10_Net48\\\\A2v10.Uk.Help show --stat --oneline HEAD)",
       "PowerShell(git -C C:\\\\Claude\\\\docs-llm diff -- .claude/settings.local.json)",
       "Bash(ls -R \"C:/A2v10_Net48/A2v10.Uk.Help/A2v10.Help/html/report\" 2>/dev/null | head -50)",
-      "Bash(cd \"C:/A2v10_Net48/A2v10.Uk.Help/A2v10.Help/html\" && ls xaml/bind* xaml/enums 2>/dev/null)"
+      "Bash(cd \"C:/A2v10_Net48/A2v10.Uk.Help/A2v10.Help/html\" && ls xaml/bind* xaml/enums 2>/dev/null)",
+      "Bash(gh run *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} %{size_download}\\\\n\" https://docs-llm.a2v10.com/report.md)",
+      "Read(//tmp/**)",
+      "Bash(curl -s https://docs-llm.a2v10.com/llms.txt)",
+      "Bash(curl -s https://docs-llm.a2v10.com/report/elements.md)",
+      "Bash(grep -E '^#{2,3} ')"
     ]
   }
 }

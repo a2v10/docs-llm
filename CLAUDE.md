@@ -42,11 +42,19 @@ xaml/
   bind.md             ← DONE (Bind + BindCmd, all properties and CommandTypes)
   base-classes.md     ← DONE (UIElementBase/UIElement/Inline/Container/Control/…)
   text.md             ← DONE (all 13 inlines in one file + TextColor values)
+  switch.md           ← DONE (Switch/Case/Else — one block of several by a bound value)
   controls/           ← DONE (button, checkbox, combobox, datagrid, datepicker,
-                              fileimage, graphics, image, selector, selectorsimple,
-                              static, textbox, toolbaraligner, uploadfile)
-  layouts/            ← DONE (dialog, fieldset, grid, page, repeater,
-                              sheet, stackpanel, tabpanel, toolbar)
+                              fileimage, graphics, image, list, menuitem, pager,
+                              pdfreportviewer, periodpicker, radio, selector,
+                              selectorsimple, static, table, textbox, toolbaraligner,
+                              uploadfile)
+                         ListItem lives in list.md; TableRow/TableCell/TableColumn
+                         in table.md
+  layouts/            ← DONE (block, commandbar, dialog, dropdownmenu, fieldset, grid,
+                              group, page, panel, partial, popup, repeater, sheet,
+                              stackpanel, tabbar, tabpanel, taskpad, toolbar)
+                         GridGroup lives in grid.md; TabButton in tabbar.md;
+                         Partial + PartialBlock + Include in partial.md
 app/                  ← application-wide config (source html/app/)
   menu.md             ← DONE (menu.json navigation tree + icon set)
   layout.md           ← DONE (_layout folder, _scripts.html/_styles.html, Core only)
@@ -99,32 +107,79 @@ No stub files remain. `sql/overview.md` was deleted rather than written: its pro
 does — name composition and dataset types, from `models/general.html` — is already
 `sql/markers.md`.
 
+## Coverage Policy
+
+The help is not a checklist. These docs cover what gets written into real endpoints; a help page
+that describes a superseded element is not a gap, and mirroring all of `html/xaml/` 1:1 is not
+the goal. `DONE` in the content map above means that file is written — never that the matching
+help folder is exhausted.
+
+Part of the help is older than the platform, and which pages those are is not derivable from the
+HTML. Any element added from the lists below is first confirmed as current with the project
+owner. Pages that are empty stubs in the help (a few hundred bytes, no properties) are out of
+scope until the help itself has content.
+
+Measured state as of 2026-09-12 — help pages versus ours:
+
+| Help folder | Pages | Ours | Where ours live |
+|-------------|-------|------|-----------------|
+| `xaml/controls/` | 50 | 15 | `xaml/controls/` |
+| `xaml/containers/` | 33 | 9 | `xaml/layouts/` |
+| `xaml/abstract/` | 11 | 1 | `xaml/base-classes.md` (folded) |
+| `xaml/text/` | 14 | 1 | `xaml/text.md` (folded) |
+| `xaml/sheet/` | 12 | 1 | `xaml/layouts/sheet.md` (folded) |
+| `xaml/bind/` | 8 | 1 | `xaml/bind.md` (folded) |
+| `report/` | 28 | 7 | `report/` (folded) |
+| `xaml/enums/` | 23 | 0 | — |
+| `xaml/components/` | 11 | 0 | — |
+| `xaml/simple/` | 13 | 0 | — |
+
+Folding several help pages into one doc is the norm here, not an exception.
+
 ## Roadmap — Next Tasks (prioritized)
 
 Ordered by leverage. Cross-references must be full absolute URLs (see CONVENTIONS.md → Links).
 
-1. ~~Fill the two remaining SQL stubs~~ — done: `sql/procedures.md` written,
-   `sql/overview.md` deleted. Note that `.Fetch` and `.Delete` are **not** platform procedure
-   suffixes — the help knows only `.Index`, `.Load`, `.Metadata`, `.Update`, `.Expand`.
-2. **Horizontal links — Priority 3** (data ↔ controls; Priority 1+2 already done):
-   - `xaml/controls/datagrid.md` → `sql/array.md`, `sql/tree.md`, `xaml/bind.md`
-     (datagrid currently has *no* cross-links, not even base-classes)
+1. ~~**Containers**~~ — done on 2026-09-12, triaged by the project owner: `Panel`, `Group`,
+   `Block`, `GridGroup` (in `grid.md`), `Taskpad`, `CommandBar`, `DropDownMenu` +
+   `DropDownMegaMenu`, `TabBar` (+ `TabButton`), `Popup`, `Partial` + `PartialBlock` + `Include`,
+   and `Switch` + `Case` + `Else` from `html/xaml/components/` — the `containers/case.html` copy
+   is a stale duplicate, ignore it.
+   - Deferred, not now: `Card` + `CardBody`, `FullHeightPanel`, `Flex` + `FlexList`,
+     `InlineDialog`, `IFrame`.
+   - Obsolete, do not document: `Splitter`, `Wizard` + `WizardPage`.
+2. **Controls** — triaged by the project owner on 2026-09-12.
+   - Done: `List` + `ListItem`, `Pager`, `PeriodPicker`, `Radio`, `MenuItem`, the `Table` family
+     (`Table`, `TableRow`, `TableCell`, `TableColumn`), `TabButton` (in `tabbar.md`).
+   - Deferred, not now: `TreeView` + `TreeViewItem`, `TreeGrid` + `TreeGridColumn`, `TimePicker`,
+     `PropertyGrid` + `PropertyGridItem`, `Alert`, `MultiSelect`, `EmptyPanel`, `Separator`,
+     `GridDivider`, `Header`, `Label`, `Code`, `HtmlElement` + `HtmlAttribute`.
+   - Stubs in the help, nothing to write yet: `StateCard`, `ChatItem`, `TableMarkCell` — all
+     three also sit in the TODO list of `whatsnew/w202609.html`.
+   - `ComboBoxItem`, `DataGridColumn` and `DataGridRowDetails` were already covered inside
+     `combobox.md` and `datagrid.md`.
+3. **Horizontal links** — nine pairs verified missing:
+   - `xaml/controls/datagrid.md` → `xaml/base-classes.md` (the other three links are in place)
    - `xaml/controls/selector.md` → `model/commands.md` (the server-side `fetch` command),
      `sql/array.md`
-   - `xaml/controls/combobox.md` → `sql/array.md` (bound list is an array)
+   - `xaml/controls/combobox.md` → `sql/array.md` (a bound list is an array)
    - `sql/tree.md` → `xaml/layouts/sheet.md`, `xaml/controls/datagrid.md`
      (sheet links to tree, but not back — one-directional)
    - `model/reports.md` → `xaml/layouts/sheet.md` (Excel export)
    - `sql/array.md` → `xaml/controls/datagrid.md` (what renders it)
    - `sql/paging.md` → `xaml/controls/datagrid.md` (sorting/paging UI)
-3. ~~Remaining `models/` source pages~~ — done: `blob` → `sql/blob.md`,
-   `rowversion` → `sql/rowversion.md`. Every `models/` page of the help now has a doc.
-4. **Anchor-text hygiene pass** (low priority): replace any bare `See [X]` / generic anchors with
+4. **XAML enums** (not started): `html/xaml/enums/` has 23 pages — `Icon`, `TextColor`,
+   `ColumnControlType`, `ControlSize`, `WrapMode`, … Today enum values are inlined in the control
+   that uses them, which is the right default; a shared page is worth it only for a set several
+   controls repeat. The `Icon` list in `app/menu.md` is the *menu.json* set, a different naming —
+   do not merge the two.
+5. **Anchor-text hygiene pass** (low priority): replace any bare `See [X]` / generic anchors with
    descriptive noun phrases. Not a RAG optimization — just readability for the direct-fetch model.
-5. **XAML enums** (not started): the help has `html/xaml/enums/` (24 pages — `Icon`, `TextColor`,
-   `ColumnControlType`, `ControlSize`, `WrapMode`, …). We have no enum reference at all; the
-   values we document are inlined per control. The `Icon` list in `app/menu.md` is the
-   *menu.json* set, a different naming — do not merge the two.
+
+Closed: SQL stubs (`sql/procedures.md` written, `sql/overview.md` deleted — note that `.Fetch`
+and `.Delete` are **not** platform procedure suffixes; the help knows only `.Index`, `.Load`,
+`.Metadata`, `.Update`, `.Expand`). All `models/` source pages (`blob` → `sql/blob.md`,
+`rowversion` → `sql/rowversion.md`). The `report/` section.
 
 ## Authoring Rules (summary — full rules in CONVENTIONS.md)
 

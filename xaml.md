@@ -6,6 +6,7 @@
 - [Bind & BindCmd](https://docs-llm.a2v10.com/xaml/bind.md): Data binding and command binding — Bind properties, DataType values, all CommandType values
 - [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md): Inherited properties on all elements — UIElementBase, UIElement, Inline, Control, ValuedControl, Container
 - [Text Elements](https://docs-llm.a2v10.com/xaml/text.md): Inlines that compose text — Text, Paragraph, Span, Hyperlink, Popover, Badge, TagLabel, SpanIcon, SpanSum, StaticImage, Html, Break, Line, and the TextColor values
+- [Switch, Case and Else](https://docs-llm.a2v10.com/xaml/switch.md): Renders one of several blocks depending on a bound value
 
 ## Controls
 
@@ -13,11 +14,17 @@
 - [TextBox](https://docs-llm.a2v10.com/xaml/controls/textbox.md): Text input field — Multiline, Password, Number, UpdateTrigger, EnterCommand
 - [DataGrid](https://docs-llm.a2v10.com/xaml/controls/datagrid.md): Data table — ItemsSource, columns, sorting, row marking, DoubleClick, ContextMenu
 - [DataGridColumn](https://docs-llm.a2v10.com/xaml/controls/datagrid.md): Column definition — Content, Header, Width, Align, Editable, Command, Role
+- [Table](https://docs-llm.a2v10.com/xaml/controls/table.md): Markup table — TableRow/TableCell/TableColumn, merging, row marking, grid lines
+- [List](https://docs-llm.a2v10.com/xaml/controls/list.md): Selectable list of items — ListItem, ListStyle, marking, AutoSelect, EmptyPanel
 - [ComboBox](https://docs-llm.a2v10.com/xaml/controls/combobox.md): Dropdown list — static items, bound list, DisplayProperty, ComboBoxItem
 - [Selector](https://docs-llm.a2v10.com/xaml/controls/selector.md): Search/lookup control — Delegate, SetDelegate, ItemsPanel, NewPane, server-side search
 - [SelectorSimple](https://docs-llm.a2v10.com/xaml/controls/selectorsimple.md): Shorthand selector configured by a single Url — fetch, browse dialog and DisplayProperty by convention
 - [CheckBox](https://docs-llm.a2v10.com/xaml/controls/checkbox.md): Boolean checkbox bound to model value
 - [DatePicker](https://docs-llm.a2v10.com/xaml/controls/datepicker.md): Date selector with calendar popup — View (Day/Month), Placement
+- [PeriodPicker](https://docs-llm.a2v10.com/xaml/controls/periodpicker.md): Period selector bound to a TPeriod — Display, Placement, ShowAllData, Hyperlink style
+- [Radio](https://docs-llm.a2v10.com/xaml/controls/radio.md): Radio button — CheckedValue, a set bound to one value, CheckBox style
+- [MenuItem](https://docs-llm.a2v10.com/xaml/controls/menuitem.md): Menu entry — Content, Icon, Command, attached Separator
+- [Pager](https://docs-llm.a2v10.com/xaml/controls/pager.md): Page navigation driven by CollectionView — Source, TemplateText macros, PagerStyle
 - [Static](https://docs-llm.a2v10.com/xaml/controls/static.md): Read-only display field styled like a disabled TextBox
 - [ToolbarAligner](https://docs-llm.a2v10.com/xaml/controls/toolbaraligner.md): Invisible spacer that pushes following elements to the opposite edge — flex-grow for toolbars
 - [Graphics](https://docs-llm.a2v10.com/xaml/controls/graphics.md): Drawing surface filled by a d3.js delegate — Delegate, Argument, Watch modes, attaching d3
@@ -37,3 +44,12 @@
 - [TabPanel](https://docs-llm.a2v10.com/xaml/layouts/tabpanel.md): Tabbed content panel — Tab elements, Border, FullPage, dynamic tabs via ItemsSource
 - [Repeater](https://docs-llm.a2v10.com/xaml/layouts/repeater.md): Transparent repeating container — renders Content for each item in ItemsSource
 - [Sheet](https://docs-llm.a2v10.com/xaml/layouts/sheet.md): Spreadsheet-style report table — header/footer, sections, tree groups, cross columns, Excel export
+- [Popup](https://docs-llm.a2v10.com/xaml/layouts/popup.md): Root element of a popup window loaded from the server — Width, MinWidth
+- [Panel](https://docs-llm.a2v10.com/xaml/layouts/panel.md): Framed container with a header — PaneStyle colours, Collapsible, Icon, Hint
+- [Block](https://docs-llm.a2v10.com/xaml/layouts/block.md): Plain box — Height, Scroll, Border, MaxWidth, Relative for absolute children
+- [Group](https://docs-llm.a2v10.com/xaml/layouts/group.md): Invisible container — several elements where one is allowed, one condition for all of them
+- [Taskpad](https://docs-llm.a2v10.com/xaml/layouts/taskpad.md): Side panel of a page or dialog — Title, Width, Collapsible, Overflow
+- [CommandBar](https://docs-llm.a2v10.com/xaml/layouts/commandbar.md): Row commands whose visibility follows the parent row — Visibility, Float
+- [DropDownMenu](https://docs-llm.a2v10.com/xaml/layouts/dropdownmenu.md): Button dropdown and the DropDownMegaMenu variant — Direction, GroupBy, Columns
+- [TabBar](https://docs-llm.a2v10.com/xaml/layouts/tabbar.md): Bar of TabButtons bound to one value — Value, ActiveValue, TabBarStyle
+- [Partial, PartialBlock and Include](https://docs-llm.a2v10.com/xaml/layouts/partial.md): Embedding a view with its own model inside another page

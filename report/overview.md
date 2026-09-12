@@ -69,7 +69,7 @@ services.AddReportEngines(factory =>
 
 ### Data
 
-Data for a report is prepared by a stored procedure, exactly as for an ordinary model — `model`, `procedure`, `parameters` in the report description. The engine receives an already built model and loads nothing on its own while walking the template: if something is missing from the model, the corresponding place in the document stays empty.
+Data for a report is prepared by a stored procedure, exactly as for an ordinary model (`model` and `parameters` in the report description). The name of the procedure is always built from the model — `[schema].[Model.Report]` — and cannot be set to something else. The engine receives an already built model and loads nothing on its own while walking the template: if something is missing from the model, the corresponding place in the document stays empty.
 
 The root of the model is available in expressions under the name `Root`, and its properties simply by name. Details: [Expressions and Bindings](https://docs-llm.a2v10.com/report/bind.md).
 
@@ -144,4 +144,4 @@ The current scope is passed into the function as an argument — `{Bind rowTotal
 ## Hints
 
 - A report that renders blank is usually a data problem, not a template problem: run the report procedure and check that the model really contains the object the template reads.
-- While debugging the data, declare a second report over the same procedure with `"type": "json"` — the response is then the model itself, exactly as the engine sees it.
+- While debugging the data, declare a second report over the same `model` with `"type": "json"` — the response is then the model itself, exactly as the engine sees it.
