@@ -24,6 +24,7 @@
 - [Image](https://docs-llm.a2v10.com/xaml/controls/image.md): Data-bound image with upload — Base, Source, ReadOnly, Limit, Placeholder, blob procedures
 - [FileImage](https://docs-llm.a2v10.com/xaml/controls/fileimage.md): Data-bound image served by a files operation — Url, Value, Width, Height
 - [UploadFile](https://docs-llm.a2v10.com/xaml/controls/uploadfile.md): File selection field with drag-and-drop — Url, Argument, Accept, Limit, Delegate, ErrorDelegate
+- [PdfReportViewer](https://docs-llm.a2v10.com/xaml/controls/pdfreportviewer.md): A Xaml report shown on the form itself — Url, Report, Argument, Height
 
 ## Layouts
 

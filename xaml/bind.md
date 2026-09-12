@@ -73,8 +73,10 @@ Command="{BindCmd Dialog, Action=Edit, Argument={Bind Row}}"
 | `Confirm` | Confirm | Show confirmation dialog before executing |
 | `NewWindow` | Boolean | Open in new browser tab |
 | `ReloadAfter` | Boolean | Reload model after command completes |
+| `Report` | String | Report name — the key in the `reports` section (for the `Report` command) |
 | `Export` | Boolean | Export instead of display (for Report command) |
 | `Print` | Boolean | Print instead of display |
+| `Format` | String | Download format for the `Report` command; the available values depend on the report type |
 | `Permission` | Permission | Required permission: `CanView`, `CanEdit`, `CanDelete`, `CanApply`, `CanCreate`, etc. |
 
 ### CommandType Values
@@ -96,7 +98,7 @@ Command="{BindCmd Dialog, Action=Edit, Argument={Bind Row}}"
 | `Append` | Append new row to an array |
 | `Remove` / `RemoveSelected` | Remove item from array |
 | `DbRemove` / `DbRemoveSelected` | Delete from DB via server call |
-| `Report` | Execute a report (with `Export`/`Print` options) |
+| `Report` | Run a report declared in the [reports](https://docs-llm.a2v10.com/model/reports.md) section. `Report` names it, `Url` is the endpoint folder rather than an action, `Argument` supplies the identifier, `Data` becomes parameters of the report procedure, `Export`/`Print` download or print it. See [Viewing and Printing Reports](https://docs-llm.a2v10.com/report/view.md) |
 | `Download` | Download a static file |
 | `File` | Work with binary objects (Show, Download, Print) |
 | `Navigate` | Client-side navigation |

@@ -78,7 +78,21 @@ client/               ← DONE (client object model / runtime API; source html/c
   utils.md            ← DONE (std:utils — date/currency/text)
   require.md          ← DONE (require + std: modules)
   (source has empty stubs: index/module/global/localization — skipped)
+report/               ← DONE (Xaml printed forms, Core only; source html/report/)
+  overview.md         ← DONE (two template forms, wiring via reports, data, Code section)
+  bind.md             ← DONE (scope rule, Bind vs braces, DataType/Format, quoting, budget)
+  elements.md         ← DONE (base element, Length/Thickness, Page/Column/Inlined/
+                              Text+Span/Space/Break, List, Line, Checkbox)
+  table.md            ← DONE (Table/TableRow/TableCell/TableColumn, TableStyle, nesting)
+  images.md           ← DONE (Image/QrCode/Barcode, watermark, bytes vs file name, SVG)
+  workbook.md         ← DONE (Workbook/Cell/Range/Row/Column/PageFooter, Excel conversion)
+  view.md             ← DONE (PdfReportViewer on a form + BindCmd Report Print/Export)
 ```
+
+The 28 source pages of `html/report/` are folded into these seven: the element enums
+(`report/enums.html`) are placed where they are used — `DataType` in `report/bind.md`,
+`TableStyle` in `report/table.md`, `BarcodeType` in `report/images.md` — and `Length` /
+`Thickness` live in `report/elements.md`.
 
 No stub files remain. `sql/overview.md` was deleted rather than written: its promised scope
 (schemas, standard columns, DDL idempotence) has no source in the help, and the one part that
@@ -107,6 +121,10 @@ Ordered by leverage. Cross-references must be full absolute URLs (see CONVENTION
    `rowversion` → `sql/rowversion.md`. Every `models/` page of the help now has a doc.
 4. **Anchor-text hygiene pass** (low priority): replace any bare `See [X]` / generic anchors with
    descriptive noun phrases. Not a RAG optimization — just readability for the direct-fetch model.
+5. **XAML enums** (not started): the help has `html/xaml/enums/` (24 pages — `Icon`, `TextColor`,
+   `ColumnControlType`, `ControlSize`, `WrapMode`, …). We have no enum reference at all; the
+   values we document are inlined per control. The `Icon` list in `app/menu.md` is the
+   *menu.json* set, a different naming — do not merge the two.
 
 ## Authoring Rules (summary — full rules in CONVENTIONS.md)
 
@@ -133,10 +151,11 @@ Rules:
 - English only
 - Omit sections that have nothing to say — never leave `TODO` placeholders
 
-The root `llms.txt` is a flat, one-level index with six entries — SQL, XAML, MODEL, TEMPLATE,
-CLIENT, APP — each pointing to a section index page (`sql.md`, `xaml.md`, `model.md`,
-`template.md`, `client.md`, `app.md`). Those section pages hold the per-file one-liners. Every
-new file needs its one-liner added to the matching section page, not to `llms.txt`.
+The root `llms.txt` is a flat, one-level index with seven entries — SQL, XAML, MODEL, REPORT,
+TEMPLATE, CLIENT, APP — each pointing to a section index page (`sql.md`, `xaml.md`, `model.md`,
+`report.md`, `template.md`, `client.md`, `app.md`). Those section pages hold the per-file
+one-liners. Every new file needs its one-liner added to the matching section page, not to
+`llms.txt`.
 
 ## Sample Schema
 
@@ -156,6 +175,8 @@ When writing new documentation, draw from the original A2v10 HTML help:
 - **app/** — model.json (already documented)
 - **sql/** — SQL conventions and markers (needed for the TODO stubs)
 - **xaml/** — XAML controls (already documented)
+- **report/** — Xaml printed forms (already documented)
+- **whatsnew/** — release notes; the fastest way to find what the help gained since last time
 
 Fetch files with WebFetch using the raw GitHub URL + path.
 
