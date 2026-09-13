@@ -123,11 +123,31 @@ A document table with a header, rows from a collection and a total:
 </Table>
 ```
 
+### Nested tables
+
+The content of a cell may be another table. Its `ItemsSource` is evaluated from the row it stands in, so nesting works to any depth with nothing extra to declare.
+
+To make a nested table look like part of the outer one, remove the padding of the cell (`Padding="0"`) and give the nested table the `Simple` style. It then fills the cell up to the border, and the borders of its cells merge with the border of the outer table.
+
+```xml
+<TableCell Padding="0">
+    <Table Style="Simple" Columns="1fr,1fr">
+        <TableRow>
+            <TableCell Content="A"/>
+            <TableCell Content="C"/>
+        </TableRow>
+        <TableRow>
+            <TableCell Content="B"/>
+            <TableCell Content="D"/>
+        </TableRow>
+    </Table>
+</TableCell>
+```
+
 ## Notes
 
 - `If` on a body row is evaluated for every element of the collection separately, so rows can be hidden selectively: `<TableRow If="{Bind !Void}">`.
 - Footer rows are read from the scope of the table, not of a row — that is why a footer says `{Bind Document.Sum}` where the body says `{Bind Sum}`.
-- The content of a cell may be another table. Its `ItemsSource` is evaluated from the row it stands in, so nesting works to any depth with nothing extra to declare.
 - Fractions (`fr`) share what is left after the fixed columns. When the fixed widths add up to more than the page width, the document is not built — the engine reports contradictory sizes.
 - A border on a `TableRow` has no effect. To underline a whole row, set `Border` on each of its cells.
 - A table does not number its rows. `RowNo` in the examples is an ordinary field of the model, like any other — the collection behind a table is usually an [Array](https://docs-llm.a2v10.com/sql/array.md) dataset.
