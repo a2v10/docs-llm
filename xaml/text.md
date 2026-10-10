@@ -1,6 +1,6 @@
 # Text Elements
 
-> Inline elements used to compose text — Text, Paragraph, Span, Hyperlink, Popover, Badge, TagLabel, SpanIcon, SpanSum, StaticImage, Html, Break, Line.
+> Inline elements used to compose text — Text, Paragraph, Span, Bold, Italic, Hyperlink, Popover, Badge, TagLabel, SpanIcon, SpanSum, StaticImage, Html, Break, Line.
 
 ## Overview
 
@@ -18,6 +18,7 @@ Containers of inlines:
 Text pieces and decorations:
 
 - [Span](#span) — a fragment of text, the basic building block
+- [Bold](#bold) and [Italic](#italic) — a fragment of text in bold or italics
 - [Badge](#badge) — a small badge with auxiliary text, such as a count
 - [TagLabel](#taglabel) — a coloured tag-style marker, usually an entity state
 - [SpanIcon](#spanicon) — an icon inside text
@@ -82,6 +83,18 @@ A fragment of text — the element reached for most often. Content property: `Co
 | `Big` | Boolean | Larger font |
 | `Space` | SpaceMode | Add a space around the element: `None` (default), `Before`, `After`, `Both` |
 | `MaxChars` | Int32 | Maximum number of characters. Works for bound values only: longer text is cut and an ellipsis is appended |
+
+## Bold
+
+A fragment of text in bold. The same as `Span` with `Bold="True"`; the properties are those of [Span](#span). Content property: `Content`.
+
+Inherits `Span`.
+
+## Italic
+
+A fragment of text in italics. The same as `Span` with `Italic="True"`; the properties are those of [Span](#span). Content property: `Content`.
+
+Inherits `Span`.
 
 ## Hyperlink
 
@@ -188,7 +201,7 @@ Its normal use is showing HTML text that comes from elsewhere — from the datab
 Use XAML elements instead:
 
 ```xml
-<Text>This is <Span Bold="True">bold</Span> text</Text>
+<Text>This is <Bold>bold</Bold> text</Text>
 ```
 
 Or, when the markup really is HTML, wrap it in CDATA:

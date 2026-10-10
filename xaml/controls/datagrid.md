@@ -68,6 +68,8 @@ The `Mark` binding should return one of these strings:
 | `Bold` | Boolean | Bold cell text |
 | `Small` | Boolean | Smaller font size for cells |
 | `Mark` | Object | **Bind only.** CSS class string for cell-level color marking |
+| `Done` | Object | **Bind only.** "Posted" flag: an icon before the cell content — green when the value is true, yellow when not |
+| `CheckAll` | String | **Bind only.** A boolean row property, `CheckAll="{Bind Checked}"`. Replaces the header with a "select all" checkbox: if the property is set in every row, a click clears it in all rows, otherwise sets it in all rows. Shows three states: all, some, none |
 | `Icon` | Icon | Icon shown before cell content |
 | `MaxChars` | Int32 | Max characters before truncation (rest shown as tooltip) |
 | `LineClamp` | Int32 | Max lines before truncation |
@@ -77,10 +79,22 @@ The `Mark` binding should return one of these strings:
 | `SortProperty` | String | Model property to sort by (defaults to `Content` path) |
 | `If` | Boolean? | Conditional column rendering — use `Bind` |
 | `Command` | BindCmd | Make cell content a clickable hyperlink |
-| `Role` | ColumnRole | Preset role: `Default`, `Id`, `Number`, `Date`, `CheckBox` |
+| `Role` | ColumnRole | Preset set of properties — see [ColumnRole Values](#columnrole-values) |
 | `MinWidth` | Length | Minimum column width |
 | `Background` | ColumnBackgroundStyle | Cell background: `Yellow`, `Green`, `Red`, `Blue`, `Gray` |
 | `CssClass` | String | Additional CSS classes on cells |
+
+### ColumnRole Values
+
+| Value | Displays | Same as |
+|-------|----------|---------|
+| `Default` | — (default) | nothing is set |
+| `Id` | An identifier | `Fit="True" Align="Right" Wrap="NoWrap"` |
+| `Number` | A number | `Fit="True" Align="Right" Wrap="NoWrap"` |
+| `Date` | A date | `Fit="True" Align="Center" Wrap="NoWrap"` |
+| `CheckBox` | A checkbox | `Fit="True" Align="Center" Wrap="NoWrap" ControlType="CheckBox"` |
+| `Code` | A code | `Fit="True" Wrap="NoWrap"` |
+| `Fit` | Any value; alignment unchanged | `Fit="True" Wrap="NoWrap"` |
 
 ## Example
 
@@ -135,6 +149,6 @@ The `Mark` binding should return one of these strings:
 - `Sort="True"` on the table enables sorting UI; individual columns can opt out with `Sort="False"`.
 - `Editable="True"` on a column renders an inline edit field; the `ControlType` property selects which control type to use.
 - `Mark` binding is evaluated for each row and should return a string (one of the named color classes) or empty string/null for no mark.
-- `Role="Id"` on a column applies `Id`-specific styles (e.g., monospace, no wrap).
+- `Role` is shorthand for a set of column properties — `Role="Id"` is the same as `Fit="True" Align="Right" Wrap="NoWrap"`.
 - The bound array is shaped server-side — see [array models](https://docs-llm.a2v10.com/sql/array.md). A hierarchical source is a [tree model](https://docs-llm.a2v10.com/sql/tree.md), which DataGrid renders as an expandable tree.
 - At runtime the bound array exposes selection and helpers through the [Array API](https://docs-llm.a2v10.com/client/array.md) (for example `Documents.Selected`, used by `DoubleClick` above); a hierarchical row is a [Tree Element](https://docs-llm.a2v10.com/client/tree-element.md) with `$expand` / `$selectPath`.

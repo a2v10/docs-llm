@@ -8,6 +8,8 @@
 
 By default, `TextBox` is single-line. Setting `Multiline="True"` switches it to a multi-line textarea. The `Password` flag masks input; `Number` restricts input to digits and minus sign.
 
+`SearchBox` is a `TextBox` preset for search fields — see [SearchBox](#searchbox).
+
 ## Syntax
 
 ```xml
@@ -32,8 +34,9 @@ By default, `TextBox` is single-line. Setting `Multiline="True"` switches it to 
 | `Placeholder` | String | — | Hint text shown in empty field; disappears on focus |
 | `SpellCheck` | Boolean? | — | Override browser spell-check (default: browser setting) |
 | `UpdateTrigger` | UpdateTrigger | Default | When to sync value to model: `Default`, `Blur`, `Input` |
-| `EnterCommand` | BindCmd | — | Command fired on Enter key (Ctrl+Enter for multi-line) |
+| `EnterCommand` | BindCmd | — | Command fired on Enter key (Ctrl+Enter for multi-line). Runs before the model is updated |
 | `ShowClear` | Boolean | False | Show × button to clear the field (hidden when empty) |
+| `ShowSearch` | Boolean | False | Show a search icon while the clear button is not visible |
 | `ShowFilter` | Boolean | False | Show filter icon for `CollectionView` integration |
 | `Highlight` | Boolean | False | Visual emphasis when field has a non-empty value |
 | `Accel` | Accel | — | Keyboard shortcut that focuses this field |
@@ -55,6 +58,16 @@ See [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md) for `Label`,
 | `Default` | Sync on blur (when field loses focus) |
 | `Blur` | Sync on blur |
 | `Input` | Sync on every keystroke (immediate) |
+
+## SearchBox
+
+A search field. Inherits `TextBox`.
+
+`SearchBox` is a `TextBox` whose `ShowClear`, `ShowSearch` and `Highlight` are always `True`; values set for them in markup are ignored. All other properties are those of `TextBox`.
+
+```xml
+<SearchBox Placeholder="Search..." Value="{Bind Filter.Fragment}" />
+```
 
 ## Example
 
@@ -88,7 +101,7 @@ See [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md) for `Label`,
          Value="{Bind Filter.Text}"
          ShowClear="True"
          EnterCommand="{BindCmd Reload}"
-         UpdateTrigger="Blur" />
+         UpdateTrigger="Input" />
 
 <!-- Inline editable cell in DataGrid -->
 <DataGrid ItemsSource="{Bind Items}">
@@ -102,5 +115,6 @@ See [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md) for `Label`,
 - `DataType` is specified on the `Bind` extension, not on `TextBox` directly: `Value="{Bind Field, DataType=Currency}"`.
 - `UpdateTrigger="Input"` updates the model on every keystroke — use sparingly as it triggers watchers frequently.
 - `EnterCommand` on a multi-line field requires Ctrl+Enter, not plain Enter (which inserts a newline).
+- `EnterCommand` runs before the model is updated: the property bound to `Value` still holds the previous value. If the command needs the new value — a `Reload` driven by a filter field, for example — set `UpdateTrigger="Input"`.
 - `ShowClear` renders a clear button only when the field has content; it disappears when the field is empty.
 - `Number` mode allows only digits and `-`; for formatted currency input, use `DataType=Currency` on the Bind instead.

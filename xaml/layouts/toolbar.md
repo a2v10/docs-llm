@@ -78,7 +78,8 @@ See [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md) for inherite
   <TextBox Value="{Bind Filter.Search}"
            Placeholder="Search..."
            ShowClear="True"
-           EnterCommand="{BindCmd Reload}" />
+           EnterCommand="{BindCmd Reload}"
+           UpdateTrigger="Input" />
   <Button Content="Search" Command="{BindCmd Reload}" Icon="Search" Style="Primary" />
 </Toolbar>
 ```

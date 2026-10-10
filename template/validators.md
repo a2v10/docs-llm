@@ -39,7 +39,8 @@ interface templateValidatorObj {
   msg?:      string,
   regExp?:   RegExp,
   severity?: Severity,
-  applyIf?:  (elem: IElement, value?: any) => boolean
+  when?(this: IElement, value?: any): boolean,
+  applyIf?(elem: IElement, value?: any): boolean /* deprecated, use when */
 }
 
 type templateValidator = string | templateValidatorFunc | templateValidatorObj;
@@ -58,7 +59,8 @@ validators: {
 | `msg` | Error message; a function may also return the message as a string |
 | `severity` | Severity of the result; defaults to `'error'`. Affects appearance and can be read in code |
 | `regExp` | Regular expression for the standard `'regExp'` validator |
-| `applyIf` | Function deciding whether the validator should apply |
+| `when` | Function deciding whether the validator should apply; `this` is the element |
+| `applyIf` | Deprecated. Same as `when`, but the element is passed as the first argument |
 
 ### Standard validators
 
@@ -102,7 +104,13 @@ The function receives `elem` (the element being validated) and `value` (the valu
 | `templateValidatorResult` | Object specifying message and severity |
 | `Promise` | For an async validator; must resolve to a boolean or string |
 
-The `applyIf` function has the same `(elem, value)` signature and returns `true` when the validator is active and should be applied.
+### Condition function
+
+```ts
+when(value?: any): boolean;
+```
+
+`this` is the element the validator applies to; `value` is the value being checked. Returns `true` when the validator is active and should be applied. Write `when` as a method or a `function`, never as an arrow function — an arrow function has no `this` of its own, so `this` is not the element.
 
 ## Example
 
@@ -115,7 +123,7 @@ const template = {
       valid(elem, value) { return value > 0; },
       msg: 'Price must be positive',
       severity: 'warning',
-      applyIf(elem) { return elem.Qty > 0; }
+      when() { return this.Qty > 0; }
     }
   }
 };
@@ -128,7 +136,8 @@ module.exports = template;
 - Validator names are data paths. Array segments use the `[]` suffix — `Document.Rows[].Sum`, not `Document.Rows.Sum`.
 - A property's value may be one validator or an array of validators; an array applies all of them.
 - `severity` defaults to `'error'`. `'warning'` and `'info'` are advisory and do not block saving the way an error does.
-- `applyIf` lets a validator depend on other fields — skip the price check on rows with no quantity, for example.
+- `when` lets a validator depend on other fields — skip the price check on rows with no quantity, for example.
+- `applyIf` is deprecated; new code uses `when`. The difference is only where the element arrives: `applyIf(elem, value)` versus `this` inside `when(value)`.
 
 ## Hints
 

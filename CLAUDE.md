@@ -41,15 +41,16 @@ xaml/
   overview.md         ← DONE (Page/Dialog roots, extensions, property syntax)
   bind.md             ← DONE (Bind + BindCmd, all properties and CommandTypes)
   base-classes.md     ← DONE (UIElementBase/UIElement/Inline/Container/Control/…)
-  text.md             ← DONE (all 13 inlines in one file + TextColor values)
+  text.md             ← DONE (all 15 inlines in one file + TextColor values)
   switch.md           ← DONE (Switch/Case/Else — one block of several by a bound value)
-  controls/           ← DONE (button, checkbox, combobox, datagrid, datepicker,
+  controls/           ← DONE (button, checkbox, colorpicker, combobox, datagrid, datepicker,
                               fileimage, graphics, image, list, menuitem, pager,
                               pdfreportviewer, periodpicker, radio, selector,
                               selectorsimple, static, table, textbox, toolbaraligner,
                               uploadfile)
                          ListItem lives in list.md; TableRow/TableCell/TableColumn
-                         in table.md
+                         in table.md; SearchBox in textbox.md; ColorComboBox +
+                         ColorComboBoxItem in colorpicker.md
   layouts/            ← DONE (block, commandbar, dialog, dropdownmenu, fieldset, grid,
                               group, page, panel, partial, popup, repeater, sheet,
                               stackpanel, tabbar, tabpanel, taskpad, toolbar)
@@ -97,7 +98,7 @@ report/               ← DONE (Xaml printed forms, Core only; source html/repor
   view.md             ← DONE (PdfReportViewer on a form + BindCmd Report Print/Export)
 ```
 
-The 28 source pages of `html/report/` are folded into these seven: the element enums
+The 27 source pages of `html/report/` are folded into these seven: the element enums
 (`report/enums.html`) are placed where they are used — `DataType` in `report/bind.md`,
 `TableStyle` in `report/table.md`, `BarcodeType` in `report/images.md` — and `Length` /
 `Thickness` live in `report/elements.md`.
@@ -119,20 +120,23 @@ HTML. Any element added from the lists below is first confirmed as current with 
 owner. Pages that are empty stubs in the help (a few hundred bytes, no properties) are out of
 scope until the help itself has content.
 
-Measured state as of 2026-09-12 — help pages versus ours:
+Measured state as of 2026-10-10 — help pages versus ours. Pages: `.html` files in the folder,
+subfolders included, `index.html` excluded. Ours: our `.md` files drawn from that folder.
 
 | Help folder | Pages | Ours | Where ours live |
 |-------------|-------|------|-----------------|
-| `xaml/controls/` | 50 | 15 | `xaml/controls/` |
-| `xaml/containers/` | 33 | 9 | `xaml/layouts/` |
+| `xaml/controls/` | 52 | 22 | `xaml/controls/` |
+| `xaml/containers/` | 33 | 17 | `xaml/layouts/` (all but `sheet.md`) |
 | `xaml/abstract/` | 11 | 1 | `xaml/base-classes.md` (folded) |
-| `xaml/text/` | 14 | 1 | `xaml/text.md` (folded) |
-| `xaml/sheet/` | 12 | 1 | `xaml/layouts/sheet.md` (folded) |
-| `xaml/bind/` | 8 | 1 | `xaml/bind.md` (folded) |
-| `report/` | 28 | 7 | `report/` (folded) |
-| `xaml/enums/` | 23 | 0 | — |
-| `xaml/components/` | 11 | 0 | — |
-| `xaml/simple/` | 13 | 0 | — |
+| `xaml/text/` | 15 | 1 | `xaml/text.md` (folded) |
+| `xaml/sheet/` | 11 | 1 | `xaml/layouts/sheet.md` (folded) |
+| `xaml/bind/` | 7 | 1 | `xaml/bind.md` (folded) |
+| `xaml/overview/` | 1 | 1 | `xaml/overview.md` |
+| `xaml/components/` | 10 | 1 | `xaml/switch.md` (Switch/Case/Else) |
+| `report/` | 27 | 7 | `report/` (folded) |
+| `xaml/enums/` | 22 | 0 | — |
+| `xaml/simple/` | 12 | 0 | — |
+| `xaml/diagram/` | 3 | 0 | — |
 
 Folding several help pages into one doc is the norm here, not an exception.
 
@@ -155,7 +159,7 @@ Ordered by leverage. Cross-references must be full absolute URLs (see CONVENTION
      `PropertyGrid` + `PropertyGridItem`, `Alert`, `MultiSelect`, `EmptyPanel`, `Separator`,
      `GridDivider`, `Header`, `Label`, `Code`, `HtmlElement` + `HtmlAttribute`.
    - Stubs in the help, nothing to write yet: `StateCard`, `ChatItem`, `TableMarkCell` — all
-     three also sit in the TODO list of `whatsnew/w202609.html`.
+     three also sit in the TODO list of `whatsnew/w202610.html`.
    - `ComboBoxItem`, `DataGridColumn` and `DataGridRowDetails` were already covered inside
      `combobox.md` and `datagrid.md`.
 3. **Horizontal links** — nine pairs verified missing:

@@ -5,18 +5,21 @@
 - [XAML Overview](https://docs-llm.a2v10.com/xaml/overview.md): How XAML views work — Page/Dialog roots, markup extensions, property syntax, element hierarchy
 - [Bind & BindCmd](https://docs-llm.a2v10.com/xaml/bind.md): Data binding and command binding — Bind properties, DataType values, all CommandType values
 - [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md): Inherited properties on all elements — UIElementBase, UIElement, Inline, Control, ValuedControl, Container
-- [Text Elements](https://docs-llm.a2v10.com/xaml/text.md): Inlines that compose text — Text, Paragraph, Span, Hyperlink, Popover, Badge, TagLabel, SpanIcon, SpanSum, StaticImage, Html, Break, Line, and the TextColor values
+- [Text Elements](https://docs-llm.a2v10.com/xaml/text.md): Inlines that compose text — Text, Paragraph, Span, Bold, Italic, Hyperlink, Popover, Badge, TagLabel, SpanIcon, SpanSum, StaticImage, Html, Break, Line, and the TextColor values
 - [Switch, Case and Else](https://docs-llm.a2v10.com/xaml/switch.md): Renders one of several blocks depending on a bound value
 
 ## Controls
 
 - [Button](https://docs-llm.a2v10.com/xaml/controls/button.md): Command button — Style, Icon, DropDown, ButtonStyle values
-- [TextBox](https://docs-llm.a2v10.com/xaml/controls/textbox.md): Text input field — Multiline, Password, Number, UpdateTrigger, EnterCommand
+- [TextBox](https://docs-llm.a2v10.com/xaml/controls/textbox.md): Text input field — Multiline, Password, Number, UpdateTrigger, EnterCommand runs before the model update, ShowClear/ShowSearch
+- [SearchBox](https://docs-llm.a2v10.com/xaml/controls/textbox.md): Search field — a TextBox with ShowClear, ShowSearch and Highlight always on
 - [DataGrid](https://docs-llm.a2v10.com/xaml/controls/datagrid.md): Data table — ItemsSource, columns, sorting, row marking, DoubleClick, ContextMenu
-- [DataGridColumn](https://docs-llm.a2v10.com/xaml/controls/datagrid.md): Column definition — Content, Header, Width, Align, Editable, Command, Role
+- [DataGridColumn](https://docs-llm.a2v10.com/xaml/controls/datagrid.md): Column definition — Content, Header, Width, Align, Editable, Command, Role presets, CheckAll, Done
 - [Table](https://docs-llm.a2v10.com/xaml/controls/table.md): Markup table — TableRow/TableCell/TableColumn, merging, row marking, grid lines
 - [List](https://docs-llm.a2v10.com/xaml/controls/list.md): Selectable list of items — ListItem, ListStyle, marking, AutoSelect, EmptyPanel
 - [ComboBox](https://docs-llm.a2v10.com/xaml/controls/combobox.md): Dropdown list — static items, bound list, DisplayProperty, ComboBoxItem
+- [ColorPicker](https://docs-llm.a2v10.com/xaml/controls/colorpicker.md): Choice of a colour name from coloured labels — Value, Text, Compact, the colour names
+- [ColorComboBox](https://docs-llm.a2v10.com/xaml/controls/colorpicker.md): Dropdown list of a model array shown as coloured labels — ItemsSource, ColorComboBoxItem Content/Value/Color
 - [Selector](https://docs-llm.a2v10.com/xaml/controls/selector.md): Search/lookup control — Delegate, SetDelegate, ItemsPanel, NewPane, server-side search
 - [SelectorSimple](https://docs-llm.a2v10.com/xaml/controls/selectorsimple.md): Shorthand selector configured by a single Url — fetch, browse dialog and DisplayProperty by convention
 - [CheckBox](https://docs-llm.a2v10.com/xaml/controls/checkbox.md): Boolean checkbox bound to model value
