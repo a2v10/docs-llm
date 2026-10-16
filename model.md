@@ -8,4 +8,5 @@
 - [Popups](https://docs-llm.a2v10.com/model/popups.md): Popup window configuration within model.json
 - [Commands](https://docs-llm.a2v10.com/model/commands.md): Server-side commands — SQL, CLR, API calls, and process management
 - [Reports](https://docs-llm.a2v10.com/model/reports.md): Report and export configuration — Xaml (pdf/xlsx), Stimulsoft, XML, and JSON formats
-- [File Upload](https://docs-llm.a2v10.com/model/files.md): File upload handling — parse, SQL storage, Azure Blob, and CLR processing
+- [File Upload](https://docs-llm.a2v10.com/model/files.md): File upload handling — parse into rows and CLR processing; the sql and azureBlob storage types are deprecated
+- [Blobs](https://docs-llm.a2v10.com/model/blobs.md): Upload targets for platform-stored files (.NET Core) — accept, maxSize, requireBase for attachments

@@ -1,6 +1,6 @@
 # Image
 
-> An image bound to data — displays a binary object and uploads a new one in a single control, using the `.Load` / `.Update` procedure pair.
+> Deprecated — use [BlobImage](https://docs-llm.a2v10.com/xaml/controls/blobimage.md) instead. The old data-bound image backed by a `.Load` / `.Update` procedure pair; kept only to read existing code.
 
 ## Overview
 
@@ -14,15 +14,9 @@ To display the image the platform calls the `.Load` procedure, passing the ident
 
 `Image` inherits from `UIElementBase` — see [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md).
 
-## Use When
-
-- An image belongs to a record as its own entity and is served on demand — an avatar, a product photo.
-- Viewing and replacing the picture should be one control on the form.
-
 ## Do Not Use When
 
-- The bytes are served by an operation from the `files` section of `model.json` rather than by dedicated procedures — use [FileImage](https://docs-llm.a2v10.com/xaml/controls/fileimage.md) instead.
-- What is uploaded is an arbitrary file rather than a picture to display — use [UploadFile](https://docs-llm.a2v10.com/xaml/controls/uploadfile.md) instead.
+- Any new code — use [BlobImage](https://docs-llm.a2v10.com/xaml/controls/blobimage.md) instead; to view a file read-only, BlobPreview on the same page.
 
 ## Syntax
 

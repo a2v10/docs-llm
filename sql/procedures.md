@@ -26,7 +26,7 @@ Everything the platform learns about the shape of the data it gets from the name
 | `.Update` | Save the instance. See [Update Model (TVP + MERGE)](https://docs-llm.a2v10.com/sql/update-model.md) |
 | `.Expand` | Return the child elements of a node when the user expands it in a dynamic tree. See [Tree & Hierarchy](https://docs-llm.a2v10.com/sql/tree.md) |
 
-Binary objects are served by their own pair of procedures, named after the model property rather than the model alone — `[schema].[Model.Property.Load]` and `[schema].[Model.Property.Update]`. See [Binary Objects (blob)](https://docs-llm.a2v10.com/sql/blob.md).
+Files and images need no procedures of their own: the platform stores them, see [Files and Images](https://docs-llm.a2v10.com/sql/blob-storage.md). The `[schema].[Model.Property.Load]` / `[schema].[Model.Property.Update]` pair found in existing code is the deprecated [Binary Objects (blob)](https://docs-llm.a2v10.com/sql/blob.md) model.
 
 ### Parameters
 

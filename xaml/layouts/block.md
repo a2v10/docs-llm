@@ -60,7 +60,7 @@ See [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md) for inherite
 
 <!-- a positioning context for an absolutely placed badge -->
 <Block Relative="True" Height="120px">
-  <Image Source="{Bind Product.Photo}" />
+  <BlobImage Url="/catalog/product" Value="{Bind Product.Photo}" Height="120px" />
   <Badge Content="{Bind Product.StateName}" Absolute="8,8,0,0" />
 </Block>
 ```

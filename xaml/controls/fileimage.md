@@ -1,6 +1,6 @@
 # FileImage
 
-> An image bound to data whose bytes come from an operation of the `files` section of model.json.
+> Deprecated — use [BlobImage](https://docs-llm.a2v10.com/xaml/controls/blobimage.md) instead. The old data-bound image served by an operation of the `files` section of model.json; kept only to read existing code.
 
 ## Overview
 
@@ -10,14 +10,9 @@
 
 `FileImage` inherits from `UIElementBase` — see [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md).
 
-## Use When
-
-- The image is served by an upload operation already declared in the `files` section — the same endpoint that stored it also returns it.
-
 ## Do Not Use When
 
-- The picture has its own `.Load` / `.Update` procedures and should be replaceable in place — use [Image](https://docs-llm.a2v10.com/xaml/controls/image.md) instead.
-- The user has to choose and send a file — use [UploadFile](https://docs-llm.a2v10.com/xaml/controls/uploadfile.md) instead.
+- Any new code — use [BlobImage](https://docs-llm.a2v10.com/xaml/controls/blobimage.md) instead; to view a file read-only, BlobPreview on the same page.
 
 ## Syntax
 

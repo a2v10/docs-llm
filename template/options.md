@@ -26,6 +26,13 @@ options: {
 | `persistSelect` | string[] | Arrays whose selected element position is preserved across save and reload |
 | `skipDirty` | string[] | Property paths whose changes do not set the `$isDirty` flag |
 
+### skipDirty paths
+
+| Path | Covers |
+|------|--------|
+| `'Comments[].Text'` | A property of the elements of an array, or of an object |
+| `'Comments'` | The array itself: its `$append`, `$remove`, `$empty`. .NET Core only |
+
 ## Example
 
 ```js
@@ -40,10 +47,18 @@ const template = {
 module.exports = template;
 ```
 
+Data already saved by a separate command or by a file upload — an added comment, an attached file — is not a change for the page's `Save` button:
+
+```js
+options: {
+  skipDirty: ['Comments', 'Comments[].Text', 'Attachments']
+}
+```
+
 ## Notes
 
 - `bindOnce` accepts root properties only — names without a dot. It is useful for binding reference lists (lookups) once, avoiding a rebind on every model reload.
 - `persistSelect` keeps the `$selected` element of an array in place when the model is saved or reloaded, so the user's row selection is not lost.
 - `skipDirty` takes full property paths; changing one of those properties leaves `$isDirty` unchanged. Use it for transient UI state such as a search box that should not count as an unsaved edit.
 - With `noDirty` set, `$isDirty` never becomes `true`, so the platform will not warn about unsaved changes or auto-enable a `Save` command for this model.
-- Property names beginning with `$$` in [`properties`](https://docs-llm.a2v10.com/template/properties.md) also avoid setting the dirty flag — a per-property alternative to `skipDirty`.
+- Property names beginning with `$$` in [`properties`](https://docs-llm.a2v10.com/template/properties.md) also avoid setting the dirty flag — a per-property alternative to `skipDirty`. Use `$$` names for the root's own properties that live only on the client.

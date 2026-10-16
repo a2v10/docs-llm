@@ -7,6 +7,7 @@
 - [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md): Inherited properties on all elements — UIElementBase, UIElement, Inline, Control, ValuedControl, Container
 - [Text Elements](https://docs-llm.a2v10.com/xaml/text.md): Inlines that compose text — Text, Paragraph, Span, Bold, Italic, Hyperlink, Popover, Badge, TagLabel, SpanIcon, SpanSum, StaticImage, Html, Break, Line, and the TextColor values
 - [Switch, Case and Else](https://docs-llm.a2v10.com/xaml/switch.md): Renders one of several blocks depending on a bound value
+- [Slot](https://docs-llm.a2v10.com/xaml/slot.md): Data context for nested elements — Scope, Fallback shown while the context is empty
 
 ## Controls
 
@@ -31,10 +32,14 @@
 - [Static](https://docs-llm.a2v10.com/xaml/controls/static.md): Read-only display field styled like a disabled TextBox
 - [ToolbarAligner](https://docs-llm.a2v10.com/xaml/controls/toolbaraligner.md): Invisible spacer that pushes following elements to the opposite edge — flex-grow for toolbars
 - [Graphics](https://docs-llm.a2v10.com/xaml/controls/graphics.md): Drawing surface filled by a d3.js delegate — Delegate, Argument, Watch modes, attaching d3
-- [Image](https://docs-llm.a2v10.com/xaml/controls/image.md): Data-bound image with upload — Base, Source, ReadOnly, Limit, Placeholder, blob procedures
-- [FileImage](https://docs-llm.a2v10.com/xaml/controls/fileimage.md): Data-bound image served by a files operation — Url, Value, Width, Height
+- [BlobImage](https://docs-llm.a2v10.com/xaml/controls/blobimage.md): Image in a record field of the platform file storage (.NET Core) — Url, Value, shows, uploads and clears
+- [BlobPreview](https://docs-llm.a2v10.com/xaml/controls/blobimage.md): Read-only view of a platform-stored file (.NET Core) — image, PDF, or a download link
+- [TextEditor](https://docs-llm.a2v10.com/xaml/controls/texteditor.md): Text with bold and pasted images stored as attachments (.NET Core, Tabbed layout) — Delegates UploadImage/ImageUrl/Submit
+- [TextView](https://docs-llm.a2v10.com/xaml/controls/texteditor.md): Read-only display of TextEditor text — clickable links, images via ImageUrl
 - [UploadFile](https://docs-llm.a2v10.com/xaml/controls/uploadfile.md): File selection field with drag-and-drop — Url, Argument, Accept, Limit, Delegate, ErrorDelegate
 - [PdfReportViewer](https://docs-llm.a2v10.com/xaml/controls/pdfreportviewer.md): A Xaml report shown on the form itself — Url, Report, Argument, Height
+- [Image](https://docs-llm.a2v10.com/xaml/controls/image.md): Deprecated, use BlobImage — the old image backed by blob procedures
+- [FileImage](https://docs-llm.a2v10.com/xaml/controls/fileimage.md): Deprecated, use BlobImage — the old image served by a files operation
 
 ## Layouts
 

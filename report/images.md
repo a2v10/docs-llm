@@ -137,5 +137,5 @@ A header with a logo from the model and a stamp from a file, and a page watermar
 
 ## Hints
 
-- An image stored in the database is an ordinary `varbinary(max)` field of the report model — see [Binary Objects](https://docs-llm.a2v10.com/sql/blob.md) for how such a field is loaded.
+- An image stored in the database is an ordinary `varbinary(max)` field of the report model. Files of the platform storage ([Files and Images](https://docs-llm.a2v10.com/sql/blob-storage.md)) cannot be printed in reports yet.
 - To make one template serve both a draft and a final copy, keep the condition in a `Code` function and return an empty string for the final one: an empty watermark means none.

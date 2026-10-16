@@ -19,7 +19,7 @@ When the upload and the processing are finished, the platform calls the [delegat
 
 ## Do Not Use When
 
-- The point is to display an existing image rather than send a new file — use [Image](https://docs-llm.a2v10.com/xaml/controls/image.md) or [FileImage](https://docs-llm.a2v10.com/xaml/controls/fileimage.md) instead.
+- The file is stored rather than processed — an image in a record field or an attachment — use [BlobImage and BlobPreview](https://docs-llm.a2v10.com/xaml/controls/blobimage.md) instead.
 - The user should download a static file shipped with the application — use the `Download` command of [BindCmd](https://docs-llm.a2v10.com/xaml/bind.md) instead.
 
 ## Syntax

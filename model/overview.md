@@ -19,12 +19,14 @@ Property names within each child object become operation names. For example, an 
   "source": "",
   "schema": "",
   "model": "",
+  "requireBase": false,
   "actions":   {},
   "dialogs":   {},
   "popups":    {},
   "commands":  {},
   "reports":   {},
-  "files":     {}
+  "files":     {},
+  "blobs":     {}
 }
 ```
 
@@ -33,12 +35,14 @@ Property names within each child object become operation names. For example, an 
 | `source` | string | `"Default"` | Connection string name from the application configuration |
 | `schema` | string | `"dbo"` | SQL schema used for stored procedure calls |
 | `model` | string | — | Base model name, inherited by child sections unless overridden |
+| `requireBase` | boolean | `false` | .NET Core only. Every call must carry `base` — the owner's endpoint URL; its roles are checked first. Used for attachments, see [Blobs](https://docs-llm.a2v10.com/model/blobs.md) |
 | `actions` | object | — | Named page actions — each renders a view and loads a model |
 | `dialogs` | object | — | Named modal dialogs |
 | `popups` | object | — | Named popup windows |
 | `commands` | object | — | Named server-side commands |
 | `reports` | object | — | Named report or export operations |
 | `files` | object | — | Named file upload operations |
+| `blobs` | object | — | .NET Core only. Fields a file or an image can be uploaded into — see [Blobs](https://docs-llm.a2v10.com/model/blobs.md) |
 
 ## Example
 

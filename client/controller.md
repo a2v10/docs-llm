@@ -36,6 +36,9 @@ interface IController {
   $emitSaveEvent(): void;
   $nodirty(func: () => Promise<any>): void;
   $upload(url: string, accept?: string, data?: { Id?: any, Key?: any }, opts?: { catchError?: boolean }): Promise<any>;
+  $uploadBlob(url: string, accept?: string, data?: { Id: any, Base: string }, opts?: { catchError?: boolean }): Promise<any>;
+  $uploadBlobFile(url: string, file: File, data?: { Id: any, Base: string }, opts?: { catchError?: boolean }): Promise<any>;
+  $ensureSaved(): Promise<boolean>;
 }
 
 declare const enum CommonStyle {
@@ -74,6 +77,9 @@ declare const enum CommonStyle {
 | `$emitSaveEvent()` | void | Sends the event named by the dialog's `SaveEvent` to the caller |
 | `$nodirty(func)` | void | Runs `func` (async) without setting the dirty flag |
 | `$upload(url, accept?, data?, opts?)` | `Promise` | Shows a file picker and uploads the file to a file command |
+| `$uploadBlob(url, accept?, data?, opts?)` | `Promise` | .NET Core only. Shows a file picker and uploads the file to a [blobs](https://docs-llm.a2v10.com/model/blobs.md) section; see below |
+| `$uploadBlobFile(url, file, data?, opts?)` | `Promise` | .NET Core only. The same as `$uploadBlob` for a `File` already at hand (paste, drop) — no picker |
+| `$ensureSaved()` | `Promise<boolean>` | .NET Core only. Saves the main object if it is new, so it gets an `Id`; see below |
 
 ## Key methods
 
@@ -92,6 +98,43 @@ Returns `true` immediately if the model is unchanged. If it changed, it shows a 
 ### $asyncValid
 
 Runs an async [validator](https://docs-llm.a2v10.com/template/validators.md) command at the current endpoint, usually backed by an SQL procedure that returns a single `Result` object with one `Value` property of type `bit` or `nvarchar`. Results are cached to limit server calls.
+
+### $uploadBlob
+
+Uploads a file into the platform storage — see [Files and Images](https://docs-llm.a2v10.com/sql/blob-storage.md). Used for attachments: with `data` the file is linked to its owner.
+
+| Argument | Description |
+|----------|-------------|
+| `url` | The endpoint and the key of its `blobs` section: `/attachment/upload` |
+| `accept` | Allowed MIME types, comma-separated. Sets the filter of the file picker; the server still checks `accept` from `model.json` |
+| `data` | The owner: `Id` — the owner record, `Base` — its endpoint URL (`/catalog/agentblob`). Other properties of the object are not sent. Without `data` the file is linked to nothing |
+| `opts` | `catchError` — as in `$upload` |
+
+It resolves to the new row `{ Id, Blob: { Id, Token, Name, Mime } }` for an attachment, to the file object `{ Id, Token, Name, Mime }` without `data`, and to `false` on error (unless `catchError` is set). What to do with the result — append a row, select it, reload — is up to the application:
+
+```js
+async upload() {
+  // Owner = { Id, Base } from the Index procedure
+  const result = await this.$ctrl.$uploadBlob('/attachment/upload', null, this.Owner);
+  if (!result)
+    return;
+  this.Attachments.$append(result).$select();
+}
+```
+
+`$uploadBlobFile(url, file, data?, opts?)` takes a browser `File` instead of `accept` and shows no picker — the file already came from a paste or a drop. It is used in the `UploadImage` delegate of [TextEditor](https://docs-llm.a2v10.com/xaml/controls/texteditor.md).
+
+### $ensureSaved
+
+Saves the main object of the model if it is new (`$isNew`) — the same object `$save` saves: the one marked as main, otherwise the first object of the model. A new object is saved even if nothing in it changed. Concurrent calls wait for the same save. Resolves to `true` if the object has an identifier afterwards — it was saved before or has just been saved.
+
+Use it when an action needs the record's `Id` — for example, to attach a file to a record not yet saved:
+
+```js
+if (!await this.$ctrl.$ensureSaved())
+  return null;
+// this.Task.Id exists here
+```
 
 ## Example
 

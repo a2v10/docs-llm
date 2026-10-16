@@ -1,6 +1,6 @@
 # File Upload
 
-> The `files` object in model.json — configures server-side handling of uploaded files: parsing, binary storage, Azure Blob upload, or CLR processing.
+> The `files` object in model.json — configures server-side handling of uploaded files: parsing into rows or CLR processing. Its storage types `sql` and `azureBlob` are deprecated — files are stored via [Blobs](https://docs-llm.a2v10.com/model/blobs.md).
 
 ## Overview
 
@@ -9,6 +9,10 @@ The `files` object declares named upload operations for an endpoint. Each operat
 The `type` property is required and determines the execution path. For parse operations, the `parse` property further specifies the expected file format.
 
 File upload operations call two stored procedures: a `[model].Metadata` procedure that returns column definitions for validation, and a `[model].Update` procedure that saves the data. Both are resolved using the `source`, `schema`, and `model` values (inherited from root unless overridden).
+
+## Do Not Use When
+
+- A file or an image is stored — use [Blobs](https://docs-llm.a2v10.com/model/blobs.md) instead. The `parse` operation (importing rows from a file) stays here.
 
 ## Syntax
 
@@ -36,8 +40,8 @@ File upload operations call two stored procedures: a `[model].Metadata` procedur
 | Value | Description |
 |-------|-------------|
 | `parse` | Parses the file content (Excel, CSV, DBF, XML) and saves rows to the database |
-| `sql` | Stores the raw file as `varbinary(max)` in the database |
-| `azureBlob` | Uploads the file to an Azure Blob Storage container |
+| `sql` | Deprecated — use [Blobs](https://docs-llm.a2v10.com/model/blobs.md). Stores the raw file as `varbinary(max)` in the database |
+| `azureBlob` | Deprecated — use [Blobs](https://docs-llm.a2v10.com/model/blobs.md). Uploads the file to an Azure Blob Storage container |
 | `clr` | Passes the file to a .NET class implementing `IInvokeTarget` |
 
 ### Properties
@@ -50,12 +54,12 @@ File upload operations call two stored procedures: a `[model].Metadata` procedur
 | `schema` | string | Overrides the root `schema` |
 | `model` | string | Overrides the root `model`; empty string means no database storage |
 | `locale` | string | Locale used when parsing numeric and date values, e.g. `"uk"` or `"uk-UA"` |
-| `container` | string | Azure Blob container name — required for `azureBlob` type |
-| `azureSource` | string | Azure Storage connection name; defaults to `"AzureStorage"` |
+| `container` | string | Deprecated with `azureBlob`. Azure Blob container name — required for `azureBlob` type |
+| `azureSource` | string | Deprecated with `azureBlob`. Azure Storage connection name; defaults to `"AzureStorage"` |
 | `clrType` | string | Assembly-qualified .NET type — required for `clr` type |
 | `async` | boolean | If `true`, the CLR operation runs asynchronously |
 | `parameters` | object | Static key-value pairs passed to the stored procedure |
-| `imageCompress` | object | JPEG compression settings (see below) |
+| `imageCompress` | object | Deprecated with `sql` and `azureBlob`. JPEG compression settings (see below) |
 
 ### imageCompress object
 
@@ -81,7 +85,7 @@ File upload operations call two stored procedures: a `[model].Metadata` procedur
 
 The platform calls `[a2].[Agent.Metadata]` to get column definitions, parses the uploaded `.xlsx` file, and saves each row via `[a2].[Agent.Update]`.
 
-### Azure Blob upload with image compression
+### Azure Blob upload with image compression (deprecated)
 
 ```json
 "files": {
@@ -99,7 +103,7 @@ The platform calls `[a2].[Agent.Metadata]` to get column definitions, parses the
 
 Images larger than 0.5 MB are recompressed to 80% JPEG quality before upload.
 
-### Raw binary SQL storage
+### Raw binary SQL storage (deprecated)
 
 ```json
 "files": {

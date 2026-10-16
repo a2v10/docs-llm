@@ -34,7 +34,9 @@ sql/
   cross.md            ← DONE (CrossArray/CrossObject, $cross)
   map-object.md       ← DONE (MapObject, !Key, key list, dynamic keys)
   system-datasets.md  ← DONE ($System/$Aliases/$Defaults, modifiers, set order)
-  blob.md             ← DONE (binary objects, !Token, .Load/.Update byte procedures)
+  blob.md             ← DEPRECATED (binary objects, .Load/.Update byte procedures)
+  blob-storage.md     ← DONE (Files and Images, Core only — record field, attachments,
+                              platformid, BlobStorage; source models/blobs.html)
   rowversion.md       ← DONE (rv column, varbinary(8) in TVP, version check in .Update)
   errors.md           ← DONE (throw, UI: prefix — user alert vs developer alert)
 xaml/
@@ -43,14 +45,17 @@ xaml/
   base-classes.md     ← DONE (UIElementBase/UIElement/Inline/Container/Control/…)
   text.md             ← DONE (all 15 inlines in one file + TextColor values)
   switch.md           ← DONE (Switch/Case/Else — one block of several by a bound value)
-  controls/           ← DONE (button, checkbox, colorpicker, combobox, datagrid, datepicker,
-                              fileimage, graphics, image, list, menuitem, pager,
-                              pdfreportviewer, periodpicker, radio, selector,
-                              selectorsimple, static, table, textbox, toolbaraligner,
-                              uploadfile)
+  slot.md             ← DONE (Slot — data context + Fallback)
+  controls/           ← DONE (blobimage, button, checkbox, colorpicker, combobox, datagrid,
+                              datepicker, fileimage, graphics, image, list, menuitem,
+                              pager, pdfreportviewer, periodpicker, radio, selector,
+                              selectorsimple, static, table, texteditor, textbox,
+                              toolbaraligner, uploadfile)
                          ListItem lives in list.md; TableRow/TableCell/TableColumn
                          in table.md; SearchBox in textbox.md; ColorComboBox +
-                         ColorComboBoxItem in colorpicker.md
+                         ColorComboBoxItem in colorpicker.md; BlobPreview in
+                         blobimage.md; TextView in texteditor.md.
+                         image.md and fileimage.md are DEPRECATED
   layouts/            ← DONE (block, commandbar, dialog, dropdownmenu, fieldset, grid,
                               group, page, panel, partial, popup, repeater, sheet,
                               stackpanel, tabbar, tabpanel, taskpad, toolbar)
@@ -67,6 +72,7 @@ model/
   commands.md         ← DONE (sql/clr/callApi/javascript/process/sendMessage)
   reports.md          ← DONE (Stimulsoft/xml/json, macros in filename)
   files.md            ← DONE (parse/sql/azureBlob/clr, imageCompress)
+  blobs.md            ← DONE (blobs section accept/maxSize + requireBase, Core only)
 template/             ← DONE (client-side JS model behavior; source html/template/)
   overview.md         ← DONE (exported template object + sections)
   options.md          ← DONE (noDirty/bindOnce/persistSelect/skipDirty)
@@ -83,7 +89,8 @@ client/               ← DONE (client object model / runtime API; source html/c
   array.md            ← DONE (IElementArray — selection, lazy, insert/find/sum)
   array-element.md    ← DONE (IArrayElement — select/check/remove/move)
   tree-element.md     ← DONE (ITreeElement — expand, selectPath)
-  controller.md       ← DONE (IController via $ctrl — invoke/reload/msg/upload)
+  controller.md       ← DONE (IController via $ctrl — invoke/reload/msg/upload/uploadBlob/
+                              ensureSaved)
   utils.md            ← DONE (std:utils — date/currency/text)
   require.md          ← DONE (require + std: modules)
   (source has empty stubs: index/module/global/localization — skipped)
@@ -120,19 +127,33 @@ HTML. Any element added from the lists below is first confirmed as current with 
 owner. Pages that are empty stubs in the help (a few hundred bytes, no properties) are out of
 scope until the help itself has content.
 
-Measured state as of 2026-10-10 — help pages versus ours. Pages: `.html` files in the folder,
+### Deprecated pages
+
+Files and images: the canon is `sql/blob-storage.md`, `model/blobs.md`, `blobimage.md`,
+`texteditor.md` — decided by the project owner on 2026-10-16, .NET Framework included.
+Deprecated: `sql/blob.md`, `xaml/controls/image.md`, `xaml/controls/fileimage.md`, the `sql` /
+`azureBlob` types and `imageCompress` in `model/files.md`. A deprecated page or value:
+- blockquote (or table cell) starts with `Deprecated — use X instead`;
+- no `Use When`; `Do Not Use When` is the single bullet "Any new code — use X";
+- index entry `Deprecated, use X — …`, listed after the canonical entries;
+- a canonical page links to it only with the word "deprecated" next to the link
+  (`sql/procedures.md` → `sql/blob.md`, for reading existing code).
+Kept, not deprecated: `parse`/`clr` in `files`, `UploadFile`, `$upload`, the `File` command of
+BindCmd, `varbinary` images in `report/` (platform files cannot be printed yet).
+
+Measured state as of 2026-10-16 — help pages versus ours. Pages: `.html` files in the folder,
 subfolders included, `index.html` excluded. Ours: our `.md` files drawn from that folder.
 
 | Help folder | Pages | Ours | Where ours live |
 |-------------|-------|------|-----------------|
-| `xaml/controls/` | 52 | 22 | `xaml/controls/` |
+| `xaml/controls/` | 56 | 24 | `xaml/controls/` |
 | `xaml/containers/` | 33 | 17 | `xaml/layouts/` (all but `sheet.md`) |
 | `xaml/abstract/` | 11 | 1 | `xaml/base-classes.md` (folded) |
 | `xaml/text/` | 15 | 1 | `xaml/text.md` (folded) |
 | `xaml/sheet/` | 11 | 1 | `xaml/layouts/sheet.md` (folded) |
 | `xaml/bind/` | 7 | 1 | `xaml/bind.md` (folded) |
 | `xaml/overview/` | 1 | 1 | `xaml/overview.md` |
-| `xaml/components/` | 10 | 1 | `xaml/switch.md` (Switch/Case/Else) |
+| `xaml/components/` | 10 | 2 | `xaml/switch.md` (Switch/Case/Else), `xaml/slot.md` |
 | `report/` | 27 | 7 | `report/` (folded) |
 | `xaml/enums/` | 22 | 0 | — |
 | `xaml/simple/` | 12 | 0 | — |

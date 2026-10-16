@@ -1,6 +1,6 @@
 # Binary Objects (blob)
 
-> Images and attachments as separate entities — the `!Token` access marker and the dedicated `.Load` / `.Update` procedure pair that reads and writes the byte stream.
+> Deprecated — use [Files and Images](https://docs-llm.a2v10.com/sql/blob-storage.md) instead. The old model of images and attachments: the `!Token` marker and a `.Load` / `.Update` procedure pair for the bytes; kept only to read existing code.
 
 ## Overview
 
@@ -16,15 +16,10 @@ Working with binary objects consists of three almost independent parts:
 
 The bytes themselves are read and written by two dedicated procedures, one with the `.Load` suffix and one with `.Update`. These procedures are specific to binary data and do not follow the rules for building models — they take fixed parameters and return plain columns with no markers.
 
-## Use When
-
-- An image or an attachment is a separate entity whose bytes are served on demand rather than loaded with the model.
-- The content must be protected from unauthorized access — the token is checked before any procedure is called.
-- Data is kept in external storage and only its name is held in the database.
-
 ## Do Not Use When
 
-- The upload is handled by an endpoint action — parsing a file into rows, storing it as raw binary, or sending it to Azure Blob Storage — configure the `files` section of `model.json` instead, see [File Upload](https://docs-llm.a2v10.com/model/files.md).
+- Any new code — use [Files and Images](https://docs-llm.a2v10.com/sql/blob-storage.md) instead: storage, checks, and tokens are handled by the platform.
+- The file is parsed into rows — use the `parse` operation of [File Upload](https://docs-llm.a2v10.com/model/files.md) instead.
 
 ## Syntax
 
