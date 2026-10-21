@@ -17,7 +17,7 @@ interface IController {
   readonly $isPristine: boolean;
   // methods
   $invoke(command: string, arg: object, path?: string, opts?: { catchError: boolean }): Promise<object>;
-  $requery(): void;
+  $requery(query?: object): void;
   $requeryNew(id: any): void;
   $reload(args?: any): Promise<void>;
   $modalClose(result?: any): void;
@@ -63,7 +63,7 @@ declare const enum CommonStyle {
 | Member | Returns | Description |
 |--------|---------|-------------|
 | `$invoke(command, arg, path?, opts?)` | `Promise` | Calls a server [command](https://docs-llm.a2v10.com/model/commands.md) by name; `arg` properties become its arguments |
-| `$requery()` | void | Re-runs the current query |
+| `$requery(query?)` | void | Reloads the page — markup and model, unlike `$reload`, which refreshes only the data. `query` works in .NET Core and the Tabbed layout only; see below |
 | `$requeryNew(id)` | void | Puts `id` into the page URL (no navigation, no new browser history entry) and reloads the model — the page now shows that record |
 | `$reload(args?)` | `Promise` | Reloads the model, or a lazy array if one is passed |
 | `$modalClose(result?)` | void | Closes the current modal, returning `result` |
@@ -96,6 +96,22 @@ declare const enum CommonStyle {
 ### $invoke
 
 Calls a server command declared in the [`commands`](https://docs-llm.a2v10.com/model/commands.md) section of `model.json`. `arg` is an arbitrary object whose properties become command arguments. `path` optionally targets another endpoint; omitted, it runs at the current one. With `opts.catchError` set, the promise rejects on error so it can be caught — otherwise the platform shows the error and the promise does not run.
+
+### $requery
+
+Reloads the page: markup and model. `$reload` refreshes only the data.
+
+`query` (.NET Core and the Tabbed layout only) is merged into the parameters of the tab URL — a parameter with the same name is replaced — and the page loads from the new URL. The parameters stay in the tab URL.
+
+| Value in `query` | Goes to the URL as |
+|------------------|--------------------|
+| Date, period | `DateUrl` format |
+| Object | Its identifier |
+| Array | Element identifiers, comma-separated |
+| Property named `_…` or `$…` | Not sent |
+| `Run: true` | Not stored in the URL; the page loads once with `run=true` |
+
+In a dialog and in other layouts `query` is ignored — the page simply reloads.
 
 ### $confirm
 
