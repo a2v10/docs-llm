@@ -18,6 +18,7 @@ interface IController {
   // methods
   $invoke(command: string, arg: object, path?: string, opts?: { catchError: boolean }): Promise<object>;
   $requery(): void;
+  $requeryNew(id: any): void;
   $reload(args?: any): Promise<void>;
   $modalClose(result?: any): void;
   $msg(msg: string, title?: string, style?: CommonStyle): Promise<boolean>;
@@ -29,12 +30,16 @@ interface IController {
   $asyncValid(cmd: string, arg: object): any | Promise<any>;
   $saveModified(message?: string, title?: string): boolean;
   $setFilter(target: object, prop: string, value: any): void;
+  $clearFilter(source: object): void;
   $inlineOpen(id: string): void;
   $inlineClose(id: string, result: any): void;
+  $inlineDepth(): number;
   $focus(htmlid: string): void;
   $emitCaller(event: string, ...params: any[]): void;
   $emitSaveEvent(): void;
+  $saveCaller(): any;
   $nodirty(func: () => Promise<any>): void;
+  $longOperation(action: () => Promise<any>): Promise<void>;
   $upload(url: string, accept?: string, data?: { Id?: any, Key?: any }, opts?: { catchError?: boolean }): Promise<any>;
   $uploadBlob(url: string, accept?: string, data?: { Id: any, Base: string }, opts?: { catchError?: boolean }): Promise<any>;
   $uploadBlobFile(url: string, file: File, data?: { Id: any, Base: string }, opts?: { catchError?: boolean }): Promise<any>;
@@ -59,6 +64,7 @@ declare const enum CommonStyle {
 |--------|---------|-------------|
 | `$invoke(command, arg, path?, opts?)` | `Promise` | Calls a server [command](https://docs-llm.a2v10.com/model/commands.md) by name; `arg` properties become its arguments |
 | `$requery()` | void | Re-runs the current query |
+| `$requeryNew(id)` | void | Puts `id` into the page URL (no navigation, no new browser history entry) and reloads the model — the page now shows that record |
 | `$reload(args?)` | `Promise` | Reloads the model, or a lazy array if one is passed |
 | `$modalClose(result?)` | void | Closes the current modal, returning `result` |
 | `$msg(msg, title?, style?)` | `Promise` | Shows a message in a modal window |
@@ -70,12 +76,16 @@ declare const enum CommonStyle {
 | `$asyncValid(cmd, arg)` | `Promise` | Runs an async validation command at the current endpoint |
 | `$saveModified(message?, title?)` | boolean | Prompts to save if the model changed; see below |
 | `$setFilter(target, prop, value)` | void | Sets a filter value (filters cannot be assigned directly) |
+| `$clearFilter(source)` | void | Resets the `CollectionView` filter to its initial values (from `Filter`) and reloads the data. `source` is the array in the `CollectionView`'s `ItemsSource`. Works only with `RunAt="ServerUrl"` |
 | `$inlineOpen(id)` | void | Opens an inline dialog by `id` |
 | `$inlineClose(id, result)` | void | Closes an inline dialog by `id` |
+| `$inlineDepth()` | number | The number of inline dialogs currently open |
 | `$focus(htmlid)` | void | Moves the cursor to the element with `htmlid` |
 | `$emitCaller(event, ...params)` | void | Sends an event to the calling code (caller) |
 | `$emitSaveEvent()` | void | Sends the event named by the dialog's `SaveEvent` to the caller |
+| `$saveCaller()` | any | Saves the model of the page that opened the current one (the caller) and returns the result of its `$save`; `null` if there is no caller or it is already closed |
 | `$nodirty(func)` | void | Runs `func` (async) without setting the dirty flag |
+| `$longOperation(action)` | `Promise` | Runs `action` (an async function or one returning a promise) with the request indicator shown for its whole duration, as during a server call. The indicator is removed on error too; the error propagates |
 | `$upload(url, accept?, data?, opts?)` | `Promise` | Shows a file picker and uploads the file to a file command |
 | `$uploadBlob(url, accept?, data?, opts?)` | `Promise` | .NET Core only. Shows a file picker and uploads the file to a [blobs](https://docs-llm.a2v10.com/model/blobs.md) section; see below |
 | `$uploadBlobFile(url, file, data?, opts?)` | `Promise` | .NET Core only. The same as `$uploadBlob` for a `File` already at hand (paste, drop) — no picker |

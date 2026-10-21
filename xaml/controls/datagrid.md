@@ -6,7 +6,7 @@
 
 `DataGrid` renders a table where each row corresponds to one element of an [array in the model](https://docs-llm.a2v10.com/client/array.md). Columns are defined with nested `DataGridColumn` elements. It inherits from `Control → UIElement → UIElementBase`.
 
-DataGrid is the primary list control in A2v10. When combined with a `CollectionView`, it gains sorting, filtering, pagination, and grouping. Rows can be marked with colors, expanded for details, double-clicked, or right-clicked for a context menu.
+DataGrid is the primary list control in A2v10. When combined with a `CollectionView`, it gains sorting, filtering, and pagination. Rows can be grouped by field values on the client (`GroupBy`), marked with colors, expanded for details, double-clicked, or right-clicked for a context menu.
 
 ## Syntax
 
@@ -39,10 +39,11 @@ DataGrid is the primary list control in A2v10. When combined with a `CollectionV
 | `DoubleClick` | BindCmd | Command fired on row double-click |
 | `ContextMenu` | DropDownMenu | Right-click context menu |
 | `RowDetails` | DataGridRowDetails | Expandable row detail section |
+| `GroupBy` | String | Row grouping: comma-separated row fields, each field the next nesting level — see [Row Grouping](#row-grouping) |
 | `AutoSelect` | AutoSelectMode | Auto-select after load: `FirstItem`, `LastItem` |
 | `HeadersVisibility` | HeadersVisibility | Show/hide header row |
 | `RowBold` | Boolean? | Bold font for all rows |
-| `GridLines` | GridLinesVisibility | Show grid lines: `None`, `Columns`, `Rows`, `Both` |
+| `GridLines` | GridLinesVisibility | Grid lines: `None` (default), `Horizontal`, `Vertical`, `Both` |
 
 ### Row Mark Colors
 
@@ -54,6 +55,23 @@ The `Mark` binding should return one of these strings:
 | `"warning"`, `"yellow"` | Yellow row marker |
 | `"success"`, `"green"` | Green row marker |
 | `"info"`, `"cyan"` | Cyan row marker |
+
+### Row Grouping
+
+The table groups rows itself, on the client, and only the rows it has already received: with server-side paging, groups are built within the current page.
+
+```xml
+<DataGrid ItemsSource="{Bind Documents}" GroupBy="Agent.Name,Date">
+  <DataGridColumn Header="Number" Content="{Bind No}" />
+  <DataGridColumn Header="Amount" Content="{Bind Sum, DataType=Currency}" />
+</DataGrid>
+```
+
+- Each group starts with a header row: the field value and the row count. A top-level group's count is the sum over its nested groups.
+- Clicking a header row collapses or expands the group.
+- A date value is shown in the `Date` format.
+- Rows with an empty field value go into a group of their own.
+- Sorting by a column rebuilds the groups from the sorted rows.
 
 ## DataGridColumn Properties
 

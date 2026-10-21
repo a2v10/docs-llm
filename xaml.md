@@ -14,7 +14,7 @@
 - [Button](https://docs-llm.a2v10.com/xaml/controls/button.md): Command button — Style, Icon, DropDown, ButtonStyle values
 - [TextBox](https://docs-llm.a2v10.com/xaml/controls/textbox.md): Text input field — Multiline, Password, Number, UpdateTrigger, EnterCommand runs before the model update, ShowClear/ShowSearch
 - [SearchBox](https://docs-llm.a2v10.com/xaml/controls/textbox.md): Search field — a TextBox with ShowClear, ShowSearch and Highlight always on
-- [DataGrid](https://docs-llm.a2v10.com/xaml/controls/datagrid.md): Data table — ItemsSource, columns, sorting, row marking, DoubleClick, ContextMenu
+- [DataGrid](https://docs-llm.a2v10.com/xaml/controls/datagrid.md): Data table — ItemsSource, columns, sorting, row grouping, row marking, DoubleClick, ContextMenu
 - [DataGridColumn](https://docs-llm.a2v10.com/xaml/controls/datagrid.md): Column definition — Content, Header, Width, Align, Editable, Command, Role presets, CheckAll, Done
 - [Table](https://docs-llm.a2v10.com/xaml/controls/table.md): Markup table — TableRow/TableCell/TableColumn, merging, row marking, grid lines
 - [List](https://docs-llm.a2v10.com/xaml/controls/list.md): Selectable list of items — ListItem, ListStyle, marking, AutoSelect, EmptyPanel

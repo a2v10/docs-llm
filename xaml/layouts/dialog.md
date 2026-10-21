@@ -54,7 +54,7 @@ A dialog has a title bar, a content area, and a button panel (`Buttons`). The `S
 | `SaveEvent` | String | Event name triggered when saving objects within the dialog. |
 | `TestId` | String | Identifier for test automation. |
 | `CollectionView` | CollectionView | Collection management at dialog level. |
-| `HeaderMenu` | DropDownMenu | Dropdown menu in the title bar. |
+| `HeaderMenu` | DropDownMenu | Menu in the dialog's title bar, opened by the "⋮" icon next to the close button. The opening direction is the menu's `Direction`. |
 
 ### DialogSize Values
 
