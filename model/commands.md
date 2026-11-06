@@ -129,4 +129,4 @@ public class SendReportCommand : IClrInvokeTarget
 - `signal: true` requires SignalR to be configured in the application; it broadcasts a notification to connected clients after the command completes.
 - For `callApi` and `sendMessage`, the `parameters` object controls the request payload and behavior; the exact keys depend on the platform version.
 - `startProcess` and `resumeProcess` integrate with the A2v10 workflow engine — the process definition must exist separately.
-- Commands are triggered from the view layer by a [`BindCmd` command](https://docs-llm.a2v10.com/xaml/bind.md) (for example `Execute`, `DbRemove`).
+- Commands are triggered from the view layer by a [`BindCmd` command](https://docs-llm.a2v10.com/xaml/bind.md) (for example `Execute`). `DbRemove` needs no command — it calls the [`.Delete` procedure](https://docs-llm.a2v10.com/sql/procedures.md) by convention.

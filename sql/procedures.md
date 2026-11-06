@@ -6,7 +6,7 @@
 
 The platform knows nothing about tables, column names, or any other technical detail of the database. It calls stored procedures, and they return or receive data in the agreed format. A model is a business entity — a customer, a supplier, a document — and the procedures are the whole of the contract between it and the database.
 
-There are only four things the system can do with a model: load a list of instances, load a single instance, save an instance, and execute a command. Each of the first three is served by a procedure whose name is the model name plus a fixed suffix.
+There are only five things the system can do with a model: load a list of instances, load a single instance, save an instance, delete an instance, and execute a command. Each of the first four is served by a procedure whose name is the model name plus a fixed suffix.
 
 The schema and the model name come from the endpoint description — the `schema` and `model` properties of [model.json](https://docs-llm.a2v10.com/model/overview.md). A model named `Agent` in schema `cat` is loaded by `cat.[Agent.Load]`, and its list by `cat.[Agent.Index]`.
 
@@ -24,6 +24,7 @@ Everything the platform learns about the shape of the data it gets from the name
 | `.Load` | Load a single instance. See [Objects & References](https://docs-llm.a2v10.com/sql/object.md) |
 | `.Metadata` | Return the metadata that describes how to turn the model into table types. See [Update Model (TVP + MERGE)](https://docs-llm.a2v10.com/sql/update-model.md) |
 | `.Update` | Save the instance. See [Update Model (TVP + MERGE)](https://docs-llm.a2v10.com/sql/update-model.md) |
+| `.Delete` | Delete an instance in the database — called by the `DbRemove` / `DbRemoveSelected` commands of [BindCmd](https://docs-llm.a2v10.com/xaml/bind.md). For a lazy array the name is `[schema].[ModelName.Property.Delete]`, where `Property` is the array name |
 | `.Expand` | Return the child elements of a node when the user expands it in a dynamic tree. See [Tree & Hierarchy](https://docs-llm.a2v10.com/sql/tree.md) |
 
 Files and images need no procedures of their own: the platform stores them, see [Files and Images](https://docs-llm.a2v10.com/sql/blob-storage.md). The `[schema].[Model.Property.Load]` / `[schema].[Model.Property.Update]` pair found in existing code is the deprecated [Binary Objects (blob)](https://docs-llm.a2v10.com/sql/blob.md) model.
@@ -36,7 +37,7 @@ Parameter names are fixed; the order does not matter.
 |-----------|-------|-------------|
 | `@UserId bigint` | Everywhere | Identifier of the current user |
 | `@TenantId int` | Everywhere | Tenant identifier — in a multi-tenant environment only |
-| `@Id bigint` | `.Load`, `.Expand` | Identifier of the instance being loaded or expanded |
+| `@Id bigint` | `.Load`, `.Delete`, `.Expand` | Identifier of the instance being loaded, deleted, or expanded |
 | `@Offset`, `@PageSize`, `@Order`, `@Dir` | `.Index` | Paging and sorting — see [Paging & Filters](https://docs-llm.a2v10.com/sql/paging.md) |
 | The table types | `.Update` | One `readonly` table-valued parameter per set, built by the platform from the model |
 

@@ -47,7 +47,7 @@ See [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md) for inherite
               Command="{BindCmd Dialog, Action=Edit, Argument={Bind}}" Style="Toolbar" />
       <Button Icon="Clear" Tip="Delete"
               Command="{BindCmd DbRemove, Argument={Bind},
-                                 Confirm={Confirm Message='Delete the agent?'}}"
+                                 Confirm='Delete the agent?'}"
               Style="Toolbar" />
     </CommandBar>
   </DataGridColumn>

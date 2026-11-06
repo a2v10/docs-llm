@@ -59,9 +59,8 @@ See [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md) for inherite
               Icon="Plus" Style="Primary" />
       <Button Content="Reload" Command="{BindCmd Reload}" Icon="Reload" />
       <Button Content="Delete"
-              Command="{BindCmd DbRemoveSelected, Argument={Bind Items.Selected}}"
+              Command="{BindCmd DbRemoveSelected, Argument={Bind Items}}"
               Icon="Delete" Style="Danger"
-              If="{Bind Items.HasSelected}"
               Toolbar.Align="Right" />
     </Toolbar>
   </Page.Toolbar>

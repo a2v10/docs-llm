@@ -57,6 +57,13 @@ DoubleClick="{BindCmd Dialog, Action=EditSelected, Argument={Bind Samples}}"
 Пути `Documents.Selected` нет ни в SQL-модели, ни в TS-объекте.
 Источник: `examples/catalog/simple/index.view.vxaml`, `examples/document/operation/invoice/index.view.vxaml`.
 
+**Частично закрыто 2026-11-05.** Справка (`xaml/bind/bindcmd.html`) теперь прямо пишет: у
+`RemoveSelected` / `DbRemoveSelected` / `Select` аргумент — массив, а пока ничего не выделено,
+команда запрещена. Исправлены `bind.md`, `page.md`, `toolbar.md` (аргумент и лишние
+`If`/`Disabled` на этих кнопках — это и часть A2). Открыто: `.Selected` у `Dialog Edit`, `Open`,
+`Include` (`bind.md`, `datagrid.md`, `list.md`, `toolbaraligner.md`, `page.md`, `toolbar.md`,
+`partial.md`) — для них справка ничего нового не сказала.
+
 ### A2. Совет гасить кнопки руками противоречит нашей же доке
 
 `xaml/layouts/toolbar.md:91` — «Buttons in toolbars often use `Disabled="{Bind !Items.HasSelected}"`»,
@@ -119,7 +126,10 @@ automatically from `canExec`; never set `Disabled` yourself». Реальные 
 (`models/general.html` — состав имени и типы наборов), уже написана в `sql/markers.md`.
 
 Побочно, из разбора источников: `.Fetch` и `.Delete` **не являются** суффиксами платформы —
-справка знает только `.Index`, `.Load`, `.Metadata`, `.Update`, `.Expand`. Блокквот старой
+справка знает только `.Index`, `.Load`, `.Metadata`, `.Update`, `.Expand`. **Пересмотрено
+2026-11-05:** справка (`xaml/bind/bindcmd.html`) описала `DbRemove` — он вызывает
+`[Схема].[Модель.Delete] @Id`, для ленивого массива `[Модель.Свойство.Delete]`. `.Delete`
+внесён в `sql/procedures.md` и `CLAUDE.md`; `.Fetch` по-прежнему не суффикс. Блокквот старой
 заглушки обещал Fetch/Delete, список «Standard verbs» в `CLAUDE.md` добавлял ещё
 `Copy`/`Report`. Оба места исправлены.
 

@@ -50,10 +50,9 @@ See [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md) for inherite
             Icon="Edit"
             Disabled="{Bind !Docs.HasSelected}" />
     <Button Content="Delete"
-            Command="{BindCmd DbRemoveSelected, Argument={Bind Docs.Selected},
-                               Confirm={Confirm Message='Delete selected records?'}}"
-            Icon="Delete" Style="Danger"
-            Disabled="{Bind !Docs.HasSelected}" />
+            Command="{BindCmd DbRemoveSelected, Argument={Bind Docs},
+                               Confirm='Delete the selected record?'}"
+            Icon="Delete" Style="Danger" />
     <Separator />
     <Button Content="Reload" Command="{BindCmd Reload}" Icon="Reload" />
     <Button Content="Export"
@@ -90,5 +89,5 @@ See [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md) for inherite
 - `Separator` creates a visual divider between button groups.
 - `Toolbar.Align="Right"` on any element shifts it (and subsequent right-aligned elements) to the right side.
 - [ToolbarAligner](https://docs-llm.a2v10.com/xaml/controls/toolbaraligner.md) is an invisible spacer that does the same job for a whole group of trailing elements and makes the split point explicit in the markup.
-- Buttons in toolbars often use `Disabled="{Bind !Items.HasSelected}"` to disable actions when nothing is selected.
+- `RemoveSelected` / `DbRemoveSelected` take the whole array and are disabled automatically while nothing is selected — they need no `Disabled` binding.
 - For button-only toolbars, prefer `Style="Toolbar"` on individual `Button` elements over `Style="Primary"` for visual consistency.

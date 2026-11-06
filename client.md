@@ -8,6 +8,6 @@
 - [Array (IElementArray)](https://docs-llm.a2v10.com/client/array.md): Array members — selection, cross keys, lazy loading, and insert/remove/find/sum methods
 - [Array Element (IArrayElement)](https://docs-llm.a2v10.com/client/array-element.md): Members of an element inside an array — select, check, remove, and move
 - [Tree Element (ITreeElement)](https://docs-llm.a2v10.com/client/tree-element.md): Tree-node members — expand state, `$expand`, and `$selectPath`
-- [Controller (IController)](https://docs-llm.a2v10.com/client/controller.md): The `$ctrl` object — server commands, reload, messages, dialogs, validation, and file upload
+- [Controller (IController)](https://docs-llm.a2v10.com/client/controller.md): The `$ctrl` object — server commands, reload, messages, dialogs, validation, file upload, and the side pane
 - [Standard Utilities (std:utils)](https://docs-llm.a2v10.com/client/utils.md): The std:utils module — date, currency, and text helpers
 - [require](https://docs-llm.a2v10.com/client/require.md): Loading modules — application modules by path, standard modules by `std:` name

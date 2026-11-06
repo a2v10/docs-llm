@@ -78,6 +78,7 @@ module.exports = template;
 
 - Array events fire only when the array is manipulated through the platform's own methods. Direct mutation of the underlying JavaScript array does not raise them.
 - `changing` runs before the change and can veto it by returning `false`; `change` runs after the change is applied.
+- To set properties without raising `changing` / `change` — for example, a computed field updated from another field's handler — wrap the assignment in [`$noChangeEvents`](https://docs-llm.a2v10.com/client/element.md).
 - Object and array event names are built from the model path or type name plus a suffix — `Document.Rows[].Qty.change`, `Document.Rows.add`.
 - Custom events raised with `$emit` may carry any name; keep them distinct from the system names above.
 - Event handlers are bound to the data model, so they run regardless of which control triggered the change.

@@ -64,7 +64,7 @@ See [Base Classes](https://docs-llm.a2v10.com/xaml/base-classes.md) for properti
   <Separator />
   <Button Content="Delete"
           Command="{BindCmd DbRemove, Argument={Bind Document},
-                             Confirm={Confirm Message='Delete this record?'}}"
+                             Confirm='Delete this record?'}"
           Style="Danger"
           Icon="Delete"
           Toolbar.Align="Right" />

@@ -41,7 +41,7 @@ sql/
   errors.md           ← DONE (throw, UI: prefix — user alert vs developer alert)
 xaml/
   overview.md         ← DONE (Page/Dialog roots, extensions, property syntax)
-  bind.md             ← DONE (Bind + BindCmd, all properties and CommandTypes)
+  bind.md             ← DONE (Bind + BindCmd, all properties and CommandTypes, Confirm)
   base-classes.md     ← DONE (UIElementBase/UIElement/Inline/Container/Control/…)
   text.md             ← DONE (all 15 inlines in one file + TextColor values)
   switch.md           ← DONE (Switch/Case/Else — one block of several by a bound value)
@@ -90,7 +90,7 @@ client/               ← DONE (client object model / runtime API; source html/c
   array-element.md    ← DONE (IArrayElement — select/check/remove/move)
   tree-element.md     ← DONE (ITreeElement — expand, selectPath)
   controller.md       ← DONE (IController via $ctrl — invoke/reload/msg/upload/uploadBlob/
-                              ensureSaved)
+                              ensureSaved/showSidePane)
   utils.md            ← DONE (std:utils — date/currency/text)
   require.md          ← DONE (require + std: modules)
   (source has empty stubs: index/module/global/localization — skipped)
@@ -153,7 +153,7 @@ subfolders included, `index.html` excluded. Ours: our `.md` files drawn from tha
 | `xaml/sheet/` | 11 | 1 | `xaml/layouts/sheet.md` (folded) |
 | `xaml/bind/` | 7 | 1 | `xaml/bind.md` (folded) |
 | `xaml/overview/` | 1 | 1 | `xaml/overview.md` |
-| `xaml/components/` | 10 | 2 | `xaml/switch.md` (Switch/Case/Else), `xaml/slot.md` |
+| `xaml/components/` | 10 | 3 | `xaml/switch.md` (Switch/Case/Else), `xaml/slot.md`, `xaml/bind.md` (Confirm, folded) |
 | `report/` | 27 | 7 | `report/` (folded) |
 | `xaml/enums/` | 22 | 0 | — |
 | `xaml/simple/` | 12 | 0 | — |
@@ -202,8 +202,8 @@ Ordered by leverage. Cross-references must be full absolute URLs (see CONVENTION
    descriptive noun phrases. Not a RAG optimization — just readability for the direct-fetch model.
 
 Closed: SQL stubs (`sql/procedures.md` written, `sql/overview.md` deleted — note that `.Fetch`
-and `.Delete` are **not** platform procedure suffixes; the help knows only `.Index`, `.Load`,
-`.Metadata`, `.Update`, `.Expand`). All `models/` source pages (`blob` → `sql/blob.md`,
+is **not** a platform procedure suffix; the help knows only `.Index`, `.Load`, `.Metadata`,
+`.Update`, `.Delete`, `.Expand` — `.Delete` added on 2026-11-05, called by `DbRemove`). All `models/` source pages (`blob` → `sql/blob.md`,
 `rowversion` → `sql/rowversion.md`). The `report/` section.
 
 ## Authoring Rules (summary — full rules in CONVENTIONS.md)
@@ -244,7 +244,7 @@ All examples use the **a2v10sample** database. Common schemas and patterns:
 - Model names follow PascalCase: `Agent`, `Document`, `AgentCategory`
 - Stored procedure names: `[schema].[ModelName.Verb]` e.g. `[a2].[Agent.Index]`
 - Platform suffixes (the only ones the help confirms): `Index`, `Load`, `Metadata`, `Update`,
-  `Expand`. Anything else (`Delete`, `Copy`, `Report`, …) is an ordinary procedure invoked by a
+  `Delete` (called by `DbRemove`), `Expand`. Anything else (`Copy`, `Report`, …) is an ordinary procedure invoked by a
   command or an action from `model.json`, not a suffix the platform resolves by convention
 - Tables use `Id bigint` PK, `[Name] nvarchar(255)`, optional `Memo nvarchar(255)`
 

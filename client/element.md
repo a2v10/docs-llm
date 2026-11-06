@@ -25,6 +25,7 @@ interface IElement {
   // methods
   $empty(): IElement;
   $merge(src: Object): IElement;
+  $noChangeEvents(fn: (elem: IElement) => any): any;
 }
 ```
 
@@ -48,6 +49,7 @@ interface IElement {
 |--------|---------|-------------|
 | `$empty()` | `IElement` | Clears the object, resetting all properties to defaults; recursive — nested objects are cleared too. Returns itself |
 | `$merge(src)` | `IElement` | Copies the properties of `src` into the object. Returns itself |
+| `$noChangeEvents(fn)` | any | Calls `fn` so that changing the object's properties raises no [`.changing` / `.change` events](https://docs-llm.a2v10.com/template/events.md). `this` and the argument of `fn` are the object itself. Returns what `fn` returns |
 
 ## Example
 
@@ -56,6 +58,12 @@ const template = {
   commands: {
     clearAgent(doc) { doc.Agent.$empty(); },          /* reset a nested object */
     canSubmit(doc) { return doc.$valid && !doc.$isNew; } /* read state flags */
+  },
+  events: {
+    'Document.Rows[].Price.change'(row) {
+      // Sum is recalculated without raising Document.Rows[].Sum.change
+      row.$noChangeEvents(r => r.Sum = r.Price * r.Qty);
+    }
   }
 };
 
@@ -67,4 +75,5 @@ module.exports = template;
 - `$id` and `$name` reflect the properties marked as the identifier and name when the model is shaped in SQL — they are not literally named `Id` and `Name` unless the model is.
 - `$empty()` is recursive: clearing an object clears every object nested inside it.
 - `$valid` / `$invalid` evaluate the [validators](https://docs-llm.a2v10.com/template/validators.md) defined for the object in the template.
+- Inside `$noChangeEvents` the model still becomes dirty (`$dirty`). Only the object's own properties are silenced: changes in nested objects and arrays raise events as usual.
 - `$root` and `$ctrl` are available on every object, so deeply nested code never has to thread these references manually.

@@ -44,6 +44,8 @@ interface IController {
   $uploadBlob(url: string, accept?: string, data?: { Id: any, Base: string }, opts?: { catchError?: boolean }): Promise<any>;
   $uploadBlobFile(url: string, file: File, data?: { Id: any, Base: string }, opts?: { catchError?: boolean }): Promise<any>;
   $ensureSaved(): Promise<boolean>;
+  $showSidePane(url: string, arg?: string | number, data?: object): void;
+  $hideSidePane(): void;
 }
 
 declare const enum CommonStyle {
@@ -90,6 +92,8 @@ declare const enum CommonStyle {
 | `$uploadBlob(url, accept?, data?, opts?)` | `Promise` | .NET Core only. Shows a file picker and uploads the file to a [blobs](https://docs-llm.a2v10.com/model/blobs.md) section; see below |
 | `$uploadBlobFile(url, file, data?, opts?)` | `Promise` | .NET Core only. The same as `$uploadBlob` for a `File` already at hand (paste, drop) — no picker |
 | `$ensureSaved()` | `Promise<boolean>` | .NET Core only. Saves the main object if it is new, so it gets an `Id`; see below |
+| `$showSidePane(url, arg?, data?)` | void | Opens a page from the `_navpane` folder in the side pane; see below |
+| `$hideSidePane()` | void | Closes the side pane opened by `$showSidePane` |
 
 ## Key methods
 
@@ -160,6 +164,21 @@ Use it when an action needs the record's `Id` — for example, to attach a file 
 if (!await this.$ctrl.$ensureSaved())
   return null;
 // this.Task.Id exists here
+```
+
+### $showSidePane
+
+Opens a page in the side pane. The page comes from the application's special folder `_navpane`. A second call with the same arguments closes the pane; navigating to another page closes it too.
+
+| Argument | Description |
+|----------|-------------|
+| `url` | The endpoint path inside `_navpane` |
+| `arg` | Optional. The identifier, `0` by default |
+| `data` | Optional. Query parameters |
+
+```js
+// opens /_navpane/agent/info/15
+this.$ctrl.$showSidePane('/agent/info', agent.Id);
 ```
 
 ## Example
